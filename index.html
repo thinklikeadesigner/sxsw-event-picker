@@ -58,8 +58,9 @@
   .conflict-badge { background: #7c2d12; color: #fb923c; }
 
   /* Gantt chart — horizontal, time left→right */
-  .gantt-header-sticky { position: sticky; top: 0; z-index: 49; background: #0f0f0f; border-bottom: 1px solid #2a2a2a; overflow-x: auto; scrollbar-width: none; }
+  .gantt-header-sticky { background: #0f0f0f; border-bottom: 1px solid #2a2a2a; overflow-x: auto; scrollbar-width: none; }
   .gantt-header-sticky::-webkit-scrollbar { display: none; }
+  .gantt-day-sticky { position: sticky; z-index: 49; background: #0f0f0f; }
   .gantt-time-header-inner { display: flex; padding: 6px 0 4px; }
   .gantt-col-label { font-size: 10px; color: #555; font-weight: 600; text-align: left; padding: 0 0 2px 4px; user-select: none; flex-shrink: 0; }
   .gantt-outer { overflow-x: auto; padding-bottom: 16px; }
@@ -3732,13 +3733,15 @@ function renderGantt(dayStr) {
   }
 
   cal.innerHTML = `
-    <div class="day-header">
-      ${dayName}
-      <span class="day-badge">${sorted.length} events</span>
-      ${conflictsInDay > 0 ? `<span class="day-badge conflict-badge">&#9889; ${conflictsInDay} overlaps</span>` : ''}
-    </div>
-    <div class="gantt-header-sticky" id="gantt-header-sticky">
-      <div class="gantt-time-header-inner" style="width:${totalW}px">${timeHeaderCols}</div>
+    <div class="gantt-day-sticky" id="gantt-day-sticky">
+      <div class="day-header" style="padding:12px 0 8px">
+        ${dayName}
+        <span class="day-badge">${sorted.length} events</span>
+        ${conflictsInDay > 0 ? `<span class="day-badge conflict-badge">&#9889; ${conflictsInDay} overlaps</span>` : ''}
+      </div>
+      <div class="gantt-header-sticky" id="gantt-header-sticky">
+        <div class="gantt-time-header-inner" style="width:${totalW}px">${timeHeaderCols}</div>
+      </div>
     </div>
     <div class="gantt-outer" id="gantt-outer">
       <div class="gantt-inner" style="width:${totalW}px">
@@ -3749,11 +3752,16 @@ function renderGantt(dayStr) {
       </div>
     </div>`;
 
-  // Sync horizontal scroll between sticky time header and chart body
+  // Set sticky top below .sticky-top block, then sync horizontal scroll
   const outer = document.getElementById('gantt-outer');
-  const sticky = document.getElementById('gantt-header-sticky');
-  if (outer && sticky) {
-    outer.addEventListener('scroll', () => { sticky.scrollLeft = outer.scrollLeft; });
+  const stickyHeader = document.getElementById('gantt-header-sticky');
+  const daySticky = document.getElementById('gantt-day-sticky');
+  const stickyTop = document.querySelector('.sticky-top');
+  if (daySticky && stickyTop) {
+    daySticky.style.top = stickyTop.offsetHeight + 'px';
+  }
+  if (outer && stickyHeader) {
+    outer.addEventListener('scroll', () => { stickyHeader.scrollLeft = outer.scrollLeft; });
   }
 
   updateStats();
