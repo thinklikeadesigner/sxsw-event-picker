@@ -58,17 +58,11 @@
 
   /* Gantt chart — horizontal, time left→right */
   .gantt-outer { overflow-x: auto; padding-bottom: 16px; }
-  .gantt-inner { display: table; border-collapse: collapse; min-width: 100%; }
-  .gantt-header-row { display: table-row; }
-  .gantt-header-spacer { display: table-cell; width: 180px; min-width: 180px; flex-shrink: 0; }
-  .gantt-time-headers { display: table-cell; position: relative; }
-  .gantt-time-header-inner { display: flex; }
-  .gantt-col-label { font-size: 10px; color: #444; font-weight: 600; text-align: left; padding: 0 0 6px 4px; user-select: none; flex-shrink: 0; }
-  .gantt-row { display: table-row; }
-  .gantt-row-label { display: table-cell; vertical-align: top; padding: 3px 8px 3px 0; width: 180px; min-width: 180px; }
-  .gantt-row-label-inner { font-size: 11px; color: #555; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; padding-top: 6px; }
-  .gantt-row-track { display: table-cell; position: relative; vertical-align: top; }
-  .gantt-row-track-inner { position: relative; height: 100%; }
+  .gantt-inner { display: block; }
+  .gantt-time-header-inner { display: flex; margin-bottom: 4px; }
+  .gantt-col-label { font-size: 10px; color: #444; font-weight: 600; text-align: left; padding: 0 0 4px 4px; user-select: none; flex-shrink: 0; }
+  .gantt-row { position: relative; }
+  .gantt-row-track { position: relative; overflow: visible; }
   .gantt-grid-bg { position: absolute; top: 0; bottom: 0; border-left: 1px solid #1e1e1e; pointer-events: none; }
   .gantt-grid-bg.hour { border-left-color: #2a2a2a; }
 
@@ -3718,12 +3712,8 @@ function renderGantt(dayStr) {
       ${conflictsInDay > 0 ? `<span class="day-badge conflict-badge">&#9889; ${conflictsInDay} overlaps</span>` : ''}
     </div>
     <div class="gantt-outer">
-      <div class="gantt-inner">
-        <div class="gantt-header-row">
-          <div class="gantt-time-headers">
-            <div class="gantt-time-header-inner" style="width:${totalW}px">${timeHeaderCols}</div>
-          </div>
-        </div>
+      <div class="gantt-inner" style="width:${totalW}px">
+        <div class="gantt-time-header-inner">${timeHeaderCols}</div>
         ${rows}
       </div>
     </div>`;
