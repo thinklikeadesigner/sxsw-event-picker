@@ -57,7 +57,7 @@
   .conflict-badge { background: #7c2d12; color: #fb923c; }
 
   /* Gantt chart — horizontal, time left→right */
-  .gantt-header-sticky { position: sticky; top: 57px; z-index: 50; background: #0f0f0f; border-bottom: 1px solid #2a2a2a; overflow-x: auto; scrollbar-width: none; }
+  .gantt-header-sticky { position: sticky; top: 0; z-index: 50; background: #0f0f0f; border-bottom: 1px solid #2a2a2a; overflow-x: auto; scrollbar-width: none; }
   .gantt-header-sticky::-webkit-scrollbar { display: none; }
   .gantt-time-header-inner { display: flex; padding: 6px 0 4px; }
   .gantt-col-label { font-size: 10px; color: #555; font-weight: 600; text-align: left; padding: 0 0 2px 4px; user-select: none; flex-shrink: 0; }
@@ -3750,6 +3750,13 @@ function renderGantt(dayStr) {
   const outer = document.getElementById('gantt-outer');
   const sticky = document.getElementById('gantt-header-sticky');
   if (outer && sticky) {
+    // Set top = height of all sticky elements above (app header + both controls rows)
+    const appHeader = document.querySelector('header');
+    const controlRows = document.querySelectorAll('.controls');
+    let topOffset = appHeader ? appHeader.offsetHeight : 0;
+    controlRows.forEach(c => { topOffset += c.offsetHeight; });
+    sticky.style.top = topOffset + 'px';
+
     outer.addEventListener('scroll', () => { sticky.scrollLeft = outer.scrollLeft; });
   }
 
