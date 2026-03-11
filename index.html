@@ -22,6 +22,35 @@
 
   .main { padding: 16px 24px; }
 
+  /* View toggle */
+  .view-toggle { display: flex; gap: 4px; background: #1a1a1a; border: 1px solid #333; border-radius: 8px; padding: 3px; }
+  .view-btn { padding: 5px 12px; border-radius: 6px; border: none; background: transparent; color: #888; font-size: 12px; font-weight: 600; cursor: pointer; transition: all 0.15s; }
+  .view-btn.active { background: #333; color: #fff; }
+
+  /* Card list */
+  .time-slot { margin-bottom: 8px; }
+  .time-label { font-size: 11px; color: #555; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 6px; padding-left: 4px; }
+  .events-row { display: flex; flex-wrap: wrap; gap: 8px; }
+  .event-card { border: 1px solid #2a2a2a; border-radius: 10px; padding: 12px 14px; cursor: pointer; transition: all 0.15s; position: relative; min-width: 220px; max-width: 340px; flex: 1; user-select: none; }
+  .event-card:hover { border-color: #444; background: #1a1a1a; }
+  .event-card.selected { border-color: #4ade80; background: #052e16; }
+  .event-card.selected .event-name { color: #4ade80; }
+  .event-card.has-conflict { border-left: 3px solid #f97316; }
+  .event-card.has-conflict.selected { border-color: #4ade80; border-left: 3px solid #4ade80; }
+  .event-card.deselected { opacity: 0.4; }
+  .event-name { font-size: 13px; font-weight: 600; color: #e0e0e0; line-height: 1.4; margin-bottom: 6px; }
+  .event-meta { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+  .pill { font-size: 11px; padding: 2px 8px; border-radius: 10px; font-weight: 500; }
+  .pill-time { background: #1e293b; color: #7dd3fc; }
+  .pill-cost { background: #1a1a2e; color: #a78bfa; }
+  .pill-type { background: #1a2e1a; color: #86efac; }
+  .pill-conflict { background: #431407; color: #fb923c; }
+  .event-location { font-size: 11px; color: #555; margin-top: 5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .event-url { font-size: 11px; color: #3b82f6; margin-top: 4px; text-decoration: none; display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .event-url:hover { text-decoration: underline; }
+  .check-icon { position: absolute; top: 10px; right: 10px; width: 18px; height: 18px; border-radius: 50%; border: 2px solid #333; display: flex; align-items: center; justify-content: center; font-size: 10px; transition: all 0.15s; }
+  .event-card.selected .check-icon { background: #4ade80; border-color: #4ade80; color: #000; }
+
   /* Day header */
   .day-header { font-size: 18px; font-weight: 700; color: #fff; margin-bottom: 12px; display: flex; align-items: center; gap: 12px; }
   .day-badge { font-size: 11px; background: #2a2a2a; color: #888; padding: 3px 8px; border-radius: 10px; font-weight: 500; }
@@ -164,6 +193,10 @@
     <div class="header-actions">
       <div class="stat">Selected: <span id="selected-count">0</span></div>
       <div class="stat">Conflicts: <span id="conflict-count" style="color:#f97316">0</span></div>
+      <div class="view-toggle">
+        <button class="view-btn active" id="view-btn-list" onclick="setView('list', this)">&#9776; List</button>
+        <button class="view-btn" id="view-btn-gantt" onclick="setView('gantt', this)">&#9776; Timeline</button>
+      </div>
       <button class="select-all-btn" onclick="selectAll()">Select All</button>
       <button class="select-all-btn" onclick="deselectAll()">Clear All</button>
       <div class="calendar-btn-group" id="cal-btn-group">
@@ -3426,6 +3459,7 @@ const EVENTS_DATA = [
 let allEvents = [];
 let selected = new Set();
 let currentDay = '2026-03-12';
+let currentView = 'list';
 
 // --- Load bundled events ---
 function loadBundledEvents() {
@@ -3488,6 +3522,72 @@ function groupByDay(events) {
     days[k].push({ event: e, idx: i });
   });
   return days;
+}
+
+// --- Card list rendering ---
+
+function renderCard(idx) {
+  const e = allEvents[idx];
+  const isSelected = selected.has(idx);
+  const activeConflicts = e.conflictsWith.filter(ci => selected.has(ci));
+  const conflictActive = isSelected && activeConflicts.length > 0;
+  return `
+    <div class="event-card ${isSelected ? 'selected' : 'deselected'} ${e.conflictsWith.length ? 'has-conflict' : ''}"
+         id="card-${idx}" onclick="toggleEvent(${idx})">
+      <div class="check-icon">${isSelected ? '&#10003;' : ''}</div>
+      <div class="event-name">${e.summary}</div>
+      <div class="event-meta">
+        <span class="pill pill-time">${fmt(e.start)}${e.end ? ' &ndash; ' + fmt(e.end) : ''}</span>
+        ${e.cost ? `<span class="pill pill-cost">${e.cost}</span>` : ''}
+        ${e.type ? `<span class="pill pill-type">${e.type}</span>` : ''}
+        ${conflictActive ? `<span class="pill pill-conflict">&#9889; Conflict</span>` : ''}
+      </div>
+      ${e.location ? `<div class="event-location">&#128205; ${e.location}</div>` : ''}
+      ${e.url ? `<a class="event-url" href="${e.url}" target="_blank" onclick="event.stopPropagation()">${e.url}</a>` : ''}
+    </div>`;
+}
+
+function renderCards(dayStr) {
+  const cal = document.getElementById('calendar');
+  const allDays = groupByDay(allEvents);
+  const dayEvents = allDays[dayStr];
+
+  if (!dayEvents || dayEvents.length === 0) {
+    cal.innerHTML = '<div class="empty-state">No events for this day.</div>';
+    updateStats();
+    return;
+  }
+
+  const d = dayEvents[0].event.start;
+  const dayName = `${DAY_NAMES[d.getDay()]}, ${MONTH_NAMES[d.getMonth()]} ${d.getDate()}`;
+  const conflictsInDay = dayEvents.filter(({ idx }) => allEvents[idx].conflictsWith.length > 0).length;
+
+  // Group by start time
+  const byTime = {};
+  for (const { event, idx } of dayEvents) {
+    const key = fmt(event.start);
+    if (!byTime[key]) byTime[key] = [];
+    byTime[key].push(idx);
+  }
+  const sortedTimes = Object.keys(byTime).sort((a, b) => {
+    const toMin = t => { const m = t.match(/(\d+):(\d+) (AM|PM)/); if (!m) return 0; let h = +m[1]; if (m[3]==='PM'&&h!==12) h+=12; if (m[3]==='AM'&&h===12) h=0; return h*60+(+m[2]); };
+    return toMin(a) - toMin(b);
+  });
+
+  let html = `<div class="day-header">${dayName}
+    <span class="day-badge">${dayEvents.length} events</span>
+    ${conflictsInDay > 0 ? `<span class="day-badge conflict-badge">&#9889; ${conflictsInDay} conflicts</span>` : ''}
+  </div>`;
+
+  for (const time of sortedTimes) {
+    html += `<div class="time-slot">
+      <div class="time-label">${time}</div>
+      <div class="events-row">${byTime[time].map(renderCard).join('')}</div>
+    </div>`;
+  }
+
+  cal.innerHTML = html;
+  updateStats();
 }
 
 // --- Gantt rendering ---
@@ -3660,7 +3760,15 @@ document.addEventListener('mousemove', (e) => {
 });
 
 function render() {
-  renderGantt(currentDay);
+  if (currentView === 'gantt') renderGantt(currentDay);
+  else renderCards(currentDay);
+}
+
+function setView(v, btn) {
+  currentView = v;
+  document.querySelectorAll('.view-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  render();
 }
 
 function toggleEvent(idx) {
