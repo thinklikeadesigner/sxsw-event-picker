@@ -3623,7 +3623,7 @@ function renderCards(dayStr) {
 // --- Gantt rendering (horizontal: time left→right, one row per event) ---
 
 const SLOT_W = 80; // px per 30-min slot
-const ROW_H = 110; // px per event row (tall enough for card content)
+const ROW_H = 150; // px per event row (tall enough for card content)
 
 function toMinutes(d) {
   return d.getHours() * 60 + d.getMinutes();
@@ -3726,7 +3726,7 @@ function renderGantt(dayStr) {
 
     bars += `<div class="g-event event-card ${isSelected ? 'selected' : ''} ${allEvents[idx].conflictsWith.length ? 'has-conflict' : ''}"
       id="gbar-${idx}"
-      style="left:${leftPx}px;width:${widthPx}px;top:${topPx}px;height:${ROW_H - 6}px"
+      style="left:${leftPx}px;width:${widthPx}px;top:${topPx}px;min-height:${ROW_H - 6}px"
       onclick="toggleEvent(${idx})">
       <div class="check-icon">${isSelected ? '&#10003;' : ''}</div>
       <div class="event-name" style="padding-right:22px">${event.summary}</div>
