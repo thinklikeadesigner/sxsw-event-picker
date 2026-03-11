@@ -232,7 +232,7 @@
     </div>
   </header>
 
-  <div class="controls">
+  <div class="controls" style="border-bottom:none;padding-bottom:8px;">
     <span style="font-size:12px;color:#666;font-weight:600;">DAY:</span>
     <button class="filter-btn" id="day-btn-2026-03-10" onclick="setDay('2026-03-10', this)">Tue Mar 10</button>
     <button class="filter-btn" id="day-btn-2026-03-11" onclick="setDay('2026-03-11', this)">Wed Mar 11</button>
@@ -247,6 +247,16 @@
       <button class="filter-btn" onclick="selectDayAll()">Select Day</button>
       <button class="filter-btn" onclick="deselectDayAll()">Clear Day</button>
     </div>
+  </div>
+
+  <div class="controls" style="padding-top:8px;">
+    <span style="font-size:12px;color:#666;font-weight:600;">COST:</span>
+    <button class="filter-btn active" onclick="setCostFilter('all', this)">All</button>
+    <button class="filter-btn" onclick="setCostFilter('free', this)">Free</button>
+    <button class="filter-btn" onclick="setCostFilter('register', this)">Register</button>
+    <button class="filter-btn" onclick="setCostFilter('approval', this)">Approval Required</button>
+    <button class="filter-btn" onclick="setCostFilter('request', this)">Request to Join</button>
+    <button class="filter-btn" onclick="setCostFilter('paid', this)">Paid ($)</button>
   </div>
 
   <div class="main" id="calendar"></div>
@@ -3462,6 +3472,25 @@ let allEvents = [];
 let selected = new Set();
 let currentDay = '2026-03-12';
 let currentView = 'list';
+let costFilter = 'all';
+
+function matchesCostFilter(cost) {
+  if (costFilter === 'all') return true;
+  const c = (cost || '').toLowerCase();
+  if (costFilter === 'free') return c === 'free';
+  if (costFilter === 'register') return c === 'register';
+  if (costFilter === 'approval') return c.includes('approval');
+  if (costFilter === 'request') return c.includes('request');
+  if (costFilter === 'paid') return /\$/.test(cost);
+  return true;
+}
+
+function setCostFilter(f, btn) {
+  costFilter = f;
+  document.querySelectorAll('.controls .filter-btn[onclick*="setCostFilter"]').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  render();
+}
 
 // --- Load bundled events ---
 function loadBundledEvents() {
@@ -3554,19 +3583,21 @@ function renderCards(dayStr) {
   const allDays = groupByDay(allEvents);
   const dayEvents = allDays[dayStr];
 
-  if (!dayEvents || dayEvents.length === 0) {
-    cal.innerHTML = '<div class="empty-state">No events for this day.</div>';
+  const filteredDayEvents = (dayEvents || []).filter(({ event }) => matchesCostFilter(event.cost));
+
+  if (filteredDayEvents.length === 0) {
+    cal.innerHTML = '<div class="empty-state">No events match the current filter.</div>';
     updateStats();
     return;
   }
 
-  const d = dayEvents[0].event.start;
+  const d = filteredDayEvents[0].event.start;
   const dayName = `${DAY_NAMES[d.getDay()]}, ${MONTH_NAMES[d.getMonth()]} ${d.getDate()}`;
-  const conflictsInDay = dayEvents.filter(({ idx }) => allEvents[idx].conflictsWith.length > 0).length;
+  const conflictsInDay = filteredDayEvents.filter(({ idx }) => allEvents[idx].conflictsWith.length > 0).length;
 
   // Group by start time
   const byTime = {};
-  for (const { event, idx } of dayEvents) {
+  for (const { event, idx } of filteredDayEvents) {
     const key = fmt(event.start);
     if (!byTime[key]) byTime[key] = [];
     byTime[key].push(idx);
@@ -3633,18 +3664,20 @@ function renderGantt(dayStr) {
   const allDays = groupByDay(allEvents);
   const dayEvents = allDays[dayStr];
 
-  if (!dayEvents || dayEvents.length === 0) {
-    cal.innerHTML = '<div class="empty-state">No events for this day.</div>';
+  const filteredDayEvents = (dayEvents || []).filter(({ event }) => matchesCostFilter(event.cost));
+
+  if (filteredDayEvents.length === 0) {
+    cal.innerHTML = '<div class="empty-state">No events match the current filter.</div>';
     updateStats();
     return;
   }
 
-  const d = dayEvents[0].event.start;
+  const d = filteredDayEvents[0].event.start;
   const dayName = `${DAY_NAMES[d.getDay()]}, ${MONTH_NAMES[d.getMonth()]} ${d.getDate()}`;
 
   // Find time range for this day
   let minMin = Infinity, maxMin = -Infinity;
-  for (const { event } of dayEvents) {
+  for (const { event } of filteredDayEvents) {
     const sm = toMinutes(event.start);
     const em = event.end ? toMinutes(event.end) : sm + 60;
     if (sm < minMin) minMin = sm;
@@ -3656,13 +3689,13 @@ function renderGantt(dayStr) {
   const totalSlots = (maxMin - minMin) / 30;
 
   // Assign lanes
-  const evList = dayEvents.map(({ event, idx }) => ({
+  const evList = filteredDayEvents.map(({ event, idx }) => ({
     idx, start: event.start,
     end: event.end || new Date(event.start.getTime() + 60 * 60000)
   }));
   const { laneMap, laneCount } = assignLanes(evList);
 
-  const conflictsInDay = dayEvents.filter(({ idx }) => allEvents[idx].conflictsWith.length > 0).length;
+  const conflictsInDay = filteredDayEvents.filter(({ idx }) => allEvents[idx].conflictsWith.length > 0).length;
   const totalH = totalSlots * ROW_H;
   const bodyW = laneCount * LANE_W;
 
@@ -3685,7 +3718,7 @@ function renderGantt(dayStr) {
 
   // Build event bars
   let bars = '';
-  for (const { event, idx } of dayEvents) {
+  for (const { event, idx } of filteredDayEvents) {
     const isSelected = selected.has(idx);
     const activeConflicts = allEvents[idx].conflictsWith.filter(ci => selected.has(ci));
     const conflictActive = isSelected && activeConflicts.length > 0;
@@ -3713,7 +3746,7 @@ function renderGantt(dayStr) {
   cal.innerHTML = `
     <div class="day-header">
       ${dayName}
-      <span class="day-badge">${dayEvents.length} events</span>
+      <span class="day-badge">${filteredDayEvents.length} events</span>
       ${conflictsInDay > 0 ? `<span class="day-badge conflict-badge">&#9889; ${conflictsInDay} overlaps</span>` : ''}
     </div>
     <div class="gantt-wrap">
