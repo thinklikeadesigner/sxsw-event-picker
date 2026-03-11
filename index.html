@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SXSW 2026 Event Picker</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background: #0f0f0f; color: #e0e0e0; min-height: 100vh; }
+
+  header { background: #1a1a1a; border-bottom: 1px solid #333; padding: 20px 32px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; }
+  header h1 { font-size: 20px; font-weight: 700; color: #fff; }
+  header .subtitle { font-size: 13px; color: #888; margin-top: 2px; }
+  .header-actions { display: flex; gap: 12px; align-items: center; }
+  .stat { font-size: 13px; color: #888; }
+  .stat span { color: #4ade80; font-weight: 600; }
+
+  .controls { background: #151515; border-bottom: 1px solid #2a2a2a; padding: 12px 32px; display: flex; gap: 16px; align-items: center; flex-wrap: wrap; }
+  .filter-btn { padding: 6px 14px; border-radius: 20px; border: 1px solid #333; background: transparent; color: #aaa; font-size: 12px; cursor: pointer; transition: all 0.15s; }
+  .filter-btn:hover, .filter-btn.active { background: #4ade80; border-color: #4ade80; color: #000; font-weight: 600; }
+  .filter-btn.conflict-filter.active { background: #f97316; border-color: #f97316; color: #000; }
+
+  .main { padding: 24px 32px; max-width: 1200px; margin: 0 auto; }
+
+  .day-section { margin-bottom: 40px; }
+  .day-header { font-size: 18px; font-weight: 700; color: #fff; margin-bottom: 16px; padding-bottom: 8px; border-bottom: 1px solid #2a2a2a; display: flex; align-items: center; gap: 12px; }
+  .day-badge { font-size: 11px; background: #2a2a2a; color: #888; padding: 3px 8px; border-radius: 10px; font-weight: 500; }
+  .conflict-badge { background: #7c2d12; color: #fb923c; }
+
+  .time-slot { margin-bottom: 8px; }
+  .time-label { font-size: 11px; color: #555; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 6px; padding-left: 4px; }
+  .events-row { display: flex; flex-wrap: wrap; gap: 8px; }
+
+  .event-card {
+    border: 1px solid #2a2a2a;
+    border-radius: 10px;
+    padding: 12px 14px;
+    cursor: pointer;
+    transition: all 0.15s;
+    position: relative;
+    min-width: 220px;
+    max-width: 340px;
+    flex: 1;
+    user-select: none;
+  }
+  .event-card:hover { border-color: #444; background: #1a1a1a; }
+  .event-card.selected { border-color: #4ade80; background: #052e16; }
+  .event-card.selected .event-name { color: #4ade80; }
+  .event-card.conflict { border-left: 3px solid #f97316; }
+  .event-card.conflict.selected { border-color: #4ade80; border-left: 3px solid #4ade80; }
+  .event-card.deselected { opacity: 0.4; }
+
+  .event-name { font-size: 13px; font-weight: 600; color: #e0e0e0; line-height: 1.4; margin-bottom: 6px; }
+  .event-meta { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+  .pill { font-size: 11px; padding: 2px 8px; border-radius: 10px; font-weight: 500; }
+  .pill-time { background: #1e293b; color: #7dd3fc; }
+  .pill-cost { background: #1a1a2e; color: #a78bfa; }
+  .pill-type { background: #1a2e1a; color: #86efac; }
+  .pill-conflict { background: #431407; color: #fb923c; }
+  .event-location { font-size: 11px; color: #555; margin-top: 5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .event-url { font-size: 11px; color: #3b82f6; margin-top: 4px; text-decoration: none; display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .event-url:hover { text-decoration: underline; }
+
+  .check-icon { position: absolute; top: 10px; right: 10px; width: 18px; height: 18px; border-radius: 50%; border: 2px solid #333; display: flex; align-items: center; justify-content: center; font-size: 10px; transition: all 0.15s; }
+  .event-card.selected .check-icon { background: #4ade80; border-color: #4ade80; color: #000; }
+
+  .export-btn {
+    padding: 10px 24px;
+    background: #4ade80;
+    color: #000;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .export-btn:hover { background: #22c55e; }
+  .export-btn:disabled { background: #333; color: #666; cursor: not-allowed; }
+
+  .select-all-btn {
+    padding: 6px 14px;
+    background: transparent;
+    color: #888;
+    border: 1px solid #333;
+    border-radius: 20px;
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .select-all-btn:hover { border-color: #555; color: #ccc; }
+
+  .conflict-group { background: #1a1200; border: 1px solid #3d2700; border-radius: 12px; padding: 12px 14px; margin-bottom: 8px; }
+  .conflict-group-label { font-size: 11px; color: #f97316; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 8px; display: flex; align-items: center; gap: 6px; }
+  .conflict-group-label::before { content: "⚡"; }
+
+  #load-section { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 60vh; gap: 16px; }
+  #load-section h2 { font-size: 24px; color: #fff; }
+  #load-section p { color: #888; font-size: 14px; text-align: center; max-width: 400px; line-height: 1.6; }
+  .file-drop { border: 2px dashed #333; border-radius: 16px; padding: 40px 60px; text-align: center; cursor: pointer; transition: all 0.2s; }
+  .file-drop:hover, .file-drop.drag-over { border-color: #4ade80; background: #052e16; }
+  .file-drop input { display: none; }
+  .file-drop-label { font-size: 14px; color: #888; }
+  .file-drop-label strong { color: #4ade80; }
+  .or-auto { font-size: 13px; color: #555; margin-top: 8px; }
+
+  #app { display: none; }
+
+  .empty-state { text-align: center; padding: 40px; color: #555; font-size: 14px; }
+
+  .toast { position: fixed; bottom: 24px; right: 24px; background: #4ade80; color: #000; padding: 12px 20px; border-radius: 8px; font-weight: 600; font-size: 14px; z-index: 999; animation: slideIn 0.2s ease; }
+  @keyframes slideIn { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+</style>
+</head>
+<body>
+
+<div id="load-section">
+  <div class="file-drop" id="file-drop" onclick="document.getElementById('file-input').click()">
+    <input type="file" id="file-input" accept=".ics">
+    <div class="file-drop-label">
+      <div style="font-size:32px;margin-bottom:12px;">📅</div>
+      <strong>Click or drag your .ics file here</strong>
+      <div style="margin-top:8px;font-size:12px;color:#555;">SXSW_2026_Events.ics</div>
+    </div>
+  </div>
+  <p class="or-auto">Or <a href="#" onclick="autoLoad()" style="color:#4ade80;">click here</a> if the file is already at ~/Downloads/SXSW_2026_Events.ics</p>
+</div>
+
+<div id="app">
+  <header>
+    <div>
+      <h1>SXSW 2026 Event Picker</h1>
+      <div class="subtitle">Click events to select/deselect. Conflicts shown in orange.</div>
+    </div>
+    <div class="header-actions">
+      <div class="stat">Selected: <span id="selected-count">0</span></div>
+      <div class="stat">Conflicts: <span id="conflict-count" style="color:#f97316">0</span></div>
+      <button class="select-all-btn" onclick="selectAll()">Select All</button>
+      <button class="select-all-btn" onclick="deselectAll()">Clear All</button>
+      <button class="export-btn" id="export-btn" onclick="exportICS()">Export .ics</button>
+    </div>
+  </header>
+
+  <div class="controls">
+    <span style="font-size:12px;color:#666;font-weight:600;">FILTER:</span>
+    <button class="filter-btn active" onclick="setFilter('all', this)">All Days</button>
+    <button class="filter-btn conflict-filter" onclick="setFilter('conflicts', this)">Conflicts Only</button>
+    <button class="filter-btn" onclick="setFilter('selected', this)">Selected Only</button>
+    <button class="filter-btn" id="filter-mar10" onclick="setFilter('mar10', this)">Mar 10</button>
+    <button class="filter-btn" id="filter-mar11" onclick="setFilter('mar11', this)">Mar 11</button>
+    <button class="filter-btn" id="filter-mar12" onclick="setFilter('mar12', this)">Mar 12</button>
+    <button class="filter-btn" id="filter-mar13" onclick="setFilter('mar13', this)">Mar 13</button>
+    <button class="filter-btn" id="filter-mar14" onclick="setFilter('mar14', this)">Mar 14</button>
+    <button class="filter-btn" id="filter-mar15" onclick="setFilter('mar15', this)">Mar 15</button>
+    <button class="filter-btn" id="filter-mar16" onclick="setFilter('mar16', this)">Mar 16</button>
+    <button class="filter-btn" id="filter-mar17" onclick="setFilter('mar17', this)">Mar 17</button>
+    <button class="filter-btn" id="filter-mar18" onclick="setFilter('mar18', this)">Mar 18</button>
+  </div>
+
+  <div class="main" id="calendar"></div>
+</div>
+
+<script>
+let allEvents = [];
+let selected = new Set();
+let currentFilter = 'all';
+
+// --- ICS Parser ---
+function parseICS(text) {
+  const events = [];
+  const blocks = text.split('BEGIN:VEVENT');
+  for (let i = 1; i < blocks.length; i++) {
+    const block = blocks[i];
+    const get = (key) => {
+      const re = new RegExp(key + '[^:]*:([^\r\n]+(?:\r?\n[ \t][^\r\n]+)*)', 'i');
+      const m = block.match(re);
+      if (!m) return '';
+      return m[1].replace(/\r?\n[ \t]/g, '').trim();
+    };
+    const uid = get('UID');
+    const summary = get('SUMMARY').replace(/\\,/g, ',').replace(/\\n/g, ' ');
+    const dtstart = get('DTSTART');
+    const dtend = get('DTEND');
+    const url = get('URL');
+    const location = get('LOCATION').replace(/\\,/g, ',');
+    const desc = get('DESCRIPTION').replace(/\\,/g, ',').replace(/\\n/g, '\n');
+
+    const parseLocal = (s) => {
+      const m = s.match(/(\d{4})(\d{2})(\d{2})T(\d{2})(\d{2})(\d{2})/);
+      if (!m) return null;
+      return new Date(+m[1], +m[2]-1, +m[3], +m[4], +m[5], +m[6]);
+    };
+
+    const start = parseLocal(dtstart);
+    const end = parseLocal(dtend);
+    if (!start) continue;
+
+    const costMatch = desc.match(/Cost:\s*([^|]+)/);
+    const typeMatch = desc.match(/Type:\s*([^|]+)/);
+
+    events.push({
+      uid, summary, start, end, url, location,
+      cost: costMatch ? costMatch[1].trim() : '',
+      type: typeMatch ? typeMatch[1].trim() : '',
+      rawBlock: 'BEGIN:VEVENT' + block,
+      conflictsWith: []
+    });
+  }
+
+  // Detect conflicts
+  for (let i = 0; i < events.length; i++) {
+    for (let j = i + 1; j < events.length; j++) {
+      const a = events[i], b = events[j];
+      if (!a.end || !b.end) continue;
+      // Same day check first for performance
+      if (a.start.toDateString() !== b.start.toDateString()) continue;
+      if (a.start < b.end && b.start < a.end) {
+        a.conflictsWith.push(j);
+        b.conflictsWith.push(i);
+      }
+    }
+  }
+
+  return events;
+}
+
+function fmt(d) {
+  if (!d) return '';
+  const h = d.getHours(), m = d.getMinutes();
+  const ampm = h >= 12 ? 'PM' : 'AM';
+  const hr = h % 12 || 12;
+  return `${hr}:${m.toString().padStart(2,'0')} ${ampm}`;
+}
+
+const DAY_NAMES = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+const MONTH_NAMES = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+
+function dayKey(d) {
+  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+}
+
+function groupByDay(events) {
+  const days = {};
+  events.forEach((e, i) => {
+    const k = dayKey(e.start);
+    if (!days[k]) days[k] = [];
+    days[k].push({ event: e, idx: i });
+  });
+  return days;
+}
+
+function groupByTimeSlot(dayEvents) {
+  const slots = {};
+  dayEvents.forEach(({ event, idx }) => {
+    const key = fmt(event.start);
+    if (!slots[key]) slots[key] = [];
+    slots[key].push({ event, idx });
+  });
+  return slots;
+}
+
+// Find conflict groups within a time slot (connected components)
+function findConflictGroups(slotEvents) {
+  const indices = slotEvents.map(e => e.idx);
+  const visited = new Set();
+  const groups = [];
+
+  for (const { idx } of slotEvents) {
+    if (visited.has(idx)) continue;
+    // BFS
+    const group = [];
+    const queue = [idx];
+    while (queue.length) {
+      const cur = queue.shift();
+      if (visited.has(cur)) continue;
+      visited.add(cur);
+      group.push(cur);
+      const curEvent = allEvents[cur];
+      for (const cidx of curEvent.conflictsWith) {
+        if (indices.includes(cidx) && !visited.has(cidx)) {
+          queue.push(cidx);
+        }
+      }
+    }
+    groups.push(group);
+  }
+  return groups;
+}
+
+function renderCard(idx) {
+  const e = allEvents[idx];
+  const isSelected = selected.has(idx);
+  const hasConflict = e.conflictsWith.length > 0;
+  const activeConflicts = e.conflictsWith.filter(ci => selected.has(ci));
+  const conflictActive = isSelected && activeConflicts.length > 0;
+
+  return `
+    <div class="event-card ${isSelected ? 'selected' : 'deselected'} ${hasConflict ? 'conflict' : ''}"
+         id="card-${idx}" onclick="toggleEvent(${idx})">
+      <div class="check-icon">${isSelected ? '✓' : ''}</div>
+      <div class="event-name">${e.summary}</div>
+      <div class="event-meta">
+        <span class="pill pill-time">${fmt(e.start)}${e.end ? ' – ' + fmt(e.end) : ''}</span>
+        ${e.cost ? `<span class="pill pill-cost">${e.cost}</span>` : ''}
+        ${e.type ? `<span class="pill pill-type">${e.type}</span>` : ''}
+        ${conflictActive ? `<span class="pill pill-conflict">⚡ Conflict</span>` : ''}
+      </div>
+      ${e.location ? `<div class="event-location">📍 ${e.location}</div>` : ''}
+      ${e.url ? `<a class="event-url" href="${e.url}" target="_blank" onclick="event.stopPropagation()">${e.url}</a>` : ''}
+    </div>`;
+}
+
+function render() {
+  const cal = document.getElementById('calendar');
+  const days = groupByDay(allEvents);
+  const sortedDays = Object.keys(days).sort();
+
+  let html = '';
+
+  for (const dayStr of sortedDays) {
+    const dayEvents = days[dayStr];
+    const d = dayEvents[0].event.start;
+
+    // Apply filter
+    let filteredEvents = dayEvents;
+    if (currentFilter === 'conflicts') {
+      filteredEvents = dayEvents.filter(({ idx }) => allEvents[idx].conflictsWith.length > 0);
+    } else if (currentFilter === 'selected') {
+      filteredEvents = dayEvents.filter(({ idx }) => selected.has(idx));
+    } else if (currentFilter.startsWith('mar')) {
+      const dayNum = parseInt(currentFilter.replace('mar', ''));
+      if (d.getDate() !== dayNum) continue;
+    }
+
+    if (filteredEvents.length === 0) continue;
+
+    const conflictsInDay = dayEvents.filter(({ idx }) => allEvents[idx].conflictsWith.length > 0).length;
+    const dayName = `${DAY_NAMES[d.getDay()]}, ${MONTH_NAMES[d.getMonth()]} ${d.getDate()}`;
+
+    html += `<div class="day-section">
+      <div class="day-header">
+        ${dayName}
+        <span class="day-badge">${filteredEvents.length} events</span>
+        ${conflictsInDay > 0 ? `<span class="day-badge conflict-badge">⚡ ${conflictsInDay} conflicts</span>` : ''}
+      </div>`;
+
+    // Group by time slot
+    const slots = groupByTimeSlot(filteredEvents);
+    const sortedSlots = Object.keys(slots).sort((a, b) => {
+      const toMin = t => {
+        const m = t.match(/(\d+):(\d+) (AM|PM)/);
+        if (!m) return 0;
+        let h = parseInt(m[1]);
+        const min = parseInt(m[2]);
+        if (m[3] === 'PM' && h !== 12) h += 12;
+        if (m[3] === 'AM' && h === 12) h = 0;
+        return h * 60 + min;
+      };
+      return toMin(a) - toMin(b);
+    });
+
+    for (const slotKey of sortedSlots) {
+      const slotEvents = slots[slotKey];
+      const groups = findConflictGroups(slotEvents);
+
+      html += `<div class="time-slot"><div class="time-label">${slotKey}</div>`;
+
+      for (const group of groups) {
+        if (group.length > 1) {
+          // Conflict group
+          html += `<div class="conflict-group">
+            <div class="conflict-group-label">Conflicting events — pick one (or more)</div>
+            <div class="events-row">`;
+          for (const idx of group) {
+            html += renderCard(idx);
+          }
+          html += `</div></div>`;
+        } else {
+          html += `<div class="events-row">`;
+          html += renderCard(group[0]);
+          html += `</div>`;
+        }
+      }
+
+      html += `</div>`;
+    }
+
+    html += `</div>`;
+  }
+
+  if (!html) html = '<div class="empty-state">No events match the current filter.</div>';
+  cal.innerHTML = html;
+  updateStats();
+}
+
+function toggleEvent(idx) {
+  if (selected.has(idx)) {
+    selected.delete(idx);
+  } else {
+    selected.add(idx);
+  }
+  render();
+}
+
+function selectAll() {
+  allEvents.forEach((_, i) => selected.add(i));
+  render();
+}
+
+function deselectAll() {
+  selected.clear();
+  render();
+}
+
+function setFilter(f, btn) {
+  currentFilter = f;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  render();
+}
+
+function updateStats() {
+  document.getElementById('selected-count').textContent = selected.size;
+  const conflictPairs = new Set();
+  allEvents.forEach((e, i) => {
+    if (selected.has(i)) {
+      e.conflictsWith.forEach(j => {
+        if (selected.has(j)) {
+          conflictPairs.add([i,j].sort().join('-'));
+        }
+      });
+    }
+  });
+  document.getElementById('conflict-count').textContent = conflictPairs.size;
+}
+
+function exportICS() {
+  if (selected.size === 0) { showToast('No events selected!'); return; }
+
+  const header = `BEGIN:VCALENDAR\r\nVERSION:2.0\r\nPRODID:-//SXSW 2026 Picker//EN\r\nCALSCALE:GREGORIAN\r\nMETHOD:PUBLISH\r\nX-WR-CALNAME:SXSW 2026 My Schedule\r\nX-WR-TIMEZONE:America/Chicago\r\nBEGIN:VTIMEZONE\r\nTZID:America/Chicago\r\nBEGIN:STANDARD\r\nDTSTART:19671029T020000\r\nRRULE:FREQ=YEARLY;BYDAY=1SU;BYMONTH=11\r\nTZOFFSETFROM:-0500\r\nTZOFFSETTO:-0600\r\nTZNAME:CST\r\nEND:STANDARD\r\nBEGIN:DAYLIGHT\r\nDTSTART:19870405T020000\r\nRRULE:FREQ=YEARLY;BYDAY=2SU;BYMONTH=3\r\nTZOFFSETFROM:-0600\r\nTZOFFSETTO:-0500\r\nTZNAME:CDT\r\nEND:DAYLIGHT\r\nEND:VTIMEZONE\r\n`;
+  const footer = `END:VCALENDAR\r\n`;
+
+  let body = '';
+  allEvents.forEach((e, i) => {
+    if (!selected.has(i)) return;
+    body += e.rawBlock.replace(/\r?\n/g, '\r\n');
+    if (!body.endsWith('\r\n')) body += '\r\n';
+  });
+
+  const ics = header + body + footer;
+  const blob = new Blob([ics], { type: 'text/calendar;charset=utf-8' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'SXSW_2026_MySchedule.ics';
+  a.click();
+  showToast(`Exported ${selected.size} events!`);
+}
+
+function showToast(msg) {
+  const t = document.createElement('div');
+  t.className = 'toast';
+  t.textContent = msg;
+  document.body.appendChild(t);
+  setTimeout(() => t.remove(), 3000);
+}
+
+function loadICS(text) {
+  allEvents = parseICS(text);
+  // Select all by default
+  allEvents.forEach((_, i) => selected.add(i));
+  document.getElementById('load-section').style.display = 'none';
+  document.getElementById('app').style.display = 'block';
+  render();
+}
+
+// File input
+document.getElementById('file-input').addEventListener('change', (e) => {
+  const file = e.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = (ev) => loadICS(ev.target.result);
+  reader.readAsText(file);
+});
+
+// Drag and drop
+const dropZone = document.getElementById('file-drop');
+dropZone.addEventListener('dragover', (e) => { e.preventDefault(); dropZone.classList.add('drag-over'); });
+dropZone.addEventListener('dragleave', () => dropZone.classList.remove('drag-over'));
+dropZone.addEventListener('drop', (e) => {
+  e.preventDefault();
+  dropZone.classList.remove('drag-over');
+  const file = e.dataTransfer.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = (ev) => loadICS(ev.target.result);
+  reader.readAsText(file);
+});
+
+// Auto-load attempt (won't work due to browser security, but guides user)
+function autoLoad() {
+  showToast('Drag the .ics file onto the box above, or click to browse');
+}
+</script>
+</body>
+</html>
