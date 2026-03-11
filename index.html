@@ -178,7 +178,7 @@
   <header>
     <div>
       <h1>SXSW 2026 Event Picker</h1>
-      <div class="subtitle">SXSW 2026 &bull; 291 unofficial tech events via Entre</div>
+      <div class="subtitle">SXSW 2026 &bull; 279 unofficial tech events via Entre</div>
     </div>
     <div class="header-actions">
       <div class="stat">Selected: <span id="selected-count">0</span></div>
@@ -3488,7 +3488,16 @@ function loadBundledEvents() {
     return new Date(+m[1], +m[2]-1, +m[3], +m[4], +m[5], +m[6]);
   }
 
-  allEvents = EVENTS_DATA.map(d => ({
+  // Deduplicate by summary + dtstart
+  const seen = new Set();
+  const unique = EVENTS_DATA.filter(d => {
+    const key = d.summary.trim() + '|' + d.dtstart;
+    if (seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  });
+
+  allEvents = unique.map(d => ({
     uid: d.uid,
     summary: d.summary,
     start: parseLocal(d.dtstart),
