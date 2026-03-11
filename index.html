@@ -3707,38 +3707,45 @@ function renderGantt(dayStr) {
     }
   }
   const laneCount = Math.max(1, laneEndMin.length);
-  const trackH = laneCount * ROW_H;
 
-  // Build bars (all in one track)
-  let bars = '';
+  // Group events by lane
+  const lanes = Array.from({ length: laneCount }, () => []);
   for (const { event, idx } of sorted) {
-    const isSelected = selected.has(idx);
-    const activeConflicts = allEvents[idx].conflictsWith.filter(ci => selected.has(ci));
-    const conflictActive = isSelected && activeConflicts.length > 0;
+    lanes[laneOf[idx] || 0].push({ event, idx });
+  }
 
-    const startMin = toMinutes(event.start);
-    let endMin = event.end ? toMinutes(event.end) : startMin + 60;
-    if (endMin <= startMin) endMin += 1440;
-    const leftPx = (startMin - minMin) / 30 * SLOT_W + 2;
-    const widthPx = Math.max((endMin - startMin) / 30 * SLOT_W - 4, SLOT_W - 4);
-    const lane = laneOf[idx] || 0;
-    const topPx = lane * ROW_H + 3;
+  // Build one div per lane, cards absolutely positioned within each lane
+  let laneHtml = '';
+  for (let l = 0; l < laneCount; l++) {
+    let laneBars = '';
+    for (const { event, idx } of lanes[l]) {
+      const isSelected = selected.has(idx);
+      const activeConflicts = allEvents[idx].conflictsWith.filter(ci => selected.has(ci));
+      const conflictActive = isSelected && activeConflicts.length > 0;
 
-    bars += `<div class="g-event event-card ${isSelected ? 'selected' : ''} ${allEvents[idx].conflictsWith.length ? 'has-conflict' : ''}"
-      id="gbar-${idx}"
-      style="left:${leftPx}px;width:${widthPx}px;top:${topPx}px;min-height:${ROW_H - 6}px"
-      onclick="toggleEvent(${idx})">
-      <div class="check-icon">${isSelected ? '&#10003;' : ''}</div>
-      <div class="event-name" style="padding-right:22px">${event.summary}</div>
-      <div class="event-meta">
-        <span class="pill pill-time">${fmt(event.start)}${event.end ? ' &ndash; ' + fmt(event.end) : ''}</span>
-        ${event.cost ? `<span class="pill pill-cost">${event.cost}</span>` : ''}
-        ${event.type ? `<span class="pill pill-type">${event.type}</span>` : ''}
-        ${conflictActive ? `<span class="pill pill-conflict">&#9889; Conflict</span>` : ''}
-      </div>
-      ${event.location ? `<div class="event-location">&#128205; ${event.location}</div>` : ''}
-      ${event.url ? `<a class="event-url" href="${event.url}" target="_blank" onclick="event.stopPropagation()">${event.url}</a>` : ''}
-    </div>`;
+      const startMin = toMinutes(event.start);
+      let endMin = event.end ? toMinutes(event.end) : startMin + 60;
+      if (endMin <= startMin) endMin += 1440;
+      const leftPx = (startMin - minMin) / 30 * SLOT_W + 2;
+      const widthPx = Math.max((endMin - startMin) / 30 * SLOT_W - 4, SLOT_W - 4);
+
+      laneBars += `<div class="g-event event-card ${isSelected ? 'selected' : ''} ${allEvents[idx].conflictsWith.length ? 'has-conflict' : ''}"
+        id="gbar-${idx}"
+        style="left:${leftPx}px;width:${widthPx}px;top:3px"
+        onclick="toggleEvent(${idx})">
+        <div class="check-icon">${isSelected ? '&#10003;' : ''}</div>
+        <div class="event-name" style="padding-right:22px">${event.summary}</div>
+        <div class="event-meta">
+          <span class="pill pill-time">${fmt(event.start)}${event.end ? ' &ndash; ' + fmt(event.end) : ''}</span>
+          ${event.cost ? `<span class="pill pill-cost">${event.cost}</span>` : ''}
+          ${event.type ? `<span class="pill pill-type">${event.type}</span>` : ''}
+          ${conflictActive ? `<span class="pill pill-conflict">&#9889; Conflict</span>` : ''}
+        </div>
+        ${event.location ? `<div class="event-location">&#128205; ${event.location}</div>` : ''}
+        ${event.url ? `<a class="event-url" href="${event.url}" target="_blank" onclick="event.stopPropagation()">${event.url}</a>` : ''}
+      </div>`;
+    }
+    laneHtml += `<div style="position:relative;height:${ROW_H}px;border-bottom:1px solid #1a1a1a;">${gridBg}${laneBars}</div>`;
   }
 
   cal.innerHTML = `
@@ -3754,10 +3761,7 @@ function renderGantt(dayStr) {
     </div>
     <div class="gantt-outer" id="gantt-outer">
       <div class="gantt-inner" style="width:${totalW}px">
-        <div class="gantt-row-track" style="height:${trackH}px;position:relative;">
-          ${gridBg}
-          ${bars}
-        </div>
+        ${laneHtml}
       </div>
     </div>`;
 
