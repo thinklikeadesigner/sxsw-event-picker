@@ -75,8 +75,7 @@
   .g-tt-name { font-size: 13px; font-weight: 700; color: #fff; margin-bottom: 6px; line-height: 1.4; }
   .g-tt-row { font-size: 11px; color: #888; margin-top: 3px; }
   .g-tt-row span { color: #ccc; }
-  .g-tt-conflict { font-size: 11px; color: #f97316; margin-top: 6px; font-weight: 600; }
-  .g-tt-url { font-size: 11px; color: #3b82f6; margin-top: 6px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: block; }
+.g-tt-url { font-size: 11px; color: #3b82f6; margin-top: 6px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: block; }
 
   .empty-state { text-align: center; padding: 40px; color: #555; font-size: 14px; }
 
@@ -3629,16 +3628,12 @@ function renderGantt(dayStr) {
 function showTooltip(e, idx) {
   const ev = allEvents[idx];
   const tt = document.getElementById('g-tooltip');
-  const activeConflicts = ev.conflictsWith.filter(ci => selected.has(ci));
-  const conflictNames = activeConflicts.map(ci => allEvents[ci].summary).join(', ');
-
   tt.innerHTML = `
     <div class="g-tt-name">${ev.summary}</div>
     <div class="g-tt-row">&#128337; <span>${fmt(ev.start)}${ev.end ? ' – ' + fmt(ev.end) : ''}</span></div>
     ${ev.cost ? `<div class="g-tt-row">&#128176; <span>${ev.cost}</span></div>` : ''}
     ${ev.type ? `<div class="g-tt-row">&#127981; <span>${ev.type}</span></div>` : ''}
     ${ev.location ? `<div class="g-tt-row">&#128205; <span>${ev.location}</span></div>` : ''}
-    ${conflictNames ? `<div class="g-tt-conflict">&#9889; Conflicts with: ${conflictNames}</div>` : ''}
     ${ev.url ? `<a class="g-tt-url" href="${ev.url}" target="_blank" onclick="event.stopPropagation()">${ev.url}</a>` : ''}
   `;
   tt.classList.add('visible');
