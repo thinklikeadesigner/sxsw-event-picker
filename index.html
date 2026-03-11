@@ -57,10 +57,12 @@
   .conflict-badge { background: #7c2d12; color: #fb923c; }
 
   /* Gantt chart — horizontal, time left→right */
+  .gantt-header-sticky { position: sticky; top: 57px; z-index: 50; background: #0f0f0f; border-bottom: 1px solid #2a2a2a; overflow-x: auto; scrollbar-width: none; }
+  .gantt-header-sticky::-webkit-scrollbar { display: none; }
+  .gantt-time-header-inner { display: flex; padding: 6px 0 4px; }
+  .gantt-col-label { font-size: 10px; color: #555; font-weight: 600; text-align: left; padding: 0 0 2px 4px; user-select: none; flex-shrink: 0; }
   .gantt-outer { overflow-x: auto; padding-bottom: 16px; }
   .gantt-inner { display: block; }
-  .gantt-time-header-inner { display: flex; margin-bottom: 4px; position: sticky; top: 0; background: #0f0f0f; z-index: 50; padding: 6px 0 4px; border-bottom: 1px solid #2a2a2a; }
-  .gantt-col-label { font-size: 10px; color: #444; font-weight: 600; text-align: left; padding: 0 0 4px 4px; user-select: none; flex-shrink: 0; }
   .gantt-row { position: relative; }
   .gantt-row-track { position: relative; overflow: visible; }
   .gantt-grid-bg { position: absolute; top: 0; bottom: 0; border-left: 1px solid #1e1e1e; pointer-events: none; }
@@ -3669,8 +3671,33 @@ function renderGantt(dayStr) {
     gridBg += `<div class="gantt-grid-bg ${isHour ? 'hour' : ''}" style="left:${i * SLOT_W}px;top:0;bottom:0"></div>`;
   }
 
-  // Build rows
-  let rows = '';
+  // Assign lanes to avoid overlapping bars
+  // Each "lane" is a sub-row. Events that overlap get different lanes.
+  const laneEndMin = []; // tracks end time of last event in each lane
+  const laneOf = {};
+  for (const { event, idx } of sorted) {
+    const sm = toMinutes(event.start);
+    let em = event.end ? toMinutes(event.end) : sm + 60;
+    if (em <= sm) em += 1440;
+    let placed = false;
+    for (let l = 0; l < laneEndMin.length; l++) {
+      if (laneEndMin[l] <= sm) {
+        laneEndMin[l] = em;
+        laneOf[idx] = l;
+        placed = true;
+        break;
+      }
+    }
+    if (!placed) {
+      laneOf[idx] = laneEndMin.length;
+      laneEndMin.push(em);
+    }
+  }
+  const laneCount = Math.max(1, laneEndMin.length);
+  const trackH = laneCount * ROW_H;
+
+  // Build bars (all in one track)
+  let bars = '';
   for (const { event, idx } of sorted) {
     const isSelected = selected.has(idx);
     const activeConflicts = allEvents[idx].conflictsWith.filter(ci => selected.has(ci));
@@ -3678,11 +3705,16 @@ function renderGantt(dayStr) {
 
     const startMin = toMinutes(event.start);
     let endMin = event.end ? toMinutes(event.end) : startMin + 60;
-    if (endMin <= startMin) endMin += 1440; // crosses midnight
+    if (endMin <= startMin) endMin += 1440;
     const leftPx = (startMin - minMin) / 30 * SLOT_W + 2;
     const widthPx = Math.max((endMin - startMin) / 30 * SLOT_W - 4, SLOT_W - 4);
+    const lane = laneOf[idx] || 0;
+    const topPx = lane * ROW_H + 3;
 
-    const cardContent = `
+    bars += `<div class="g-event event-card ${isSelected ? 'selected' : ''} ${allEvents[idx].conflictsWith.length ? 'has-conflict' : ''}"
+      id="gbar-${idx}"
+      style="left:${leftPx}px;width:${widthPx}px;top:${topPx}px;height:${ROW_H - 6}px"
+      onclick="toggleEvent(${idx})">
       <div class="check-icon">${isSelected ? '&#10003;' : ''}</div>
       <div class="event-name" style="padding-right:22px">${event.summary}</div>
       <div class="event-meta">
@@ -3693,18 +3725,6 @@ function renderGantt(dayStr) {
       </div>
       ${event.location ? `<div class="event-location">&#128205; ${event.location}</div>` : ''}
       ${event.url ? `<a class="event-url" href="${event.url}" target="_blank" onclick="event.stopPropagation()">${event.url}</a>` : ''}
-    `;
-
-    rows += `<div class="gantt-row">
-      <div class="gantt-row-track" style="width:${totalW}px;height:${ROW_H}px">
-        ${gridBg}
-        <div class="g-event event-card ${isSelected ? 'selected' : ''} ${event.conflictsWith && event.conflictsWith.length ? 'has-conflict' : ''}"
-          id="gbar-${idx}"
-          style="left:${leftPx}px;width:${widthPx}px;bottom:3px;top:3px"
-          onclick="toggleEvent(${idx})">
-          ${cardContent}
-        </div>
-      </div>
     </div>`;
   }
 
@@ -3714,12 +3734,24 @@ function renderGantt(dayStr) {
       <span class="day-badge">${sorted.length} events</span>
       ${conflictsInDay > 0 ? `<span class="day-badge conflict-badge">&#9889; ${conflictsInDay} overlaps</span>` : ''}
     </div>
-    <div class="gantt-outer">
+    <div class="gantt-header-sticky" id="gantt-header-sticky">
+      <div class="gantt-time-header-inner" style="width:${totalW}px">${timeHeaderCols}</div>
+    </div>
+    <div class="gantt-outer" id="gantt-outer">
       <div class="gantt-inner" style="width:${totalW}px">
-        <div class="gantt-time-header-inner">${timeHeaderCols}</div>
-        ${rows}
+        <div class="gantt-row-track" style="height:${trackH}px;position:relative;">
+          ${gridBg}
+          ${bars}
+        </div>
       </div>
     </div>`;
+
+  // Sync horizontal scroll between header and body
+  const outer = document.getElementById('gantt-outer');
+  const sticky = document.getElementById('gantt-header-sticky');
+  if (outer && sticky) {
+    outer.addEventListener('scroll', () => { sticky.scrollLeft = outer.scrollLeft; });
+  }
 
   updateStats();
 }
