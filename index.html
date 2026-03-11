@@ -3648,7 +3648,8 @@ function renderGantt(dayStr) {
   let minMin = Infinity, maxMin = -Infinity;
   for (const { event } of sorted) {
     const sm = toMinutes(event.start);
-    const em = event.end ? toMinutes(event.end) : sm + 60;
+    let em = event.end ? toMinutes(event.end) : sm + 60;
+    if (em <= sm) em += 1440; // crosses midnight
     if (sm < minMin) minMin = sm;
     if (em > maxMin) maxMin = em;
   }
@@ -3679,7 +3680,8 @@ function renderGantt(dayStr) {
     const conflictActive = isSelected && activeConflicts.length > 0;
 
     const startMin = toMinutes(event.start);
-    const endMin = event.end ? toMinutes(event.end) : startMin + 60;
+    let endMin = event.end ? toMinutes(event.end) : startMin + 60;
+    if (endMin <= startMin) endMin += 1440; // crosses midnight
     const leftPx = (startMin - minMin) / 30 * SLOT_W + 2;
     const widthPx = Math.max((endMin - startMin) / 30 * SLOT_W - 4, SLOT_W - 4);
 
