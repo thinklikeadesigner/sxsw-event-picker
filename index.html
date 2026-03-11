@@ -3476,23 +3476,18 @@ function groupByDay(events) {
   return days;
 }
 
-function groupByTimeSlot(dayEvents) {
-  const slots = {};
-  dayEvents.forEach(({ event, idx }) => {
-    const key = fmt(event.start);
-    if (!slots[key]) slots[key] = [];
-    slots[key].push({ event, idx });
-  });
-  return slots;
-}
-
-function findConflictGroups(slotEvents) {
-  const indices = slotEvents.map(e => e.idx);
+// Build connected conflict clusters across the entire day (ignores start-time grouping)
+function buildDayClusters(dayEvents) {
+  const indices = dayEvents.map(e => e.idx);
   const visited = new Set();
-  const groups = [];
+  const clusters = []; // each cluster: { indices: [], isConflict: bool }
 
-  for (const { idx } of slotEvents) {
+  // Sort by start time so solo events render in order
+  const sorted = [...dayEvents].sort((a, b) => a.event.start - b.event.start);
+
+  for (const { idx } of sorted) {
     if (visited.has(idx)) continue;
+    // BFS across conflictsWith, restricted to this day's indices
     const group = [];
     const queue = [idx];
     while (queue.length) {
@@ -3500,16 +3495,17 @@ function findConflictGroups(slotEvents) {
       if (visited.has(cur)) continue;
       visited.add(cur);
       group.push(cur);
-      const curEvent = allEvents[cur];
-      for (const cidx of curEvent.conflictsWith) {
+      for (const cidx of allEvents[cur].conflictsWith) {
         if (indices.includes(cidx) && !visited.has(cidx)) {
           queue.push(cidx);
         }
       }
     }
-    groups.push(group);
+    // Sort cluster members by start time
+    group.sort((a, b) => allEvents[a].start - allEvents[b].start);
+    clusters.push({ indices: group, isConflict: group.length > 1 });
   }
-  return groups;
+  return clusters;
 }
 
 function renderCard(idx) {
@@ -3568,43 +3564,25 @@ function render() {
         ${conflictsInDay > 0 ? `<span class="day-badge conflict-badge">&#9889; ${conflictsInDay} conflicts</span>` : ''}
       </div>`;
 
-    const slots = groupByTimeSlot(filteredEvents);
-    const sortedSlots = Object.keys(slots).sort((a, b) => {
-      const toMin = t => {
-        const m = t.match(/(\d+):(\d+) (AM|PM)/);
-        if (!m) return 0;
-        let h = parseInt(m[1]);
-        const min = parseInt(m[2]);
-        if (m[3] === 'PM' && h !== 12) h += 12;
-        if (m[3] === 'AM' && h === 12) h = 0;
-        return h * 60 + min;
-      };
-      return toMin(a) - toMin(b);
-    });
+    const clusters = buildDayClusters(filteredEvents);
 
-    for (const slotKey of sortedSlots) {
-      const slotEvents = slots[slotKey];
-      const groups = findConflictGroups(slotEvents);
-
-      html += `<div class="time-slot"><div class="time-label">${slotKey}</div>`;
-
-      for (const group of groups) {
-        if (group.length > 1) {
-          html += `<div class="conflict-group">
-            <div class="conflict-group-label">Conflicting events &mdash; pick one (or more)</div>
-            <div class="events-row">`;
-          for (const idx of group) {
-            html += renderCard(idx);
-          }
-          html += `</div></div>`;
-        } else {
-          html += `<div class="events-row">`;
-          html += renderCard(group[0]);
-          html += `</div>`;
+    for (const cluster of clusters) {
+      if (cluster.isConflict) {
+        const timeRange = `${fmt(allEvents[cluster.indices[0]].start)} – ${fmt(allEvents[cluster.indices[cluster.indices.length-1]].end || allEvents[cluster.indices[cluster.indices.length-1]].start)}`;
+        html += `<div class="conflict-group">
+          <div class="conflict-group-label">Conflicting events &mdash; pick one (or more) &nbsp;<span style="font-weight:400;color:#a16207;text-transform:none;letter-spacing:0">${timeRange}</span></div>
+          <div class="events-row">`;
+        for (const idx of cluster.indices) {
+          html += renderCard(idx);
         }
+        html += `</div></div>`;
+      } else {
+        const idx = cluster.indices[0];
+        html += `<div class="time-slot">
+          <div class="time-label">${fmt(allEvents[idx].start)}</div>
+          <div class="events-row">${renderCard(idx)}</div>
+        </div>`;
       }
-
-      html += `</div>`;
     }
 
     html += `</div>`;
