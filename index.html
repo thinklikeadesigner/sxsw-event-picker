@@ -59,7 +59,7 @@
   /* Gantt chart — horizontal, time left→right */
   .gantt-outer { overflow-x: auto; padding-bottom: 16px; }
   .gantt-inner { display: block; }
-  .gantt-time-header-inner { display: flex; margin-bottom: 4px; }
+  .gantt-time-header-inner { display: flex; margin-bottom: 4px; position: sticky; top: 0; background: #0f0f0f; z-index: 50; padding: 6px 0 4px; border-bottom: 1px solid #2a2a2a; }
   .gantt-col-label { font-size: 10px; color: #444; font-weight: 600; text-align: left; padding: 0 0 4px 4px; user-select: none; flex-shrink: 0; }
   .gantt-row { position: relative; }
   .gantt-row-track { position: relative; overflow: visible; }
@@ -193,21 +193,21 @@
             <span class="cal-icon">&#127822;</span>
             <span class="cal-label">
               <span class="cal-name">Apple Calendar</span>
-              <span class="cal-hint">Download .ics &rarr; double-click to import</span>
+              <span class="cal-hint">Double-click the downloaded file to add all events</span>
             </span>
           </button>
           <button class="cal-option" onclick="exportCalendar('google', event)">
             <span class="cal-icon">&#128197;</span>
             <span class="cal-label">
               <span class="cal-name">Google Calendar</span>
-              <span class="cal-hint">Download .ics, then import via Settings</span>
+              <span class="cal-hint">Settings &#9881; &rarr; Import &rarr; select the downloaded file</span>
             </span>
           </button>
           <button class="cal-option" onclick="exportCalendar('outlook', event)">
             <span class="cal-icon">&#128196;</span>
             <span class="cal-label">
               <span class="cal-name">Outlook / Exchange</span>
-              <span class="cal-hint">Download .ics &rarr; File &rarr; Import/Export</span>
+              <span class="cal-hint">Double-click the downloaded file to add all events</span>
             </span>
           </button>
         </div>
@@ -3823,11 +3823,11 @@ function exportCalendar(target, e) {
   downloadICS();
   const n = selected.size;
   if (target === 'apple') {
-    showToast(`${n} events downloaded. Double-click the .ics file to import into Apple Calendar.`);
+    showToast(`${n} events ready. Double-click the downloaded file to add them to Apple Calendar.`);
   } else if (target === 'google') {
-    showToast(`${n} events downloaded. In Google Calendar: Settings \u2699 \u2192 Import \u2192 select the .ics file.`);
+    showToast(`${n} events ready. In Google Calendar: Settings \u2699 \u2192 Import \u2192 select the downloaded file.`);
   } else if (target === 'outlook') {
-    showToast(`${n} events downloaded. In Outlook: File \u2192 Open & Export \u2192 Import/Export \u2192 Import an iCalendar file.`);
+    showToast(`${n} events ready. Double-click the downloaded file to add them to Outlook.`);
   }
 }
 
