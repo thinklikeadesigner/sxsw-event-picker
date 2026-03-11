@@ -3623,7 +3623,7 @@ function renderCards(dayStr) {
 // --- Gantt rendering (horizontal: time left→right, one row per event) ---
 
 const SLOT_W = 80; // px per 30-min slot
-const ROW_H = 150; // px per event row (tall enough for card content)
+const ROW_H = 200; // px per event row (tall enough for tallest card)
 
 function toMinutes(d) {
   return d.getHours() * 60 + d.getMinutes();
@@ -3731,7 +3731,7 @@ function renderGantt(dayStr) {
 
       laneBars += `<div class="g-event event-card ${isSelected ? 'selected' : ''} ${allEvents[idx].conflictsWith.length ? 'has-conflict' : ''}"
         id="gbar-${idx}"
-        style="left:${leftPx}px;width:${widthPx}px;top:3px"
+        style="left:${leftPx}px;width:${widthPx}px;top:3px;bottom:3px"
         onclick="toggleEvent(${idx})">
         <div class="check-icon">${isSelected ? '&#10003;' : ''}</div>
         <div class="event-name" style="padding-right:22px">${event.summary}</div>
@@ -3745,7 +3745,7 @@ function renderGantt(dayStr) {
         ${event.url ? `<a class="event-url" href="${event.url}" target="_blank" onclick="event.stopPropagation()">${event.url}</a>` : ''}
       </div>`;
     }
-    laneHtml += `<div style="position:relative;height:${ROW_H}px;border-bottom:1px solid #1a1a1a;">${gridBg}${laneBars}</div>`;
+    laneHtml += `<div style="position:relative;height:${ROW_H}px;border-bottom:1px solid #1a1a1a;flex-shrink:0;">${gridBg}${laneBars}</div>`;
   }
 
   cal.innerHTML = `
