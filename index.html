@@ -155,7 +155,7 @@
       <button class="select-all-btn" onclick="selectAll()">Select All</button>
       <button class="select-all-btn" onclick="deselectAll()">Clear All</button>
       <div class="calendar-btn-group" id="cal-btn-group">
-        <button class="add-cal-btn" id="add-cal-btn" onclick="toggleCalDropdown()">
+        <button class="add-cal-btn" id="add-cal-btn" onclick="toggleCalDropdown(event)">
           Add to Calendar <span class="caret">&#9650;</span>
         </button>
         <div class="cal-dropdown" id="cal-dropdown">
@@ -3650,10 +3650,14 @@ function downloadICS() {
   if (selected.size === 0) { showToast('No events selected!'); return false; }
   const ics = buildICS();
   const blob = new Blob([ics], { type: 'text/calendar;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
-  a.href = URL.createObjectURL(blob);
+  a.href = url;
   a.download = 'SXSW_2026_MySchedule.ics';
+  document.body.appendChild(a);
   a.click();
+  document.body.removeChild(a);
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
   return true;
 }
 
@@ -3673,7 +3677,8 @@ function exportCalendar(target) {
   }
 }
 
-function toggleCalDropdown() {
+function toggleCalDropdown(e) {
+  if (e) e.stopPropagation();
   if (selected.size === 0) { showToast('No events selected!'); return; }
   const dd = document.getElementById('cal-dropdown');
   dd.classList.toggle('open');
