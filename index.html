@@ -20,49 +20,65 @@
   .filter-btn:hover, .filter-btn.active { background: #4ade80; border-color: #4ade80; color: #000; font-weight: 600; }
   .filter-btn.conflict-filter.active { background: #f97316; border-color: #f97316; color: #000; }
 
-  .main { padding: 24px 32px; max-width: 1200px; margin: 0 auto; }
+  .main { padding: 16px 24px; }
 
-  .day-section { margin-bottom: 40px; }
-  .day-header { font-size: 18px; font-weight: 700; color: #fff; margin-bottom: 16px; padding-bottom: 8px; border-bottom: 1px solid #2a2a2a; display: flex; align-items: center; gap: 12px; }
+  /* Day header */
+  .day-header { font-size: 18px; font-weight: 700; color: #fff; margin-bottom: 12px; display: flex; align-items: center; gap: 12px; }
   .day-badge { font-size: 11px; background: #2a2a2a; color: #888; padding: 3px 8px; border-radius: 10px; font-weight: 500; }
   .conflict-badge { background: #7c2d12; color: #fb923c; }
 
-  .time-slot { margin-bottom: 8px; }
-  .time-label { font-size: 11px; color: #555; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 6px; padding-left: 4px; }
-  .events-row { display: flex; flex-wrap: wrap; gap: 8px; }
+  /* Gantt chart */
+  .gantt-wrap { display: flex; overflow-x: auto; padding-bottom: 16px; }
+  .gantt-time-col { flex-shrink: 0; width: 52px; padding-top: 0; }
+  .gantt-time-label { height: 40px; display: flex; align-items: flex-start; justify-content: flex-end; padding-right: 8px; font-size: 10px; color: #444; font-weight: 600; letter-spacing: 0.03em; user-select: none; }
+  .gantt-body { flex: 1; position: relative; min-width: 0; }
+  .gantt-grid-line { height: 40px; border-top: 1px solid #1e1e1e; }
+  .gantt-grid-line:nth-child(odd) { background: #111; }
+  .gantt-grid-line:nth-child(even) { background: #0f0f0f; }
+  .gantt-events { position: absolute; top: 0; left: 0; right: 0; bottom: 0; }
 
-  .event-card {
-    border: 1px solid #2a2a2a;
-    border-radius: 10px;
-    padding: 12px 14px;
+  /* Event bars */
+  .g-event {
+    position: absolute;
+    border-radius: 6px;
+    padding: 4px 8px;
     cursor: pointer;
-    transition: all 0.15s;
-    position: relative;
-    min-width: 220px;
-    max-width: 340px;
-    flex: 1;
+    overflow: hidden;
+    box-sizing: border-box;
+    transition: filter 0.12s, opacity 0.12s;
+    border: 1.5px solid transparent;
     user-select: none;
   }
-  .event-card:hover { border-color: #444; background: #1a1a1a; }
-  .event-card.selected { border-color: #4ade80; background: #052e16; }
-  .event-card.selected .event-name { color: #4ade80; }
-  .event-card.conflict { border-left: 3px solid #f97316; }
-  .event-card.conflict.selected { border-color: #4ade80; border-left: 3px solid #4ade80; }
-  .event-card.deselected { opacity: 0.4; }
+  .g-event.selected { background: #14532d; border-color: #4ade80; }
+  .g-event.deselected { background: #1a1a1a; border-color: #2a2a2a; opacity: 0.45; }
+  .g-event.conflict-active { border-color: #f97316 !important; }
+  .g-event:hover { filter: brightness(1.25); z-index: 10 !important; }
+  .g-event-name { font-size: 11px; font-weight: 600; color: #e0e0e0; line-height: 1.3; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .g-event.selected .g-event-name { color: #4ade80; }
+  .g-event-time { font-size: 10px; color: #666; margin-top: 1px; white-space: nowrap; }
+  .g-event.selected .g-event-time { color: #4ade80; opacity: 0.7; }
 
-  .event-name { font-size: 13px; font-weight: 600; color: #e0e0e0; line-height: 1.4; margin-bottom: 6px; }
-  .event-meta { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
-  .pill { font-size: 11px; padding: 2px 8px; border-radius: 10px; font-weight: 500; }
-  .pill-time { background: #1e293b; color: #7dd3fc; }
-  .pill-cost { background: #1a1a2e; color: #a78bfa; }
-  .pill-type { background: #1a2e1a; color: #86efac; }
-  .pill-conflict { background: #431407; color: #fb923c; }
-  .event-location { font-size: 11px; color: #555; margin-top: 5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .event-url { font-size: 11px; color: #3b82f6; margin-top: 4px; text-decoration: none; display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .event-url:hover { text-decoration: underline; }
+  /* Tooltip */
+  .g-tooltip {
+    position: fixed;
+    background: #1e1e1e;
+    border: 1px solid #333;
+    border-radius: 10px;
+    padding: 12px 14px;
+    max-width: 300px;
+    z-index: 9999;
+    pointer-events: none;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.6);
+    display: none;
+  }
+  .g-tooltip.visible { display: block; }
+  .g-tt-name { font-size: 13px; font-weight: 700; color: #fff; margin-bottom: 6px; line-height: 1.4; }
+  .g-tt-row { font-size: 11px; color: #888; margin-top: 3px; }
+  .g-tt-row span { color: #ccc; }
+  .g-tt-conflict { font-size: 11px; color: #f97316; margin-top: 6px; font-weight: 600; }
+  .g-tt-url { font-size: 11px; color: #3b82f6; margin-top: 6px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: block; }
 
-  .check-icon { position: absolute; top: 10px; right: 10px; width: 18px; height: 18px; border-radius: 50%; border: 2px solid #333; display: flex; align-items: center; justify-content: center; font-size: 10px; transition: all 0.15s; }
-  .event-card.selected .check-icon { background: #4ade80; border-color: #4ade80; color: #000; }
+  .empty-state { text-align: center; padding: 40px; color: #555; font-size: 14px; }
 
   /* Add to Calendar dropdown button group */
   .calendar-btn-group { position: relative; }
@@ -131,9 +147,6 @@
   }
   .select-all-btn:hover { border-color: #555; color: #ccc; }
 
-  .conflict-group { background: #1a1200; border: 1px solid #3d2700; border-radius: 12px; padding: 12px 14px; margin-bottom: 8px; }
-  .conflict-group-label { font-size: 11px; color: #f97316; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 8px; display: flex; align-items: center; gap: 6px; }
-  .conflict-group-label::before { content: "\26A1"; }
 
   .empty-state { text-align: center; padding: 40px; color: #555; font-size: 14px; }
 
@@ -186,22 +199,24 @@
   </header>
 
   <div class="controls">
-    <span style="font-size:12px;color:#666;font-weight:600;">FILTER:</span>
-    <button class="filter-btn active" onclick="setFilter('all', this)">All Days</button>
-    <button class="filter-btn conflict-filter" onclick="setFilter('conflicts', this)">Conflicts Only</button>
-    <button class="filter-btn" onclick="setFilter('selected', this)">Selected Only</button>
-    <button class="filter-btn" id="filter-mar10" onclick="setFilter('mar10', this)">Mar 10</button>
-    <button class="filter-btn" id="filter-mar11" onclick="setFilter('mar11', this)">Mar 11</button>
-    <button class="filter-btn" id="filter-mar12" onclick="setFilter('mar12', this)">Mar 12</button>
-    <button class="filter-btn" id="filter-mar13" onclick="setFilter('mar13', this)">Mar 13</button>
-    <button class="filter-btn" id="filter-mar14" onclick="setFilter('mar14', this)">Mar 14</button>
-    <button class="filter-btn" id="filter-mar15" onclick="setFilter('mar15', this)">Mar 15</button>
-    <button class="filter-btn" id="filter-mar16" onclick="setFilter('mar16', this)">Mar 16</button>
-    <button class="filter-btn" id="filter-mar17" onclick="setFilter('mar17', this)">Mar 17</button>
-    <button class="filter-btn" id="filter-mar18" onclick="setFilter('mar18', this)">Mar 18</button>
+    <span style="font-size:12px;color:#666;font-weight:600;">DAY:</span>
+    <button class="filter-btn" id="day-btn-2026-03-10" onclick="setDay('2026-03-10', this)">Tue Mar 10</button>
+    <button class="filter-btn" id="day-btn-2026-03-11" onclick="setDay('2026-03-11', this)">Wed Mar 11</button>
+    <button class="filter-btn active" id="day-btn-2026-03-12" onclick="setDay('2026-03-12', this)">Thu Mar 12</button>
+    <button class="filter-btn" id="day-btn-2026-03-13" onclick="setDay('2026-03-13', this)">Fri Mar 13</button>
+    <button class="filter-btn" id="day-btn-2026-03-14" onclick="setDay('2026-03-14', this)">Sat Mar 14</button>
+    <button class="filter-btn" id="day-btn-2026-03-15" onclick="setDay('2026-03-15', this)">Sun Mar 15</button>
+    <button class="filter-btn" id="day-btn-2026-03-16" onclick="setDay('2026-03-16', this)">Mon Mar 16</button>
+    <button class="filter-btn" id="day-btn-2026-03-17" onclick="setDay('2026-03-17', this)">Tue Mar 17</button>
+    <button class="filter-btn" id="day-btn-2026-03-18" onclick="setDay('2026-03-18', this)">Wed Mar 18</button>
+    <div style="margin-left:auto;display:flex;gap:8px;align-items:center;">
+      <button class="filter-btn" onclick="selectDayAll()">Select Day</button>
+      <button class="filter-btn" onclick="deselectDayAll()">Clear Day</button>
+    </div>
   </div>
 
   <div class="main" id="calendar"></div>
+  <div class="g-tooltip" id="g-tooltip"></div>
 </div>
 
 <script>
@@ -3411,7 +3426,7 @@ const EVENTS_DATA = [
 
 let allEvents = [];
 let selected = new Set();
-let currentFilter = 'all';
+let currentDay = '2026-03-12';
 
 // --- Load bundled events ---
 function loadBundledEvents() {
@@ -3476,121 +3491,181 @@ function groupByDay(events) {
   return days;
 }
 
-// Build connected conflict clusters across the entire day (ignores start-time grouping)
-function buildDayClusters(dayEvents) {
-  const indices = dayEvents.map(e => e.idx);
-  const visited = new Set();
-  const clusters = []; // each cluster: { indices: [], isConflict: bool }
+// --- Gantt rendering ---
 
-  // Sort by start time so solo events render in order
-  const sorted = [...dayEvents].sort((a, b) => a.event.start - b.event.start);
+const ROW_H = 40; // px per 30-min slot
+const MIN_PX = ROW_H / 30; // px per minute
+const LANE_W = 200; // px per parallel lane
 
-  for (const { idx } of sorted) {
-    if (visited.has(idx)) continue;
-    // BFS across conflictsWith, restricted to this day's indices
-    const group = [];
-    const queue = [idx];
-    while (queue.length) {
-      const cur = queue.shift();
-      if (visited.has(cur)) continue;
-      visited.add(cur);
-      group.push(cur);
-      for (const cidx of allEvents[cur].conflictsWith) {
-        if (indices.includes(cidx) && !visited.has(cidx)) {
-          queue.push(cidx);
-        }
+function toMinutes(d) {
+  return d.getHours() * 60 + d.getMinutes();
+}
+
+// Assign lanes so overlapping events don't visually stack on top of each other
+function assignLanes(events) {
+  // events: [{idx, start, end}, ...]  sorted by start
+  const sorted = [...events].sort((a, b) => a.start - b.start);
+  const lanes = []; // each lane: end time of last event in minutes
+  const result = {};
+  for (const ev of sorted) {
+    const startMin = toMinutes(ev.start);
+    const endMin = ev.end ? toMinutes(ev.end) : startMin + 60;
+    let placed = false;
+    for (let l = 0; l < lanes.length; l++) {
+      if (lanes[l] <= startMin) {
+        lanes[l] = endMin;
+        result[ev.idx] = l;
+        placed = true;
+        break;
       }
     }
-    // Sort cluster members by start time
-    group.sort((a, b) => allEvents[a].start - allEvents[b].start);
-    clusters.push({ indices: group, isConflict: group.length > 1 });
+    if (!placed) {
+      result[ev.idx] = lanes.length;
+      lanes.push(endMin);
+    }
   }
-  return clusters;
+  return { laneMap: result, laneCount: Math.max(1, lanes.length) };
 }
 
-function renderCard(idx) {
-  const e = allEvents[idx];
-  const isSelected = selected.has(idx);
-  const hasConflict = e.conflictsWith.length > 0;
-  const activeConflicts = e.conflictsWith.filter(ci => selected.has(ci));
-  const conflictActive = isSelected && activeConflicts.length > 0;
+function renderGantt(dayStr) {
+  const cal = document.getElementById('calendar');
+  const allDays = groupByDay(allEvents);
+  const dayEvents = allDays[dayStr];
 
-  return `
-    <div class="event-card ${isSelected ? 'selected' : 'deselected'} ${hasConflict ? 'conflict' : ''}"
-         id="card-${idx}" onclick="toggleEvent(${idx})">
-      <div class="check-icon">${isSelected ? '&#10003;' : ''}</div>
-      <div class="event-name">${e.summary}</div>
-      <div class="event-meta">
-        <span class="pill pill-time">${fmt(e.start)}${e.end ? ' &ndash; ' + fmt(e.end) : ''}</span>
-        ${e.cost ? `<span class="pill pill-cost">${e.cost}</span>` : ''}
-        ${e.type ? `<span class="pill pill-type">${e.type}</span>` : ''}
-        ${conflictActive ? `<span class="pill pill-conflict">&#9889; Conflict</span>` : ''}
-      </div>
-      ${e.location ? `<div class="event-location">&#128205; ${e.location}</div>` : ''}
-      ${e.url ? `<a class="event-url" href="${e.url}" target="_blank" onclick="event.stopPropagation()">${e.url}</a>` : ''}
+  if (!dayEvents || dayEvents.length === 0) {
+    cal.innerHTML = '<div class="empty-state">No events for this day.</div>';
+    updateStats();
+    return;
+  }
+
+  const d = dayEvents[0].event.start;
+  const dayName = `${DAY_NAMES[d.getDay()]}, ${MONTH_NAMES[d.getMonth()]} ${d.getDate()}`;
+
+  // Find time range for this day
+  let minMin = Infinity, maxMin = -Infinity;
+  for (const { event } of dayEvents) {
+    const sm = toMinutes(event.start);
+    const em = event.end ? toMinutes(event.end) : sm + 60;
+    if (sm < minMin) minMin = sm;
+    if (em > maxMin) maxMin = em;
+  }
+  // Round to nearest 30
+  minMin = Math.floor(minMin / 30) * 30;
+  maxMin = Math.ceil(maxMin / 30) * 30;
+  const totalSlots = (maxMin - minMin) / 30;
+
+  // Assign lanes
+  const evList = dayEvents.map(({ event, idx }) => ({
+    idx, start: event.start,
+    end: event.end || new Date(event.start.getTime() + 60 * 60000)
+  }));
+  const { laneMap, laneCount } = assignLanes(evList);
+
+  const conflictsInDay = dayEvents.filter(({ idx }) => allEvents[idx].conflictsWith.length > 0).length;
+  const totalH = totalSlots * ROW_H;
+  const bodyW = laneCount * LANE_W;
+
+  // Build time labels
+  let timeLabels = '';
+  for (let i = 0; i <= totalSlots; i++) {
+    const m = minMin + i * 30;
+    const h = Math.floor(m / 60), mn = m % 60;
+    const ampm = h >= 12 ? 'PM' : 'AM';
+    const hr = h % 12 || 12;
+    const label = mn === 0 ? `${hr} ${ampm}` : `${hr}:30`;
+    timeLabels += `<div class="gantt-time-label">${label}</div>`;
+  }
+
+  // Build grid lines
+  let gridLines = '';
+  for (let i = 0; i < totalSlots; i++) {
+    gridLines += `<div class="gantt-grid-line"></div>`;
+  }
+
+  // Build event bars
+  let bars = '';
+  for (const { event, idx } of dayEvents) {
+    const isSelected = selected.has(idx);
+    const activeConflicts = allEvents[idx].conflictsWith.filter(ci => selected.has(ci));
+    const conflictActive = isSelected && activeConflicts.length > 0;
+
+    const startMin = toMinutes(event.start);
+    const endMin = event.end ? toMinutes(event.end) : startMin + 60;
+    const top = (startMin - minMin) * MIN_PX;
+    const height = Math.max((endMin - startMin) * MIN_PX - 3, 18);
+    const lane = laneMap[idx] || 0;
+    const left = lane * LANE_W + 2;
+    const width = LANE_W - 4;
+    const zIndex = isSelected ? 2 : 1;
+
+    bars += `<div class="g-event ${isSelected ? 'selected' : 'deselected'} ${conflictActive ? 'conflict-active' : ''}"
+      id="gbar-${idx}"
+      style="top:${top}px;height:${height}px;left:${left}px;width:${width}px;z-index:${zIndex}"
+      onclick="toggleEvent(${idx})"
+      onmouseenter="showTooltip(event,${idx})"
+      onmouseleave="hideTooltip()">
+      <div class="g-event-name">${event.summary}</div>
+      ${height > 28 ? `<div class="g-event-time">${fmt(event.start)}${event.end ? '–'+fmt(event.end) : ''}</div>` : ''}
     </div>`;
+  }
+
+  cal.innerHTML = `
+    <div class="day-header">
+      ${dayName}
+      <span class="day-badge">${dayEvents.length} events</span>
+      ${conflictsInDay > 0 ? `<span class="day-badge conflict-badge">&#9889; ${conflictsInDay} overlaps</span>` : ''}
+    </div>
+    <div class="gantt-wrap">
+      <div class="gantt-time-col">${timeLabels}</div>
+      <div class="gantt-body" style="height:${totalH}px;min-width:${bodyW}px">
+        ${gridLines}
+        <div class="gantt-events">${bars}</div>
+      </div>
+    </div>`;
+
+  updateStats();
 }
+
+function showTooltip(e, idx) {
+  const ev = allEvents[idx];
+  const tt = document.getElementById('g-tooltip');
+  const activeConflicts = ev.conflictsWith.filter(ci => selected.has(ci));
+  const conflictNames = activeConflicts.map(ci => allEvents[ci].summary).join(', ');
+
+  tt.innerHTML = `
+    <div class="g-tt-name">${ev.summary}</div>
+    <div class="g-tt-row">&#128337; <span>${fmt(ev.start)}${ev.end ? ' – ' + fmt(ev.end) : ''}</span></div>
+    ${ev.cost ? `<div class="g-tt-row">&#128176; <span>${ev.cost}</span></div>` : ''}
+    ${ev.type ? `<div class="g-tt-row">&#127981; <span>${ev.type}</span></div>` : ''}
+    ${ev.location ? `<div class="g-tt-row">&#128205; <span>${ev.location}</span></div>` : ''}
+    ${conflictNames ? `<div class="g-tt-conflict">&#9889; Conflicts with: ${conflictNames}</div>` : ''}
+    ${ev.url ? `<a class="g-tt-url" href="${ev.url}" target="_blank" onclick="event.stopPropagation()">${ev.url}</a>` : ''}
+  `;
+  tt.classList.add('visible');
+  positionTooltip(e);
+}
+
+function positionTooltip(e) {
+  const tt = document.getElementById('g-tooltip');
+  const pad = 12;
+  let x = e.clientX + pad, y = e.clientY + pad;
+  if (x + 300 > window.innerWidth) x = e.clientX - 300 - pad;
+  if (y + 200 > window.innerHeight) y = e.clientY - 200 - pad;
+  tt.style.left = x + 'px';
+  tt.style.top = y + 'px';
+}
+
+function hideTooltip() {
+  document.getElementById('g-tooltip').classList.remove('visible');
+}
+
+document.addEventListener('mousemove', (e) => {
+  const tt = document.getElementById('g-tooltip');
+  if (tt.classList.contains('visible')) positionTooltip(e);
+});
 
 function render() {
-  const cal = document.getElementById('calendar');
-  const days = groupByDay(allEvents);
-  const sortedDays = Object.keys(days).sort();
-
-  let html = '';
-
-  for (const dayStr of sortedDays) {
-    const dayEvents = days[dayStr];
-    const d = dayEvents[0].event.start;
-
-    let filteredEvents = dayEvents;
-    if (currentFilter === 'conflicts') {
-      filteredEvents = dayEvents.filter(({ idx }) => allEvents[idx].conflictsWith.length > 0);
-    } else if (currentFilter === 'selected') {
-      filteredEvents = dayEvents.filter(({ idx }) => selected.has(idx));
-    } else if (currentFilter.startsWith('mar')) {
-      const dayNum = parseInt(currentFilter.replace('mar', ''));
-      if (d.getDate() !== dayNum) continue;
-    }
-
-    if (filteredEvents.length === 0) continue;
-
-    const conflictsInDay = dayEvents.filter(({ idx }) => allEvents[idx].conflictsWith.length > 0).length;
-    const dayName = `${DAY_NAMES[d.getDay()]}, ${MONTH_NAMES[d.getMonth()]} ${d.getDate()}`;
-
-    html += `<div class="day-section">
-      <div class="day-header">
-        ${dayName}
-        <span class="day-badge">${filteredEvents.length} events</span>
-        ${conflictsInDay > 0 ? `<span class="day-badge conflict-badge">&#9889; ${conflictsInDay} conflicts</span>` : ''}
-      </div>`;
-
-    const clusters = buildDayClusters(filteredEvents);
-
-    for (const cluster of clusters) {
-      if (cluster.isConflict) {
-        const timeRange = `${fmt(allEvents[cluster.indices[0]].start)} – ${fmt(allEvents[cluster.indices[cluster.indices.length-1]].end || allEvents[cluster.indices[cluster.indices.length-1]].start)}`;
-        html += `<div class="conflict-group">
-          <div class="conflict-group-label">Conflicting events &mdash; pick one (or more) &nbsp;<span style="font-weight:400;color:#a16207;text-transform:none;letter-spacing:0">${timeRange}</span></div>
-          <div class="events-row">`;
-        for (const idx of cluster.indices) {
-          html += renderCard(idx);
-        }
-        html += `</div></div>`;
-      } else {
-        const idx = cluster.indices[0];
-        html += `<div class="time-slot">
-          <div class="time-label">${fmt(allEvents[idx].start)}</div>
-          <div class="events-row">${renderCard(idx)}</div>
-        </div>`;
-      }
-    }
-
-    html += `</div>`;
-  }
-
-  if (!html) html = '<div class="empty-state">No events match the current filter.</div>';
-  cal.innerHTML = html;
-  updateStats();
+  renderGantt(currentDay);
 }
 
 function toggleEvent(idx) {
@@ -3612,8 +3687,22 @@ function deselectAll() {
   render();
 }
 
-function setFilter(f, btn) {
-  currentFilter = f;
+function selectDayAll() {
+  const allDays = groupByDay(allEvents);
+  const dayEvents = allDays[currentDay] || [];
+  dayEvents.forEach(({ idx }) => selected.add(idx));
+  render();
+}
+
+function deselectDayAll() {
+  const allDays = groupByDay(allEvents);
+  const dayEvents = allDays[currentDay] || [];
+  dayEvents.forEach(({ idx }) => selected.delete(idx));
+  render();
+}
+
+function setDay(d, btn) {
+  currentDay = d;
   document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
   render();
