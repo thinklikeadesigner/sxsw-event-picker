@@ -3699,7 +3699,6 @@ function renderGantt(dayStr) {
     `;
 
     rows += `<div class="gantt-row">
-      <div class="gantt-row-label"><div class="gantt-row-label-inner">${fmt(event.start)}</div></div>
       <div class="gantt-row-track" style="width:${totalW}px;height:${ROW_H}px">
         ${gridBg}
         <div class="g-event event-card ${isSelected ? 'selected' : ''} ${event.conflictsWith && event.conflictsWith.length ? 'has-conflict' : ''}"
@@ -3721,7 +3720,6 @@ function renderGantt(dayStr) {
     <div class="gantt-outer">
       <div class="gantt-inner">
         <div class="gantt-header-row">
-          <div class="gantt-header-spacer"></div>
           <div class="gantt-time-headers">
             <div class="gantt-time-header-inner" style="width:${totalW}px">${timeHeaderCols}</div>
           </div>
