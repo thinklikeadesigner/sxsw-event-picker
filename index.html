@@ -172,21 +172,21 @@
           Add to Calendar <span class="caret">&#9650;</span>
         </button>
         <div class="cal-dropdown" id="cal-dropdown">
-          <button class="cal-option" onclick="exportCalendar('apple')">
+          <button class="cal-option" onclick="exportCalendar('apple', event)">
             <span class="cal-icon">&#127822;</span>
             <span class="cal-label">
               <span class="cal-name">Apple Calendar</span>
               <span class="cal-hint">Download .ics &rarr; double-click to import</span>
             </span>
           </button>
-          <button class="cal-option" onclick="exportCalendar('google')">
+          <button class="cal-option" onclick="exportCalendar('google', event)">
             <span class="cal-icon">&#128197;</span>
             <span class="cal-label">
               <span class="cal-name">Google Calendar</span>
               <span class="cal-hint">Download .ics, then import via Settings</span>
             </span>
           </button>
-          <button class="cal-option" onclick="exportCalendar('outlook')">
+          <button class="cal-option" onclick="exportCalendar('outlook', event)">
             <span class="cal-icon">&#128196;</span>
             <span class="cal-label">
               <span class="cal-name">Outlook / Exchange</span>
@@ -3736,53 +3736,48 @@ function buildICS() {
 }
 
 function downloadICS() {
-  if (selected.size === 0) { showToast('No events selected!'); return false; }
+  if (selected.size === 0) { showToast('No events selected!'); return; }
   const ics = buildICS();
-  const blob = new Blob([ics], { type: 'text/calendar;charset=utf-8' });
-  const url = URL.createObjectURL(blob);
+  // Use data URI — more reliable than Blob URL across browsers/hosting
+  const dataUri = 'data:text/calendar;charset=utf-8,' + encodeURIComponent(ics);
   const a = document.createElement('a');
-  a.href = url;
+  a.href = dataUri;
   a.download = 'SXSW_2026_MySchedule.ics';
   document.body.appendChild(a);
   a.click();
   document.body.removeChild(a);
-  setTimeout(() => URL.revokeObjectURL(url), 1000);
-  return true;
 }
 
-function exportCalendar(target) {
+function exportCalendar(target, e) {
+  if (e) e.stopPropagation();
   closeCalDropdown();
-  if (selected.size === 0) { showToast('No events selected!'); return; }
-
-  const ok = downloadICS();
-  if (!ok) return;
-
+  if (selected.size === 0) { showToast('Select at least one event first.'); return; }
+  downloadICS();
+  const n = selected.size;
   if (target === 'apple') {
-    showToast(`Downloaded ${selected.size} events. Double-click the .ics file to import into Apple Calendar.`);
+    showToast(`${n} events downloaded. Double-click the .ics file to import into Apple Calendar.`);
   } else if (target === 'google') {
-    showToast(`Downloaded ${selected.size} events. In Google Calendar: click Settings &#9881; &rarr; Import &rarr; select the .ics file.`);
+    showToast(`${n} events downloaded. In Google Calendar: Settings \u2699 \u2192 Import \u2192 select the .ics file.`);
   } else if (target === 'outlook') {
-    showToast(`Downloaded ${selected.size} events. In Outlook: File &rarr; Open &amp; Export &rarr; Import/Export &rarr; Import an iCalendar file.`);
+    showToast(`${n} events downloaded. In Outlook: File \u2192 Open & Export \u2192 Import/Export \u2192 Import an iCalendar file.`);
   }
 }
 
 function toggleCalDropdown(e) {
   if (e) e.stopPropagation();
-  if (selected.size === 0) { showToast('No events selected!'); return; }
   const dd = document.getElementById('cal-dropdown');
   dd.classList.toggle('open');
 }
 
 function closeCalDropdown() {
-  document.getElementById('cal-dropdown').classList.remove('open');
+  const dd = document.getElementById('cal-dropdown');
+  if (dd) dd.classList.remove('open');
 }
 
 // Close dropdown when clicking outside
 document.addEventListener('click', (e) => {
   const group = document.getElementById('cal-btn-group');
-  if (group && !group.contains(e.target)) {
-    closeCalDropdown();
-  }
+  if (group && !group.contains(e.target)) closeCalDropdown();
 });
 
 function showToast(msg) {
