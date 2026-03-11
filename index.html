@@ -56,57 +56,43 @@
   .day-badge { font-size: 11px; background: #2a2a2a; color: #888; padding: 3px 8px; border-radius: 10px; font-weight: 500; }
   .conflict-badge { background: #7c2d12; color: #fb923c; }
 
-  /* Gantt chart */
-  .gantt-wrap { display: flex; overflow-x: auto; padding-bottom: 16px; }
-  .gantt-time-col { flex-shrink: 0; width: 52px; padding-top: 0; }
-  .gantt-time-label { height: 40px; display: flex; align-items: flex-start; justify-content: flex-end; padding-right: 8px; font-size: 10px; color: #444; font-weight: 600; letter-spacing: 0.03em; user-select: none; }
-  .gantt-body { flex: 1; position: relative; min-width: 0; }
-  .gantt-grid-line { height: 40px; border-top: 1px solid #1e1e1e; }
-  .gantt-grid-line:nth-child(odd) { background: #111; }
-  .gantt-grid-line:nth-child(even) { background: #0f0f0f; }
-  .gantt-events { position: absolute; top: 0; left: 0; right: 0; bottom: 0; }
+  /* Gantt chart — horizontal, time left→right */
+  .gantt-outer { overflow-x: auto; padding-bottom: 16px; }
+  .gantt-inner { display: table; border-collapse: collapse; min-width: 100%; }
+  .gantt-header-row { display: table-row; }
+  .gantt-header-spacer { display: table-cell; width: 180px; min-width: 180px; flex-shrink: 0; }
+  .gantt-time-headers { display: table-cell; position: relative; }
+  .gantt-time-header-inner { display: flex; }
+  .gantt-col-label { font-size: 10px; color: #444; font-weight: 600; text-align: left; padding: 0 0 6px 4px; user-select: none; flex-shrink: 0; }
+  .gantt-row { display: table-row; }
+  .gantt-row-label { display: table-cell; vertical-align: top; padding: 3px 8px 3px 0; width: 180px; min-width: 180px; }
+  .gantt-row-label-inner { font-size: 11px; color: #555; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; padding-top: 6px; }
+  .gantt-row-track { display: table-cell; position: relative; vertical-align: top; }
+  .gantt-row-track-inner { position: relative; height: 100%; }
+  .gantt-grid-bg { position: absolute; top: 0; bottom: 0; border-left: 1px solid #1e1e1e; pointer-events: none; }
+  .gantt-grid-bg.hour { border-left-color: #2a2a2a; }
 
-  /* Event bars */
+  /* Gantt event card — reuses card styles, positioned absolutely */
   .g-event {
     position: absolute;
-    border-radius: 6px;
-    padding: 4px 8px;
+    top: 3px;
+    border-radius: 10px;
+    padding: 10px 12px;
     cursor: pointer;
     overflow: hidden;
     box-sizing: border-box;
-    transition: filter 0.12s, opacity 0.12s;
-    border: 1.5px solid transparent;
+    transition: all 0.15s;
+    border: 1px solid #2a2a2a;
     user-select: none;
+    min-height: 36px;
   }
-  .g-event.selected { background: #14532d; border-color: #4ade80; }
-  .g-event.deselected { background: #111; border-color: #222; }
-  .g-event.deselected .g-event-name { color: #555; }
-  .g-event.deselected .g-event-time { color: #3a3a3a; }
-  .g-event.conflict-active { border-color: #f97316 !important; }
-  .g-event:hover { filter: brightness(1.25); z-index: 10 !important; }
-  .g-event-name { font-size: 11px; font-weight: 600; color: #e0e0e0; line-height: 1.3; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .g-event.selected .g-event-name { color: #4ade80; }
-  .g-event-time { font-size: 10px; color: #666; margin-top: 1px; white-space: nowrap; }
-  .g-event.selected .g-event-time { color: #4ade80; opacity: 0.7; }
-
-  /* Tooltip */
-  .g-tooltip {
-    position: fixed;
-    background: #1e1e1e;
-    border: 1px solid #333;
-    border-radius: 10px;
-    padding: 12px 14px;
-    max-width: 300px;
-    z-index: 9999;
-    pointer-events: none;
-    box-shadow: 0 8px 32px rgba(0,0,0,0.6);
-    display: none;
-  }
-  .g-tooltip.visible { display: block; }
-  .g-tt-name { font-size: 13px; font-weight: 700; color: #fff; margin-bottom: 6px; line-height: 1.4; }
-  .g-tt-row { font-size: 11px; color: #888; margin-top: 3px; }
-  .g-tt-row span { color: #ccc; }
-.g-tt-url { font-size: 11px; color: #3b82f6; margin-top: 6px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: block; }
+  .g-event:hover { border-color: #444; background: #1a1a1a; z-index: 10 !important; }
+  .g-event.selected { border-color: #4ade80; background: #052e16; }
+  .g-event.selected .event-name { color: #4ade80; }
+  .g-event.has-conflict { border-left: 3px solid #f97316; }
+  .g-event.has-conflict.selected { border-color: #4ade80; border-left: 3px solid #4ade80; }
+  .g-event .check-icon { position: absolute; top: 8px; right: 8px; width: 16px; height: 16px; border-radius: 50%; border: 2px solid #333; display: flex; align-items: center; justify-content: center; font-size: 9px; }
+  .g-event.selected .check-icon { background: #4ade80; border-color: #4ade80; color: #000; }
 
   .empty-state { text-align: center; padding: 40px; color: #555; font-size: 14px; }
 
@@ -260,7 +246,6 @@
   </div>
 
   <div class="main" id="calendar"></div>
-  <div class="g-tooltip" id="g-tooltip"></div>
 </div>
 
 <script>
@@ -3623,40 +3608,20 @@ function renderCards(dayStr) {
   updateStats();
 }
 
-// --- Gantt rendering ---
+// --- Gantt rendering (horizontal: time left→right, one row per event) ---
 
-const ROW_H = 40; // px per 30-min slot
-const MIN_PX = ROW_H / 30; // px per minute
-const LANE_W = 200; // px per parallel lane
+const SLOT_W = 80; // px per 30-min slot
+const ROW_H = 110; // px per event row (tall enough for card content)
 
 function toMinutes(d) {
   return d.getHours() * 60 + d.getMinutes();
 }
 
-// Assign lanes so overlapping events don't visually stack on top of each other
-function assignLanes(events) {
-  // events: [{idx, start, end}, ...]  sorted by start
-  const sorted = [...events].sort((a, b) => a.start - b.start);
-  const lanes = []; // each lane: end time of last event in minutes
-  const result = {};
-  for (const ev of sorted) {
-    const startMin = toMinutes(ev.start);
-    const endMin = ev.end ? toMinutes(ev.end) : startMin + 60;
-    let placed = false;
-    for (let l = 0; l < lanes.length; l++) {
-      if (lanes[l] <= startMin) {
-        lanes[l] = endMin;
-        result[ev.idx] = l;
-        placed = true;
-        break;
-      }
-    }
-    if (!placed) {
-      result[ev.idx] = lanes.length;
-      lanes.push(endMin);
-    }
-  }
-  return { laneMap: result, laneCount: Math.max(1, lanes.length) };
+function fmtColLabel(m) {
+  const h = Math.floor(m / 60), mn = m % 60;
+  const ampm = h >= 12 ? 'PM' : 'AM';
+  const hr = h % 12 || 12;
+  return mn === 0 ? `${hr} ${ampm}` : `${hr}:30`;
 }
 
 function renderGantt(dayStr) {
@@ -3672,127 +3637,99 @@ function renderGantt(dayStr) {
     return;
   }
 
-  const d = filteredDayEvents[0].event.start;
-  const dayName = `${DAY_NAMES[d.getDay()]}, ${MONTH_NAMES[d.getMonth()]} ${d.getDate()}`;
+  // Sort events by start time
+  const sorted = [...filteredDayEvents].sort((a, b) => a.event.start - b.event.start);
 
-  // Find time range for this day
+  const d = sorted[0].event.start;
+  const dayName = `${DAY_NAMES[d.getDay()]}, ${MONTH_NAMES[d.getMonth()]} ${d.getDate()}`;
+  const conflictsInDay = sorted.filter(({ idx }) => allEvents[idx].conflictsWith.length > 0).length;
+
+  // Find time range
   let minMin = Infinity, maxMin = -Infinity;
-  for (const { event } of filteredDayEvents) {
+  for (const { event } of sorted) {
     const sm = toMinutes(event.start);
     const em = event.end ? toMinutes(event.end) : sm + 60;
     if (sm < minMin) minMin = sm;
     if (em > maxMin) maxMin = em;
   }
-  // Round to nearest 30
   minMin = Math.floor(minMin / 30) * 30;
   maxMin = Math.ceil(maxMin / 30) * 30;
   const totalSlots = (maxMin - minMin) / 30;
+  const totalW = totalSlots * SLOT_W;
 
-  // Assign lanes
-  const evList = filteredDayEvents.map(({ event, idx }) => ({
-    idx, start: event.start,
-    end: event.end || new Date(event.start.getTime() + 60 * 60000)
-  }));
-  const { laneMap, laneCount } = assignLanes(evList);
-
-  const conflictsInDay = filteredDayEvents.filter(({ idx }) => allEvents[idx].conflictsWith.length > 0).length;
-  const totalH = totalSlots * ROW_H;
-  const bodyW = laneCount * LANE_W;
-
-  // Build time labels
-  let timeLabels = '';
-  for (let i = 0; i <= totalSlots; i++) {
-    const m = minMin + i * 30;
-    const h = Math.floor(m / 60), mn = m % 60;
-    const ampm = h >= 12 ? 'PM' : 'AM';
-    const hr = h % 12 || 12;
-    const label = mn === 0 ? `${hr} ${ampm}` : `${hr}:30`;
-    timeLabels += `<div class="gantt-time-label">${label}</div>`;
-  }
-
-  // Build grid lines
-  let gridLines = '';
+  // Time header
+  let timeHeaderCols = '';
   for (let i = 0; i < totalSlots; i++) {
-    gridLines += `<div class="gantt-grid-line"></div>`;
+    const m = minMin + i * 30;
+    timeHeaderCols += `<div class="gantt-col-label" style="width:${SLOT_W}px">${fmtColLabel(m)}</div>`;
   }
 
-  // Build event bars
-  let bars = '';
-  for (const { event, idx } of filteredDayEvents) {
+  // Grid bg lines (one per 30-min slot)
+  let gridBg = '';
+  for (let i = 0; i < totalSlots; i++) {
+    const isHour = ((minMin + i * 30) % 60 === 0);
+    gridBg += `<div class="gantt-grid-bg ${isHour ? 'hour' : ''}" style="left:${i * SLOT_W}px;top:0;bottom:0"></div>`;
+  }
+
+  // Build rows
+  let rows = '';
+  for (const { event, idx } of sorted) {
     const isSelected = selected.has(idx);
     const activeConflicts = allEvents[idx].conflictsWith.filter(ci => selected.has(ci));
     const conflictActive = isSelected && activeConflicts.length > 0;
 
     const startMin = toMinutes(event.start);
     const endMin = event.end ? toMinutes(event.end) : startMin + 60;
-    const top = (startMin - minMin) * MIN_PX;
-    const height = Math.max((endMin - startMin) * MIN_PX - 3, 18);
-    const lane = laneMap[idx] || 0;
-    const left = lane * LANE_W + 2;
-    const width = LANE_W - 4;
-    const zIndex = isSelected ? 2 : 1;
+    const leftPx = (startMin - minMin) / 30 * SLOT_W + 2;
+    const widthPx = Math.max((endMin - startMin) / 30 * SLOT_W - 4, SLOT_W - 4);
 
-    bars += `<div class="g-event ${isSelected ? 'selected' : 'deselected'} ${conflictActive ? 'conflict-active' : ''}"
-      id="gbar-${idx}"
-      style="top:${top}px;height:${height}px;left:${left}px;width:${width}px;z-index:${zIndex}"
-      onclick="toggleEvent(${idx})"
-      onmouseenter="showTooltip(event,${idx})"
-      onmouseleave="hideTooltip()">
-      <div class="g-event-name">${event.summary}</div>
-      ${height > 28 ? `<div class="g-event-time">${fmt(event.start)}${event.end ? '–'+fmt(event.end) : ''}</div>` : ''}
+    const cardContent = `
+      <div class="check-icon">${isSelected ? '&#10003;' : ''}</div>
+      <div class="event-name" style="padding-right:22px">${event.summary}</div>
+      <div class="event-meta">
+        <span class="pill pill-time">${fmt(event.start)}${event.end ? ' &ndash; ' + fmt(event.end) : ''}</span>
+        ${event.cost ? `<span class="pill pill-cost">${event.cost}</span>` : ''}
+        ${event.type ? `<span class="pill pill-type">${event.type}</span>` : ''}
+        ${conflictActive ? `<span class="pill pill-conflict">&#9889; Conflict</span>` : ''}
+      </div>
+      ${event.location ? `<div class="event-location">&#128205; ${event.location}</div>` : ''}
+      ${event.url ? `<a class="event-url" href="${event.url}" target="_blank" onclick="event.stopPropagation()">${event.url}</a>` : ''}
+    `;
+
+    rows += `<div class="gantt-row">
+      <div class="gantt-row-label"><div class="gantt-row-label-inner">${fmt(event.start)}</div></div>
+      <div class="gantt-row-track" style="width:${totalW}px;height:${ROW_H}px">
+        ${gridBg}
+        <div class="g-event event-card ${isSelected ? 'selected' : ''} ${event.conflictsWith && event.conflictsWith.length ? 'has-conflict' : ''}"
+          id="gbar-${idx}"
+          style="left:${leftPx}px;width:${widthPx}px;bottom:3px;top:3px"
+          onclick="toggleEvent(${idx})">
+          ${cardContent}
+        </div>
+      </div>
     </div>`;
   }
 
   cal.innerHTML = `
     <div class="day-header">
       ${dayName}
-      <span class="day-badge">${filteredDayEvents.length} events</span>
+      <span class="day-badge">${sorted.length} events</span>
       ${conflictsInDay > 0 ? `<span class="day-badge conflict-badge">&#9889; ${conflictsInDay} overlaps</span>` : ''}
     </div>
-    <div class="gantt-wrap">
-      <div class="gantt-time-col">${timeLabels}</div>
-      <div class="gantt-body" style="height:${totalH}px;min-width:${bodyW}px">
-        ${gridLines}
-        <div class="gantt-events">${bars}</div>
+    <div class="gantt-outer">
+      <div class="gantt-inner">
+        <div class="gantt-header-row">
+          <div class="gantt-header-spacer"></div>
+          <div class="gantt-time-headers">
+            <div class="gantt-time-header-inner" style="width:${totalW}px">${timeHeaderCols}</div>
+          </div>
+        </div>
+        ${rows}
       </div>
     </div>`;
 
   updateStats();
 }
-
-function showTooltip(e, idx) {
-  const ev = allEvents[idx];
-  const tt = document.getElementById('g-tooltip');
-  tt.innerHTML = `
-    <div class="g-tt-name">${ev.summary}</div>
-    <div class="g-tt-row">&#128337; <span>${fmt(ev.start)}${ev.end ? ' – ' + fmt(ev.end) : ''}</span></div>
-    ${ev.cost ? `<div class="g-tt-row">&#128176; <span>${ev.cost}</span></div>` : ''}
-    ${ev.type ? `<div class="g-tt-row">&#127981; <span>${ev.type}</span></div>` : ''}
-    ${ev.location ? `<div class="g-tt-row">&#128205; <span>${ev.location}</span></div>` : ''}
-    ${ev.url ? `<a class="g-tt-url" href="${ev.url}" target="_blank" onclick="event.stopPropagation()">${ev.url}</a>` : ''}
-  `;
-  tt.classList.add('visible');
-  positionTooltip(e);
-}
-
-function positionTooltip(e) {
-  const tt = document.getElementById('g-tooltip');
-  const pad = 12;
-  let x = e.clientX + pad, y = e.clientY + pad;
-  if (x + 300 > window.innerWidth) x = e.clientX - 300 - pad;
-  if (y + 200 > window.innerHeight) y = e.clientY - 200 - pad;
-  tt.style.left = x + 'px';
-  tt.style.top = y + 'px';
-}
-
-function hideTooltip() {
-  document.getElementById('g-tooltip').classList.remove('visible');
-}
-
-document.addEventListener('mousemove', (e) => {
-  const tt = document.getElementById('g-tooltip');
-  if (tt.classList.contains('visible')) positionTooltip(e);
-});
 
 function render() {
   if (currentView === 'gantt') renderGantt(currentDay);
