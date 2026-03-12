@@ -63,5 +63,43 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
+  // Tooltip on hover for event cards with descriptions
+  let tooltip: HTMLElement | null = null;
+
+  document.addEventListener('mouseover', (e) => {
+    const card = (e.target as HTMLElement).closest('.event-card[data-tooltip]') as HTMLElement | null;
+    if (!card) return;
+    const text = card.getAttribute('data-tooltip');
+    if (!text) return;
+
+    if (!tooltip) {
+      tooltip = document.createElement('div');
+      tooltip.className = 'card-tooltip';
+      document.body.appendChild(tooltip);
+    }
+    tooltip.textContent = text;
+    tooltip.style.display = 'block';
+
+    const rect = card.getBoundingClientRect();
+    const tipW = 360;
+    let left = rect.left;
+    let top = rect.bottom + 8;
+
+    // Keep tooltip on screen
+    if (left + tipW > window.innerWidth) left = window.innerWidth - tipW - 12;
+    if (left < 8) left = 8;
+    if (top + 150 > window.innerHeight) top = rect.top - 8; // flip above
+
+    tooltip.style.left = left + 'px';
+    tooltip.style.top = top + 'px';
+  });
+
+  document.addEventListener('mouseout', (e) => {
+    const card = (e.target as HTMLElement).closest('.event-card[data-tooltip]');
+    if (card && tooltip) {
+      tooltip.style.display = 'none';
+    }
+  });
+
   render();
 });

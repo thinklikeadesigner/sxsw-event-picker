@@ -1,10 +1,15 @@
 import { SXSWEvent } from '../data/types';
 import { fmt } from '../utils/time';
 
+function escapeAttr(s: string): string {
+  return s.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
+
 export function renderEventCard(event: SXSWEvent, starred: boolean, conflictCount: number): string {
+  const tooltip = event.description ? escapeAttr(event.description) : '';
   return `
     <div class="event-card ${starred ? 'starred' : ''} ${conflictCount > 0 ? 'has-conflict' : ''}"
-         data-index="${event.index}">
+         data-index="${event.index}"${tooltip ? ` data-tooltip="${tooltip}"` : ''}>
       <div class="star-icon">${starred ? '\u2605' : '\u2606'}</div>
       <div class="event-name">${event.summary}</div>
       <div class="event-meta">
