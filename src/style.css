@@ -145,7 +145,7 @@ main { padding: 16px 24px; }
   margin-bottom: 6px;
   padding-left: 4px;
 }
-.events-row { display: flex; flex-direction: column; gap: 8px; }
+.events-row { display: flex; flex-wrap: wrap; gap: 8px; }
 
 .event-card {
   border: 1px solid #2a2a2a;
@@ -154,9 +154,9 @@ main { padding: 16px 24px; }
   cursor: pointer;
   transition: all 0.15s;
   position: relative;
-  min-width: 0;
-  max-width: 100%;
-  flex: none;
+  min-width: 220px;
+  max-width: 340px;
+  flex: 1;
   user-select: none;
 }
 .event-card:hover { border-color: #444; background: #1a1a1a; }
@@ -577,7 +577,8 @@ main { padding: 16px 24px; }
 
   /* Existing mobile overrides */
   .tab { padding: 10px 14px; font-size: 13px; }
-  .event-card { min-width: 0; max-width: 100%; }
+  .events-row { flex-direction: column; flex-wrap: nowrap; }
+  .event-card { min-width: 0; max-width: 100%; flex: none; }
   .resolve-versus { flex-direction: column; }
   .resolve-divider { padding: 8px 0; }
   .vs-badge { border-radius: 8px; }
