@@ -70,6 +70,7 @@ export function renderResolve(container: HTMLElement) {
           </button>
         </div>
       </div>
+      <div class="swipe-hint">\u2190 Swipe to pick \u2192</div>
       <div class="resolve-bottom-actions">
         <button class="resolve-skip">Skip \u2192</button>
       </div>
@@ -88,4 +89,34 @@ export function renderResolve(container: HTMLElement) {
   container.querySelector('.resolve-skip')?.addEventListener('click', () => {
     skipConflict();
   });
+
+  // Swipe support on mobile
+  if (window.innerWidth <= 768) {
+    let touchStartX = 0;
+    let touchStartY = 0;
+    const resolveContainer = container.querySelector('.resolve-container');
+    if (resolveContainer) {
+      resolveContainer.addEventListener('touchstart', (e: Event) => {
+        const touch = (e as TouchEvent).touches[0];
+        touchStartX = touch.clientX;
+        touchStartY = touch.clientY;
+      }, { passive: true });
+
+      resolveContainer.addEventListener('touchend', (e: Event) => {
+        const touch = (e as TouchEvent).changedTouches[0];
+        const dx = touch.clientX - touchStartX;
+        const dy = touch.clientY - touchStartY;
+        // Only trigger on horizontal swipes (not scrolling)
+        if (Math.abs(dx) > 80 && Math.abs(dx) > Math.abs(dy) * 2) {
+          if (dx > 0) {
+            // Swiped right = pick event A (top card on mobile)
+            resolveConflict(conflict.id, conflict.eventA);
+          } else {
+            // Swiped left = pick event B (bottom card on mobile)
+            resolveConflict(conflict.id, conflict.eventB);
+          }
+        }
+      }, { passive: true });
+    }
+  }
 }

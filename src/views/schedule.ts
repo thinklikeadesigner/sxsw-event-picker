@@ -73,12 +73,20 @@ export function renderSchedule(container: HTMLElement) {
     showToast(`${starredEvents.length} events exported! Import the .ics file into your calendar app.`);
   });
 
-  // Bind card clicks to unstar
+  // Bind card clicks to unstar (with mobile tap-to-expand)
   container.querySelectorAll('.event-card').forEach(card => {
     card.addEventListener('click', (e) => {
       if ((e.target as HTMLElement).tagName === 'A') return;
-      const index = parseInt(card.getAttribute('data-index')!);
-      toggleStar(index);
+
+      const isMobile = window.innerWidth <= 768;
+      const tappedStar = (e.target as HTMLElement).closest('.star-icon');
+
+      if (tappedStar || !isMobile) {
+        const index = parseInt(card.getAttribute('data-index')!);
+        toggleStar(index);
+      } else {
+        card.classList.toggle('expanded');
+      }
     });
   });
 }

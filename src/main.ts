@@ -63,6 +63,19 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
+  // Filter toggle (mobile)
+  const filterRows = document.getElementById('filter-rows')!;
+  const filterToggle = document.getElementById('filter-toggle')!;
+  // Start collapsed on mobile
+  if (window.innerWidth <= 768) {
+    filterRows.classList.add('collapsed');
+    filterToggle.textContent = 'Filters \u25B8';
+  }
+  filterToggle.addEventListener('click', () => {
+    filterRows.classList.toggle('collapsed');
+    filterToggle.textContent = filterRows.classList.contains('collapsed') ? 'Filters \u25B8' : 'Filters \u25BE';
+  });
+
   // Tooltip on hover for event cards with descriptions
   let tooltip: HTMLElement | null = null;
 

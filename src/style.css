@@ -97,6 +97,7 @@ header .subtitle { font-size: 12px; color: #888; margin-top: 2px; }
   color: #000;
   font-weight: 600;
 }
+.filter-toggle { display: none; }
 .filter-count {
   font-size: 10px;
   opacity: 0.6;
@@ -213,6 +214,42 @@ main { padding: 16px 24px; }
   transition: all 0.15s;
 }
 .event-card.starred .star-icon { color: #4ade80; }
+
+/* Card description (tap-to-expand on mobile) */
+.card-description {
+  display: none;
+  font-size: 12px;
+  color: #999;
+  line-height: 1.5;
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid #2a2a2a;
+}
+.event-card.expanded .card-description { display: block; }
+
+/* Now button */
+.now-btn {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  padding: 8px 16px;
+  background: #4ade80;
+  color: #000;
+  border: none;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  margin-bottom: 12px;
+}
+
+/* Swipe hint */
+.swipe-hint { display: none; }
+
+/* Hide tooltip on touch devices */
+@media (hover: none) {
+  .card-tooltip { display: none !important; }
+}
 
 /* Empty state */
 .empty-state {
@@ -449,18 +486,101 @@ main { padding: 16px 24px; }
 
 /* ===== RESPONSIVE ===== */
 @media (max-width: 768px) {
-  header { padding: 12px 16px; flex-direction: column; gap: 8px; align-items: flex-start; }
-  header h1 { font-size: 17px; }
-  .header-stats { font-size: 12px; }
-  .view-tabs { padding: 0 12px; }
+  /* 1. Bottom tab navigation */
+  .view-tabs {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 200;
+    border-top: 1px solid #333;
+    border-bottom: none;
+    justify-content: space-around;
+    padding: 0;
+  }
+  main { padding: 12px 12px; padding-bottom: 60px; }
+
+  /* 2. Compact header */
+  header { padding: 10px 16px; flex-direction: row; gap: 0; align-items: center; justify-content: space-between; }
+  header h1 { font-size: 15px; }
+  .subtitle { display: none; }
+  .header-stats { gap: 10px; font-size: 12px; }
+
+  /* 3. Collapsible filters */
+  .filter-toggle {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background: #151515;
+    border: none;
+    color: #888;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    text-align: left;
+  }
+  .filter-rows.collapsed { display: none; }
+  .controls { padding: 0 12px; }
+  .filter-row { gap: 6px; overflow-x: auto; flex-wrap: nowrap; -webkit-overflow-scrolling: touch; padding: 4px 0; }
+
+  /* 4. Bigger star icon for tapping */
+  .star-icon {
+    width: 36px;
+    height: 36px;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* 5. Swipe hint */
+  .swipe-hint {
+    display: block;
+    text-align: center;
+    color: #555;
+    font-size: 12px;
+    margin-top: 8px;
+  }
+
+  /* 6. Full-height map */
+  #map-container {
+    height: calc(100dvh - 120px) !important;
+    border-radius: 0 !important;
+  }
+
+  /* 8. Resolve view labels */
+  .resolve-side:first-child::before {
+    content: 'OPTION A — Swipe right to pick';
+    display: block;
+    font-size: 11px;
+    color: #555;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .resolve-side:last-child::before {
+    content: 'OPTION B — Swipe left to pick';
+    display: block;
+    font-size: 11px;
+    color: #555;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  /* 9. Schedule view mobile */
+  .schedule-header { flex-direction: column; align-items: stretch; }
+  .schedule-actions { justify-content: stretch; }
+  .export-btn { width: 100%; text-align: center; }
+
+  /* Existing mobile overrides */
   .tab { padding: 10px 14px; font-size: 13px; }
-  .controls { padding: 8px 12px; }
-  .filter-row { gap: 6px; overflow-x: auto; flex-wrap: nowrap; -webkit-overflow-scrolling: touch; }
-  main { padding: 12px 12px; }
   .event-card { min-width: 0; max-width: 100%; }
   .resolve-versus { flex-direction: column; }
   .resolve-divider { padding: 8px 0; }
   .vs-badge { border-radius: 8px; }
   .day-header { font-size: 16px; }
-  .toast { left: 12px; right: 12px; max-width: none; }
+  .toast { left: 12px; right: 12px; bottom: 70px; max-width: none; }
 }

@@ -83,8 +83,42 @@ export function renderDiscover(container: HTMLElement) {
   container.querySelectorAll('.event-card').forEach(card => {
     card.addEventListener('click', (e) => {
       if ((e.target as HTMLElement).tagName === 'A') return;
-      const index = parseInt(card.getAttribute('data-index')!);
-      toggleStar(index);
+
+      // On mobile: tap star icon to star, tap card to expand
+      const isMobile = window.innerWidth <= 768;
+      const tappedStar = (e.target as HTMLElement).closest('.star-icon');
+
+      if (tappedStar || !isMobile) {
+        const index = parseInt(card.getAttribute('data-index')!);
+        toggleStar(index);
+      } else {
+        card.classList.toggle('expanded');
+      }
     });
   });
+
+  // Add "Now" button if viewing today
+  const today = new Date();
+  const todayKey = dayKey(today);
+  if (currentDay === todayKey) {
+    const nowBtn = document.createElement('button');
+    nowBtn.className = 'now-btn';
+    nowBtn.textContent = '\u25CF Now';
+    nowBtn.addEventListener('click', () => {
+      const currentHour = today.getHours();
+      const currentMin = today.getMinutes();
+      const ampm = currentHour >= 12 ? 'PM' : 'AM';
+      const hr = currentHour % 12 || 12;
+      const timeStr = `${hr}:${currentMin < 30 ? '00' : '30'} ${ampm}`;
+      // Find the closest time slot
+      const slots = container.querySelectorAll('.time-label');
+      let closest: Element | null = null;
+      for (const slot of slots) {
+        closest = slot;
+        if (slot.textContent?.trim() === timeStr) break;
+      }
+      closest?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+    container.prepend(nowBtn);
+  }
 }

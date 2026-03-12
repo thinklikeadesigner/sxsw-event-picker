@@ -40,5 +40,6 @@ export function renderEventCard(event: SXSWEvent, starred: boolean, conflictCoun
       </div>
       ${event.location ? `<div class="event-location">\uD83D\uDCCD ${event.location}</div>` : ''}
       ${event.url ? `<a class="event-url" href="${event.url}" target="_blank">${formatUrlLabel(event.url)}</a>` : ''}
+      ${event.description ? `<div class="card-description">${event.description}</div>` : ''}
     </div>`;
 }
