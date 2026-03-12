@@ -21,15 +21,10 @@ export function formatUrlLabel(url: string): string {
   }
 }
 
-function escapeAttr(s: string): string {
-  return s.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-}
-
 export function renderEventCard(event: SXSWEvent, starred: boolean, conflictCount: number): string {
-  const tooltip = event.description ? escapeAttr(event.description) : '';
   return `
     <div class="event-card ${starred ? 'starred' : ''} ${conflictCount > 0 ? 'has-conflict' : ''}"
-         data-index="${event.index}"${tooltip ? ` data-tooltip="${tooltip}"` : ''}>
+         data-index="${event.index}">
       <div class="star-icon">${starred ? '\u2605' : '\u2606'}</div>
       <div class="event-name">${event.summary}</div>
       <div class="event-meta">
