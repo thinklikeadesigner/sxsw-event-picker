@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SXSW 2026 Event Picker v2</title>
+  <script type="module" crossorigin src="/sxsw-event-picker/assets/index-BxF7vmWu.js"></script>
+  <link rel="stylesheet" crossorigin href="/sxsw-event-picker/assets/index-PdmikrTW.css">
+</head>
+<body>
+  <div class="sticky-top">
+    <header>
+      <div>
+        <h1>SXSW 2026 Event Picker</h1>
+        <div class="subtitle">Browse, star, resolve conflicts, export</div>
+      </div>
+      <div class="header-stats">
+        <div class="stat">Starred: <span id="starred-count">0</span></div>
+        <div class="stat">Conflicts: <span id="conflict-count">0</span></div>
+      </div>
+    </header>
+    <nav class="view-tabs">
+      <button class="tab active" data-view="discover">Discover</button>
+      <button class="tab" data-view="map">Map</button>
+      <button class="tab" data-view="resolve">Resolve <span class="tab-badge" id="resolve-badge" style="display:none">0</span></button>
+      <button class="tab" data-view="schedule">Schedule</button>
+    </nav>
+    <div class="controls" id="controls">
+      <div class="filter-row" id="day-filters"></div>
+      <div class="filter-row" id="cost-filters"></div>
+    </div>
+  </div>
+  <main id="content"></main>
+</body>
+</html>
