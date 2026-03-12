@@ -1,6 +1,7 @@
 import { getState, resolveConflict, skipConflict } from '../state';
 import { SXSWEvent } from '../data/types';
 import { fmt } from '../utils/time';
+import { formatUrlLabel } from '../components/event-card';
 
 function renderResolveCard(event: SXSWEvent): string {
   return `
@@ -13,7 +14,7 @@ function renderResolveCard(event: SXSWEvent): string {
         ${event.type ? `<span class="pill pill-type">${event.type}</span>` : ''}
       </div>
       ${event.location ? `<div class="event-location">\uD83D\uDCCD ${event.location}</div>` : ''}
-      ${event.url ? `<a class="event-url" href="${event.url}" target="_blank">${event.url}</a>` : ''}
+      ${event.url ? `<a class="event-url" href="${event.url}" target="_blank">${formatUrlLabel(event.url)}</a>` : ''}
     </div>`;
 }
 

@@ -1,6 +1,26 @@
 import { SXSWEvent } from '../data/types';
 import { fmt } from '../utils/time';
 
+export function formatUrlLabel(url: string): string {
+  try {
+    const host = new URL(url).hostname.replace('www.', '');
+    const labels: Record<string, string> = {
+      'luma.com': 'Luma',
+      'eventbrite.com': 'Eventbrite',
+      'connectingtheamericas.com': 'Connecting the Americas',
+      'events.inc.com': 'Inc.',
+      'events.fastcompany.com': 'Fast Company',
+      'posh.vip': 'Posh',
+      'splashthat.com': 'Splash',
+      'swoogo.com': 'Swoogo',
+    };
+    const match = Object.entries(labels).find(([domain]) => host.endsWith(domain));
+    return `Event page: ${match ? match[1] : host}`;
+  } catch {
+    return url;
+  }
+}
+
 function escapeAttr(s: string): string {
   return s.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 }
@@ -19,6 +39,6 @@ export function renderEventCard(event: SXSWEvent, starred: boolean, conflictCoun
         ${conflictCount > 0 ? `<span class="pill pill-conflict">\u26A1 ${conflictCount} overlap${conflictCount > 1 ? 's' : ''}</span>` : ''}
       </div>
       ${event.location ? `<div class="event-location">\uD83D\uDCCD ${event.location}</div>` : ''}
-      ${event.url ? `<a class="event-url" href="${event.url}" target="_blank">${event.url}</a>` : ''}
+      ${event.url ? `<a class="event-url" href="${event.url}" target="_blank">${formatUrlLabel(event.url)}</a>` : ''}
     </div>`;
 }
