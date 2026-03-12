@@ -23,22 +23,18 @@ header .subtitle { font-size: 12px; color: #888; margin-top: 2px; }
 .header-stats { display: flex; gap: 16px; align-items: center; }
 .stat { font-size: 13px; color: #888; }
 .stat span { color: #4ade80; font-weight: 600; }
-.social-links { display: flex; gap: 6px; }
-.social-link {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 28px;
-  height: 28px;
-  border-radius: 6px;
-  background: #2a2a2a;
-  color: #ccc;
-  font-size: 12px;
-  font-weight: 800;
-  text-decoration: none;
-  transition: all 0.15s;
+.site-footer {
+  text-align: center;
+  padding: 24px 16px;
+  font-size: 13px;
+  color: #555;
+  border-top: 1px solid #2a2a2a;
 }
-.social-link:hover { background: #4ade80; color: #000; }
+.site-footer a {
+  color: #4ade80;
+  text-decoration: none;
+}
+.site-footer a:hover { text-decoration: underline; }
 
 /* Tab Navigation */
 .view-tabs {
@@ -490,6 +486,7 @@ main { padding: 16px 24px; }
     padding: 0;
   }
   main { padding: 12px 12px; padding-bottom: 60px; }
+  .site-footer { padding-bottom: 70px; }
 
   /* 2. Compact header */
   header { padding: 10px 16px; flex-direction: row; gap: 0; align-items: center; justify-content: space-between; }
