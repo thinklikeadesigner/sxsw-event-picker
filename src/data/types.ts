@@ -34,7 +34,7 @@ export interface Conflict {
   winner: number | null;
 }
 
-export type ViewMode = 'discover' | 'resolve' | 'schedule';
+export type ViewMode = 'discover' | 'resolve' | 'schedule' | 'map';
 
 export interface Filters {
   cost: string;

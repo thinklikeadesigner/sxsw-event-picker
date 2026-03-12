@@ -3,6 +3,7 @@ import { init, onStateChange, getState, setView } from './state';
 import { renderDiscover } from './views/discover';
 import { renderResolve } from './views/resolve';
 import { renderSchedule } from './views/schedule';
+import { renderMap, destroyMap } from './views/map';
 import { renderFilters } from './components/filters';
 import { ViewMode } from './data/types';
 
@@ -24,14 +25,23 @@ function render() {
     t.classList.toggle('active', t.getAttribute('data-view') === state.currentView);
   });
 
-  // Show/hide filters
-  controls.style.display = state.currentView === 'discover' ? '' : 'none';
+  // Clean up map when switching away
+  if (state.currentView !== 'map') {
+    destroyMap();
+  }
+
+  // Show/hide filters (discover and map views)
+  controls.style.display = (state.currentView === 'discover' || state.currentView === 'map') ? '' : 'none';
 
   // Render
   switch (state.currentView) {
     case 'discover':
       renderFilters();
       renderDiscover(content);
+      break;
+    case 'map':
+      renderFilters();
+      renderMap(content);
       break;
     case 'resolve':
       renderResolve(content);
