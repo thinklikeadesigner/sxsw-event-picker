@@ -112,7 +112,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0010-8e66df41@entre.events",
     summary: "Pitch Roast Live SXSW",
-    description: "Join a hackathon, jam on product design, and meet fellow tinkerers in the industry of tomorrow.",
     dtstart: "20260313T180000",
     dtend: "20260313T203000",
     url: "https://luma.com/pitchroastsxsw",
@@ -136,7 +135,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0012-4c6db5f9@entre.events",
     summary: "Hiring in the Age of AI - Dinner for founders and CEOs",
-    description: "Join a hackathon, learn about LLMs and prompt engineering, or connect with other AI practitioners.",
     dtstart: "20260310T180000",
     dtend: "20260310T203000",
     url: "https://luma.com/Gild14",
@@ -160,7 +158,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0014-c4d7e45c@entre.events",
     summary: "Lunch Society: State of VC and Growth Equity",
-    description: "Join a hackathon, jam on product design, and meet fellow tinkerers in the industry of tomorrow.",
     dtstart: "20260310T113000",
     dtend: "20260310T133000",
     url: "https://luma.com/zgt4xrmd",
@@ -196,7 +193,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0017-8749de54@entre.events",
     summary: "Pulse & Policy: The Equitable Health Exchange Powered by American Heart Association",
-    description: "Join a hackathon, jam on product design, and meet fellow tinkerers in the industry of tomorrow.",
     dtstart: "20260310T180000",
     dtend: "20260310T200000",
     url: "https://luma.com/AHABlocSXSW",
@@ -208,7 +204,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0018-09bf928e@entre.events",
     summary: "Open Lakehouse and AI",
-    description: "Join a hackathon, learn about LLMs and prompt engineering, or connect with other AI practitioners.",
     dtstart: "20260310T180000",
     dtend: "20260310T210000",
     url: "https://luma.com/2cxlufyd",
@@ -232,7 +227,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0020-cd555722@entre.events",
     summary: "Women Fully Loaded",
-    description: "From running clubs to pickleball tournaments, take part in a fitness event to challenge yourself and connect with old and new friends.",
     dtstart: "20260311T094500",
     dtend: "20260311T123000",
     url: "https://luma.com/u8k6xix8",
@@ -256,7 +250,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0022-857d4fba@entre.events",
     summary: "Touch Grass Tech Picnic",
-    description: "From morning coffee to late night pizza, enjoy great food and drinks with old and new friends.",
     dtstart: "20260311T120000",
     dtend: "20260311T140000",
     url: "https://luma.com/7k05rfa5",
@@ -280,7 +273,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0024-681f7d38@entre.events",
     summary: "Dream Wealth Camp SXSW Edition",
-    description: "Join a hackathon, jam on product design, and meet fellow tinkerers in the industry of tomorrow.",
     dtstart: "20260311T130000",
     dtend: "20260311T170000",
     url: "https://luma.com/SXSWDWC26",
@@ -328,7 +320,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0028-d94dbd5e@entre.events",
     summary: "Network Before the Noise: (Pre SXSW) Defense + Innovation Social",
-    description: "Join a hackathon, jam on product design, and meet fellow tinkerers in the industry of tomorrow.",
     dtstart: "20260311T170000",
     dtend: "20260311T220000",
     url: "https://luma.com/ih7kiypt",
@@ -340,7 +331,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0029-9433109b@entre.events",
     summary: "Dream Wealth Camp SXSW Reception Powered by Camelback Ventures",
-    description: "Join a hackathon, jam on product design, and meet fellow tinkerers in the industry of tomorrow.",
     dtstart: "20260311T173000",
     dtend: "20260311T190000",
     url: "https://luma.com/SXSWDWCCBV",
@@ -352,7 +342,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0030-20252a13@entre.events",
     summary: "AI Startup Gathering | Atlassian x Hack AI",
-    description: "Join a hackathon, learn about LLMs and prompt engineering, or connect with other AI practitioners.",
     dtstart: "20260311T180000",
     dtend: "20260311T200000",
     url: "https://luma.com/rjiov4tt",
@@ -364,7 +353,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0031-15681c28@entre.events",
     summary: "Leadership in Tech",
-    description: "Join a hackathon, jam on product design, and meet fellow tinkerers in the industry of tomorrow.",
     dtstart: "20260311T183000",
     dtend: "20260311T220000",
     url: "https://luma.com/e5d52tim",
@@ -388,7 +376,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0033-cd52b469@entre.events",
     summary: "Pre-SXSW Tech Mixer",
-    description: "Join a hackathon, jam on product design, and meet fellow tinkerers in the industry of tomorrow.",
     dtstart: "20260311T184500",
     dtend: "20260311T210000",
     url: "https://luma.com/xmu1j0xl",
@@ -424,7 +411,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0036-3412335f@entre.events",
     summary: "Founder & VC Brunch",
-    description: "Join a hackathon, jam on product design, and meet fellow tinkerers in the industry of tomorrow.",
     dtstart: "20260312T103000",
     dtend: "20260312T123000",
     url: "https://luma.com/scl3lu93",
@@ -436,7 +422,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0037-eeefe79d@entre.events",
     summary: "SXSW Kickoff Mixer",
-    description: "Join a hackathon, jam on product design, and meet fellow tinkerers in the industry of tomorrow.",
     dtstart: "20260312T170000",
     dtend: "20260312T190000",
     url: "https://luma.com/lx5itodv",
@@ -448,7 +433,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0038-aaade0d7@entre.events",
     summary: "Street Tank Live",
-    description: "Join a hackathon, jam on product design, and meet fellow tinkerers in the industry of tomorrow.",
     dtstart: "20260312T183000",
     dtend: "20260312T200000",
     url: "https://luma.com/f5yhikw8",
@@ -483,7 +467,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0041-c85a6e5d@entre.events",
     summary: "SXSW International Investment Roundtable",
-    description: "Join a hackathon, jam on product design, and meet fellow tinkerers in the industry of tomorrow.",
     dtstart: "20260312T090000",
     dtend: "20260312T103000",
     url: "https://luma.com/dt8pm9tz",
@@ -542,7 +525,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0046-d4beb566@entre.events",
     summary: "Investor Lounge",
-    description: "Join a hackathon, jam on product design, and meet fellow tinkerers in the industry of tomorrow.",
     dtstart: "20260312T110000",
     dtend: "20260312T190000",
     url: "https://luma.com/gqhs0akm",
@@ -554,7 +536,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0047-a6b2aa1f@entre.events",
     summary: "Midwest House Austin 2026",
-    description: "Join a hackathon, jam on product design, and meet fellow tinkerers in the industry of tomorrow.",
     dtstart: "20260312T110000",
     dtend: "20260312T210000",
     url: "https://luma.com/vght0n78",
@@ -578,7 +559,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0049-824411ac@entre.events",
     summary: "LaFamilia VC Brunch @ SXSW '26",
-    description: "Join a hackathon, learn about LLMs and prompt engineering, or connect with other AI practitioners.",
     dtstart: "20260312T113000",
     dtend: "20260312T143000",
     url: "https://luma.com/np5qzs55",
@@ -614,7 +594,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0052-c84abe9f@entre.events",
     summary: "Texas Futures Summit",
-    description: "Join a hackathon, learn about LLMs and prompt engineering, or connect with other AI practitioners.",
     dtstart: "20260312T133000",
     dtend: "20260312T210000",
     url: "https://luma.com/eqdzabt0",
@@ -626,7 +605,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0053-ae61f0d4@entre.events",
     summary: "🎮 SXSW 2026 | K-GAME IR Day",
-    description: "Join a hackathon, learn about LLMs and prompt engineering, or connect with other AI practitioners.",
     dtstart: "20260312T140000",
     dtend: "20260312T150000",
     url: "https://luma.com/3yrsi7sb",
@@ -638,7 +616,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0054-02ca7345@entre.events",
     summary: "America House: Startup & Tech Ecosystem Leaders Gather From Across the United States",
-    description: "Join a hackathon, jam on product design, and meet fellow tinkerers in the industry of tomorrow.",
     dtstart: "20260312T140000",
     dtend: "20260312T180000",
     url: "https://luma.com/america-house-austin-2026",
@@ -674,7 +651,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0057-89a94181@entre.events",
     summary: "Just Us: Community, Capital & Culture Mixer",
-    description: "Join a hackathon, jam on product design, and meet fellow tinkerers in the industry of tomorrow.",
     dtstart: "20260312T143000",
     dtend: "20260312T160000",
     url: "https://luma.com/mildks7r",
@@ -698,7 +674,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0059-434cc4d0@entre.events",
     summary: "Made in Austin' Official SXSW Showcase + Creative Hackathon",
-    description: "Join a hackathon, learn about LLMs and prompt engineering, or connect with other AI practitioners.",
     dtstart: "20260312T150000",
     dtend: "20260312T230000",
     url: "https://luma.com/mbbx3bai",
@@ -757,7 +732,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0064-28798843@entre.events",
     summary: "Female Founders Networking for Capital Happy Hour hosted by J.P. Morgan + Deel",
-    description: "Join a hackathon, jam on product design, and meet fellow tinkerers in the industry of tomorrow.",
     dtstart: "20260312T163000",
     dtend: "20260312T183000",
     url: "https://luma.com/grammq81",
@@ -769,7 +743,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0065-60f4f69c@entre.events",
     summary: "Future in Focus: Meet Germany’s Top AI Startups",
-    description: "Join a hackathon, learn about LLMs and prompt engineering, or connect with other AI practitioners.",
     dtstart: "20260312T170000",
     dtend: "20260312T183000",
     url: "https://luma.com/x44yh804",
@@ -781,7 +754,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0066-8d7739ff@entre.events",
     summary: "Cocktails and light bites with beehiiv at sxsw",
-    description: "From morning coffee to late night pizza, enjoy great food and drinks with old and new friends.",
     dtstart: "20260312T170000",
     dtend: "20260312T190000",
     url: "https://luma.com/naxfdzgb",
@@ -793,7 +765,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0067-90d8c30a@entre.events",
     summary: "🎾 SXSW EDITION - Pickle & Pints: A Meetup for Austin's Tech and Research Community",
-    description: "From running clubs to pickleball tournaments, take part in a fitness event to challenge yourself and connect with old and new friends.",
     dtstart: "20260312T170000",
     dtend: "20260312T190000",
     url: "https://luma.com/ya3ctff2",
@@ -817,7 +788,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0069-c6e95b28@entre.events",
     summary: "Build What’s Next - Official Path Launch",
-    description: "Join a hackathon, learn about LLMs and prompt engineering, or connect with other AI practitioners.",
     dtstart: "20260312T170000",
     dtend: "20260312T200000",
     url: "https://luma.com/path-launch",
@@ -829,7 +799,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0070-0d65a2f2@entre.events",
     summary: "Czech Night @ SXSW 2026",
-    description: "Join a hackathon, learn about LLMs and prompt engineering, or connect with other AI practitioners.",
     dtstart: "20260312T170000",
     dtend: "20260312T230000",
     url: "https://luma.com/u2y4r9pu",
@@ -841,7 +810,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0071-f7a4bf25@entre.events",
     summary: "South by South Hold'Em - Founder Investor Showdown",
-    description: "Join a hackathon, jam on product design, and meet fellow tinkerers in the industry of tomorrow.",
     dtstart: "20260312T173000",
     dtend: "20260312T220000",
     url: "https://luma.com/mo8m8wd7",
@@ -853,7 +821,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0072-ee330f7f@entre.events",
     summary: "South by Springtime: HR Meetup",
-    description: "Join a hackathon, jam on product design, and meet fellow tinkerers in the industry of tomorrow.",
     dtstart: "20260312T173000",
     dtend: "20260312T193000",
     url: "https://luma.com/xx4049e6",
@@ -865,7 +832,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0073-c3ed8f95@entre.events",
     summary: "SXSW Themed Death Cafe @ Clozure HQ",
-    description: "Discover wellness events around you. Come for a walk, yoga or meditation, learn about nutrition and longevity, and connect with other health-conscious people.",
     dtstart: "20260312T180000",
     dtend: "20260312T193000",
     url: "https://luma.com/njhwv7iy",
@@ -877,7 +843,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0074-f56d768d@entre.events",
     summary: "Alcohol-Free House™ at SXSW • A Zero-Proof Happy Hour Takeover",
-    description: "From morning coffee to late night pizza, enjoy great food and drinks with old and new friends.",
     dtstart: "20260312T180000",
     dtend: "20260312T200000",
     url: "https://luma.com/eojlbkjb",
@@ -901,7 +866,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0076-2ed9c768@entre.events",
     summary: "Founders N' Funders: SXSW VC Reverse Pitch",
-    description: "Join a hackathon, jam on product design, and meet fellow tinkerers in the industry of tomorrow.",
     dtstart: "20260312T180000",
     dtend: "20260312T200000",
     url: "https://luma.com/fnfxsxsw0326",
@@ -913,7 +877,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0077-28748d6d@entre.events",
     summary: "Investor Salon: SWAN Impact Network at SXSW 2026",
-    description: "Join a hackathon, jam on product design, and meet fellow tinkerers in the industry of tomorrow.",
     dtstart: "20260312T180000",
     dtend: "20260312T203000",
     url: "https://luma.com/xstrloe4",
@@ -936,7 +899,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0079-f36f6dd0@entre.events",
     summary: "Camp Outlander HardTech Meet Up",
-    description: "Join a hackathon, jam on product design, and meet fellow tinkerers in the industry of tomorrow.",
     dtstart: "20260312T183000",
     dtend: "20260312T203000",
     url: "https://luma.com/i9094b72",
@@ -948,7 +910,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0080-d9b4c97c@entre.events",
     summary: "4th Annual Austin DeepTech Dinner",
-    description: "Join a hackathon, learn about LLMs and prompt engineering, or connect with other AI practitioners.",
     dtstart: "20260312T183000",
     dtend: "20260312T203000",
     url: "https://luma.com/qmyuxt5m",
@@ -960,7 +921,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0081-82fea425@entre.events",
     summary: "Off Menu: ceo dinner @ private mansion",
-    description: "From morning coffee to late night pizza, enjoy great food and drinks with old and new friends.",
     dtstart: "20260312T183000",
     dtend: "20260312T213000",
     url: "https://luma.com/ceodinneraustin1",
@@ -972,7 +932,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0082-985b43e2@entre.events",
     summary: "Hiring Shouldn't Suck™ Dinner",
-    description: "From morning coffee to late night pizza, enjoy great food and drinks with old and new friends.",
     dtstart: "20260312T190000",
     dtend: "20260312T210000",
     url: "https://luma.com/9oz42ax6",
@@ -996,7 +955,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0084-0d87bbe7@entre.events",
     summary: "Global Innovation Kickoff Party",
-    description: "Join a hackathon, jam on product design, and meet fellow tinkerers in the industry of tomorrow.",
     dtstart: "20260312T190000",
     dtend: "20260312T220000",
     url: "https://luma.com/mgehpr84",
@@ -1020,7 +978,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0086-07befe85@entre.events",
     summary: "SXSW Kickoff Party with Brooklyn Navy Yard & Aether MFG",
-    description: "Join a hackathon, jam on product design, and meet fellow tinkerers in the industry of tomorrow.",
     dtstart: "20260312T193000",
     dtend: "20260312T210000",
     url: "https://luma.com/24060cqe",
@@ -1032,7 +989,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0087-f7163ab7@entre.events",
     summary: "Building Capital and Systems for Growth",
-    description: "Join a hackathon, jam on product design, and meet fellow tinkerers in the industry of tomorrow.",
     dtstart: "20260312T193000",
     dtend: "20260312T223000",
     url: "https://luma.com/tc8tnmnw",
@@ -1092,7 +1048,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0092-b454c2ff@entre.events",
     summary: "Pitch Roast Live SXSW",
-    description: "Join a hackathon, jam on product design, and meet fellow tinkerers in the industry of tomorrow.",
     dtstart: "20260313T180000",
     dtend: "20260313T203000",
     url: "https://luma.com/pitchroastsxsw",
@@ -1104,7 +1059,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0093-fbe5adf6@entre.events",
     summary: "CZECH YOUR PACE: 5K Morning Run at SXSW 2026",
-    description: "From running clubs to pickleball tournaments, take part in a fitness event to challenge yourself and connect with old and new friends.",
     dtstart: "20260313T070000",
     dtend: "20260313T090000",
     url: "https://luma.com/qmn73qhc",
@@ -1116,7 +1070,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0094-0761d489@entre.events",
     summary: "Signal Run: SXSW | 2026 Series Kickoff",
-    description: "Join a hackathon, jam on product design, and meet fellow tinkerers in the industry of tomorrow.",
     dtstart: "20260313T080000",
     dtend: "20260313T093000",
     url: "https://luma.com/signlrun-sxsw26",
@@ -1128,7 +1081,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0095-a5a3916e@entre.events",
     summary: "Mercury Pop-Up at SXSW: Built to Your Standards",
-    description: "Join a hackathon, jam on product design, and meet fellow tinkerers in the industry of tomorrow.",
     dtstart: "20260313T080000",
     dtend: "20260313T160000",
     url: "https://luma.com/Mercury_SXSW_2026",
@@ -1140,7 +1092,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0096-f1a7edbf@entre.events",
     summary: "PropTech House at SXSW",
-    description: "Join a hackathon, learn about LLMs and prompt engineering, or connect with other AI practitioners.",
     dtstart: "20260313T080000",
     dtend: "20260313T180000",
     url: "https://luma.com/albuumsp",
@@ -1188,7 +1139,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0100-11639481@entre.events",
     summary: "Annual SX Pitch and Run",
-    description: "Join a hackathon, jam on product design, and meet fellow tinkerers in the industry of tomorrow.",
     dtstart: "20260313T090000",
     dtend: "20260313T120000",
     url: "https://luma.com/sxswpnr",
@@ -1200,7 +1150,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0101-7ee2602d@entre.events",
     summary: "The Creator Economy: Founder Panel + Private Mixer",
-    description: "Join a hackathon, jam on product design, and meet fellow tinkerers in the industry of tomorrow.",
     dtstart: "20260313T090000",
     dtend: "20260313T120000",
     url: "https://luma.com/rdvi6xyy",
@@ -1212,7 +1161,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0102-c37d7a67@entre.events",
     summary: "Texas AI House - Presented by webAI",
-    description: "Join a hackathon, learn about LLMs and prompt engineering, or connect with other AI practitioners.",
     dtstart: "20260313T090000",
     dtend: "20260313T170000",
     url: "https://luma.com/texas-ai-house",
@@ -1272,7 +1220,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0107-17b5627c@entre.events",
     summary: "South Asian Advantage @ SXSW",
-    description: "Join a hackathon, learn about LLMs and prompt engineering, or connect with other AI practitioners.",
     dtstart: "20260313T100000",
     dtend: "20260313T200000",
     url: "https://luma.com/asan-sac-sxsw-26",
@@ -1296,7 +1243,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0109-4430809c@entre.events",
     summary: "Equitech Texas Welcome Breakfast",
-    description: "Join a hackathon, jam on product design, and meet fellow tinkerers in the industry of tomorrow.",
     dtstart: "20260313T110000",
     dtend: "20260313T123000",
     url: "https://luma.com/peq53vu8",
@@ -1308,7 +1254,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0110-0de52b9d@entre.events",
     summary: "No Bad Company Presents: Tenur House, Unofficial SXSW",
-    description: "Join a hackathon, learn about LLMs and prompt engineering, or connect with other AI practitioners.",
     dtstart: "20260313T110000",
     dtend: "20260313T150000",
     url: "https://luma.com/3w1xx42w",
@@ -1320,7 +1265,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0111-3dbebf1f@entre.events",
     summary: "Hail to the Innovators: University of Michigan at SXSW 2026",
-    description: "Join a hackathon, learn about LLMs and prompt engineering, or connect with other AI practitioners.",
     dtstart: "20260313T110000",
     dtend: "20260313T170000",
     url: "https://luma.com/asqx2mhv",
@@ -1332,7 +1276,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0112-a64e2b51@entre.events",
     summary: "Investor Lounge",
-    description: "Join a hackathon, jam on product design, and meet fellow tinkerers in the industry of tomorrow.",
     dtstart: "20260313T110000",
     dtend: "20260313T190000",
     url: "https://luma.com/gqhs0akm",
@@ -1344,7 +1287,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0113-184e6922@entre.events",
     summary: "Midwest House Austin 2026",
-    description: "Join a hackathon, jam on product design, and meet fellow tinkerers in the industry of tomorrow.",
     dtstart: "20260313T110000",
     dtend: "20260313T210000",
     url: "https://luma.com/vght0n78",
@@ -1356,7 +1298,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0114-81dc3bbf@entre.events",
     summary: "Frontier House x LaFamilia VC Mixer @ SXSW '26",
-    description: "Join a hackathon, learn about LLMs and prompt engineering, or connect with other AI practitioners.",
     dtstart: "20260313T120000",
     dtend: "20260313T150000",
     url: "https://luma.com/np5qzs55",
@@ -1392,7 +1333,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0117-44af9888@entre.events",
     summary: "Midwest House at Inn Cahoots",
-    description: "Join a hackathon, learn about LLMs and prompt engineering, or connect with other AI practitioners.",
     dtstart: "20260313T120000",
     dtend: "20260313T230000",
     url: "https://luma.com/0mypd7p5",
@@ -1404,7 +1344,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0118-2e735885@entre.events",
     summary: "Texas House",
-    description: "Join a hackathon, learn about LLMs and prompt engineering, or connect with other AI practitioners.",
     dtstart: "20260313T123000",
     dtend: "20260313T223000",
     url: "https://luma.com/texashouse.sxsw26",
@@ -1428,7 +1367,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0120-12a18d1c@entre.events",
     summary: "Build Your Own AI Agent Team in 60 Min – For Non-Tech Founders",
-    description: "Join a hackathon, learn about LLMs and prompt engineering, or connect with other AI practitioners.",
     dtstart: "20260313T140000",
     dtend: "20260313T150000",
     url: "https://luma.com/rd90l9ac",
@@ -1440,7 +1378,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0121-647d7cfc@entre.events",
     summary: "\"The Future of Sports Content Is Already Here\" Livesport × Fameplay | Austin 2026",
-    description: "Join a hackathon, learn about LLMs and prompt engineering, or connect with other AI practitioners.",
     dtstart: "20260313T140000",
     dtend: "20260313T153000",
     url: "https://luma.com/4vgwvupo",
@@ -1464,7 +1401,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0123-6bb0557c@entre.events",
     summary: "Brave1 Invest Demo Day Austin",
-    description: "Join a hackathon, jam on product design, and meet fellow tinkerers in the industry of tomorrow.",
     dtstart: "20260313T140000",
     dtend: "20260313T180000",
     url: "https://luma.com/uvei2k2q",
@@ -1476,7 +1412,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0124-f479db40@entre.events",
     summary: "Austin Hardtech Open House at re:3D",
-    description: "Join a hackathon, jam on product design, and meet fellow tinkerers in the industry of tomorrow.",
     dtstart: "20260313T140000",
     dtend: "20260313T190000",
     url: "https://luma.com/7mntsane",
@@ -1500,7 +1435,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0126-aa1552b7@entre.events",
     summary: "AI Innovators & Investors Austin",
-    description: "Join a hackathon, learn about LLMs and prompt engineering, or connect with other AI practitioners.",
     dtstart: "20260313T150000",
     dtend: "20260313T180000",
     url: "https://luma.com/njjmcx4q",
@@ -1524,7 +1458,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0128-154dc907@entre.events",
     summary: "Northeast Meetup @ SXSW",
-    description: "Join a hackathon, jam on product design, and meet fellow tinkerers in the industry of tomorrow.",
     dtstart: "20260313T150000",
     dtend: "20260313T190000",
     url: "https://luma.com/txayubqj",
@@ -1536,7 +1469,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0129-31863da8@entre.events",
     summary: "Uncharted:Pitches SXSW Dinner",
-    description: "From morning coffee to late night pizza, enjoy great food and drinks with old and new friends.",
     dtstart: "20260313T150000",
     dtend: "20260313T200000",
     url: "https://luma.com/9a0rqk90",
@@ -1560,7 +1492,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0131-a4680d5d@entre.events",
     summary: "Amplitude's AI Cookout @ SXSW",
-    description: "Join a hackathon, learn about LLMs and prompt engineering, or connect with other AI practitioners.",
     dtstart: "20260313T160000",
     dtend: "20260313T210000",
     url: "https://luma.com/mfhmd7nk",
@@ -1584,7 +1515,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0133-75ca8264@entre.events",
     summary: "South Asian Collective @ SXSW",
-    description: "Join a hackathon, learn about LLMs and prompt engineering, or connect with other AI practitioners.",
     dtstart: "20260313T170000",
     dtend: "20260313T190000",
     url: "https://luma.com/asan-sac-sxsw-26",
@@ -1608,7 +1538,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0135-68531c90@entre.events",
     summary: "Breaking & Entering After Hours Happy Hour with Epidemic Sound",
-    description: "Join a hackathon, jam on product design, and meet fellow tinkerers in the industry of tomorrow.",
     dtstart: "20260313T170000",
     dtend: "20260313T200000",
     url: "https://luma.com/lpu95bf9",
@@ -1620,7 +1549,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0136-82267ca4@entre.events",
     summary: "Tennessee House: Opening Night VIP Party",
-    description: "Join a hackathon, jam on product design, and meet fellow tinkerers in the industry of tomorrow.",
     dtstart: "20260313T170000",
     dtend: "20260313T220000",
     url: "https://luma.com/tn.house.friday",
@@ -1644,7 +1572,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0138-8c158651@entre.events",
     summary: "Liberty Ventures Reception at SXSW",
-    description: "Join a hackathon, jam on product design, and meet fellow tinkerers in the industry of tomorrow.",
     dtstart: "20260313T173000",
     dtend: "20260313T190000",
     url: "https://luma.com/wfmm3v5y",
@@ -1656,7 +1583,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0139-5c9ede87@entre.events",
     summary: "Built:In Austin @ SWSW | Fintech Edition",
-    description: "Join a hackathon, jam on product design, and meet fellow tinkerers in the industry of tomorrow.",
     dtstart: "20260313T173000",
     dtend: "20260313T193000",
     url: "https://luma.com/68hom0o3",
@@ -1668,7 +1594,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0140-0beaceae@entre.events",
     summary: "Dream Boldly: Investors + Founders Rooftop & Global Launch Event",
-    description: "Join a hackathon, learn about LLMs and prompt engineering, or connect with other AI practitioners.",
     dtstart: "20260313T173000",
     dtend: "20260313T203000",
     url: "https://luma.com/31n27b8y",
@@ -1680,7 +1605,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0141-83eb45a0@entre.events",
     summary: "South X Innovation Panel w/ Hill Climbers",
-    description: "From running clubs to pickleball tournaments, take part in a fitness event to challenge yourself and connect with old and new friends.",
     dtstart: "20260313T180000",
     dtend: "20260313T220000",
     url: "https://luma.com/kgpp6zut",
@@ -1715,7 +1639,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0144-13fe8d67@entre.events",
     summary: "Off Menu: ceo dinner @ private mansion",
-    description: "From morning coffee to late night pizza, enjoy great food and drinks with old and new friends.",
     dtstart: "20260313T183000",
     dtend: "20260313T213000",
     url: "https://luma.com/ceodinneraustin2",
@@ -1739,7 +1662,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0146-cc8c61fd@entre.events",
     summary: "Brave1 Invest Demo Day Austin",
-    description: "Join a hackathon, jam on product design, and meet fellow tinkerers in the industry of tomorrow.",
     dtstart: "20260313T210000",
     dtend: "20260314T010000",
     url: "https://luma.com/uvei2k2q",
@@ -1763,7 +1685,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0148-8af94382@entre.events",
     summary: "5K with The Hustle x Founders Running Club",
-    description: "From running clubs to pickleball tournaments, take part in a fitness event to challenge yourself and connect with old and new friends.",
     dtstart: "20260314T080000",
     dtend: "20260314T100000",
     url: "https://luma.com/v4xwa416",
@@ -1775,7 +1696,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0149-11064eee@entre.events",
     summary: "Minnesota Nice Meetup @ SXSW",
-    description: "From morning coffee to late night pizza, enjoy great food and drinks with old and new friends.",
     dtstart: "20260314T080000",
     dtend: "20260314T103000",
     url: "https://luma.com/jv402h03",
@@ -1787,7 +1707,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0150-354c5e42@entre.events",
     summary: "Weißwurst & Watch Party: Bavarian Breakfast @Munich Haus",
-    description: "From morning coffee to late night pizza, enjoy great food and drinks with old and new friends.",
     dtstart: "20260314T090000",
     dtend: "20260314T120000",
     url: "https://luma.com/g4n7m36g",
@@ -1799,7 +1718,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0151-8c0bfa37@entre.events",
     summary: "RedThreadX House | The LINE Austin",
-    description: "Join a hackathon, learn about LLMs and prompt engineering, or connect with other AI practitioners.",
     dtstart: "20260314T090000",
     dtend: "20260314T170000",
     url: "https://luma.com/u4q9akh7",
@@ -1823,7 +1741,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0153-f2665450@entre.events",
     summary: "RedThreadXperience",
-    description: "Join a hackathon, jam on product design, and meet fellow tinkerers in the industry of tomorrow.",
     dtstart: "20260314T090000",
     dtend: "20260314T210000",
     url: "https://luma.com/ysv7xsh1",
@@ -1918,7 +1835,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0161-59fb9894@entre.events",
     summary: "Future POD @ SXSW",
-    description: "Join a hackathon, learn about LLMs and prompt engineering, or connect with other AI practitioners.",
     dtstart: "20260314T100000",
     dtend: "20260314T190000",
     url: "https://luma.com/futurepod",
@@ -1930,7 +1846,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0162-45390249@entre.events",
     summary: "SXSW Superhuman Suite @ Antone's",
-    description: "Join a hackathon, learn about LLMs and prompt engineering, or connect with other AI practitioners.",
     dtstart: "20260314T100000",
     dtend: "20260314T220000",
     url: "https://luma.com/vxff43hf",
@@ -1942,7 +1857,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0163-8830f306@entre.events",
     summary: "Tennessee House: Nooga in the Morning, Nash at Night",
-    description: "Join a hackathon, jam on product design, and meet fellow tinkerers in the industry of tomorrow.",
     dtstart: "20260314T100000",
     dtend: "20260314T230000",
     url: "https://luma.com/tn.house.saturday",
@@ -1977,7 +1891,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0166-a0a250cb@entre.events",
     summary: "Fireside Chat with Michael Seckler, CEO at Justworks",
-    description: "Join a hackathon, jam on product design, and meet fellow tinkerers in the industry of tomorrow.",
     dtstart: "20260314T110000",
     dtend: "20260314T130000",
     url: "https://luma.com/t6h663yb",
@@ -1989,7 +1902,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0167-4824ed6c@entre.events",
     summary: "The Founders & Funders Breakfast @ SXSW, by Microsoft, LinkedIn and Mac Venture Capital",
-    description: "From morning coffee to late night pizza, enjoy great food and drinks with old and new friends.",
     dtstart: "20260314T110000",
     dtend: "20260314T133000",
     url: "https://luma.com/qt1zbrf8",
@@ -2013,7 +1925,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0169-aa26b36f@entre.events",
     summary: "Munich Haus @SXSW: Connecting Hubs Oktoberfest-style",
-    description: "Join a hackathon, learn about LLMs and prompt engineering, or connect with other AI practitioners.",
     dtstart: "20260314T110000",
     dtend: "20260314T180000",
     url: "https://luma.com/3kyr8lif",
@@ -2025,7 +1936,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0170-6b2337f0@entre.events",
     summary: "Investor Lounge",
-    description: "Join a hackathon, jam on product design, and meet fellow tinkerers in the industry of tomorrow.",
     dtstart: "20260314T110000",
     dtend: "20260314T190000",
     url: "https://luma.com/gqhs0akm",
@@ -2037,7 +1947,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0171-01e337e0@entre.events",
     summary: "Midwest House Austin 2026",
-    description: "Join a hackathon, jam on product design, and meet fellow tinkerers in the industry of tomorrow.",
     dtstart: "20260314T110000",
     dtend: "20260314T210000",
     url: "https://luma.com/vght0n78",
@@ -2049,7 +1958,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0172-922d40b8@entre.events",
     summary: "UKHOUSE @ SXSW: AI for Science - How the UK & US Are Building the Future of Discovery",
-    description: "Join a hackathon, learn about LLMs and prompt engineering, or connect with other AI practitioners.",
     dtstart: "20260314T120000",
     dtend: "20260314T130000",
     url: "https://luma.com/xfqv2itr",
@@ -2061,7 +1969,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0173-3bca28db@entre.events",
     summary: "Capital & Innovation Salon @ SXSW",
-    description: "Join a hackathon, jam on product design, and meet fellow tinkerers in the industry of tomorrow.",
     dtstart: "20260314T120000",
     dtend: "20260314T150000",
     url: "https://luma.com/SXSWsalon",
@@ -2109,7 +2016,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0177-0fa7b158@entre.events",
     summary: "Frontiers of Innovation Day at SXSW Austin 2026 | Presented by the Frontier Collective",
-    description: "Join a hackathon, learn about LLMs and prompt engineering, or connect with other AI practitioners.",
     dtstart: "20260314T123000",
     dtend: "20260314T203000",
     url: "https://luma.com/60jxtyi9",
@@ -2121,7 +2027,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0178-7438a136@entre.events",
     summary: "Texas House",
-    description: "Join a hackathon, learn about LLMs and prompt engineering, or connect with other AI practitioners.",
     dtstart: "20260314T123000",
     dtend: "20260314T223000",
     url: "https://luma.com/texashouse.sxsw26",
@@ -2133,7 +2038,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0179-61dfe588@entre.events",
     summary: "The Future of Protein Forum",
-    description: "Find climate events from major conferences to local gatherings. Learn about deep tech, discuss climate policies, and join an hour of action.",
     dtstart: "20260314T130000",
     dtend: "20260314T160000",
     url: "https://luma.com/meat-institute-sxsw-2026",
@@ -2145,7 +2049,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0180-1557ae2e@entre.events",
     summary: "Camp Outlander X SXSW BBQ",
-    description: "From morning coffee to late night pizza, enjoy great food and drinks with old and new friends.",
     dtstart: "20260314T130000",
     dtend: "20260314T160000",
     url: "https://luma.com/5yo4wovy",
@@ -2157,7 +2060,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0181-8c30b430@entre.events",
     summary: "Agency Owner Mixer @ SXSW 26",
-    description: "Join a hackathon, learn about LLMs and prompt engineering, or connect with other AI practitioners.",
     dtstart: "20260314T130000",
     dtend: "20260314T160000",
     url: "https://luma.com/dj7iwuis",
@@ -2192,7 +2094,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0184-4972f0a3@entre.events",
     summary: "Nappr x Flex-N-Fly Present: SXSW Future of Travel Wellness!",
-    description: "From running clubs to pickleball tournaments, take part in a fitness event to challenge yourself and connect with old and new friends.",
     dtstart: "20260314T150000",
     dtend: "20260314T180000",
     url: "https://luma.com/knoulsj1",
@@ -2204,7 +2105,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0185-a7066d9a@entre.events",
     summary: "Founder Happy Hour at SXSW",
-    description: "From morning coffee to late night pizza, enjoy great food and drinks with old and new friends.",
     dtstart: "20260314T150000",
     dtend: "20260314T180000",
     url: "https://luma.com/4ya80z7n",
@@ -2216,7 +2116,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0186-4537ef2e@entre.events",
     summary: "Defense Tech Happy Hour - Powered by J.P. Morgan and Orrick",
-    description: "Join a hackathon, jam on product design, and meet fellow tinkerers in the industry of tomorrow.",
     dtstart: "20260314T160000",
     dtend: "20260314T183000",
     url: "https://luma.com/dl4us3n8",
@@ -2228,7 +2127,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0187-0a07da70@entre.events",
     summary: "Join Soap & Glory, Tula, and Fluffi for Inclusivity in Beauty Panel + Mixer at SXSW",
-    description: "Discover wellness events around you. Come for a walk, yoga or meditation, learn about nutrition and longevity, and connect with other health-conscious people.",
     dtstart: "20260314T163000",
     dtend: "20260314T183000",
     url: "https://luma.com/hwcj45u4",
@@ -2240,7 +2138,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0188-9ed87c9f@entre.events",
     summary: "OpenClaw Austin: Builders & Beers @ Mort Subite",
-    description: "Join a hackathon, learn about LLMs and prompt engineering, or connect with other AI practitioners.",
     dtstart: "20260314T163000",
     dtend: "20260314T190000",
     url: "https://luma.com/ufkpm3ft",
@@ -2275,7 +2172,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0191-e2ac6921@entre.events",
     summary: "Coffee Without Limits: An Exclusive Evening of Innovation",
-    description: "From morning coffee to late night pizza, enjoy great food and drinks with old and new friends.",
     dtstart: "20260314T173000",
     dtend: "20260314T184500",
     url: "https://luma.com/keurig-drpepper-sxsw-2026",
@@ -2287,7 +2183,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0192-3ee6aa4f@entre.events",
     summary: "Creator Exec Event for SXSW | by RockWater",
-    description: "Join a hackathon, jam on product design, and meet fellow tinkerers in the industry of tomorrow.",
     dtstart: "20260314T173000",
     dtend: "20260314T200000",
     url: "https://luma.com/pf4dxzg8",
@@ -2311,7 +2206,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0194-27bb497d@entre.events",
     summary: "Josh Tickell: Cinematic Storytelling as a Lever for Change",
-    description: "Find climate events from major conferences to local gatherings. Learn about deep tech, discuss climate policies, and join an hour of action.",
     dtstart: "20260314T180000",
     dtend: "20260314T193000",
     url: "https://luma.com/cinematic-storytelling-sxsw-2026",
@@ -2371,7 +2265,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0199-68236ddf@entre.events",
     summary: "AUSTIN SCIENCE NETWORK NIGHT @RTX HOUSE @SXSW2026",
-    description: "Join a hackathon, jam on product design, and meet fellow tinkerers in the industry of tomorrow.",
     dtstart: "20260314T183000",
     dtend: "20260314T210000",
     url: "https://luma.com/8vj9x7lu",
@@ -2407,7 +2300,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0202-150a6f67@entre.events",
     summary: "Cloudflare + Deepgram Party",
-    description: "Join a hackathon, jam on product design, and meet fellow tinkerers in the industry of tomorrow.",
     dtstart: "20260314T190000",
     dtend: "20260315T020000",
     url: "https://luma.com/unr114mi",
@@ -2443,7 +2335,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0205-a3ac2a78@entre.events",
     summary: "Austin Sunday Wake Up Call (Series A+ Founders + VCs Only)",
-    description: "From running clubs to pickleball tournaments, take part in a fitness event to challenge yourself and connect with old and new friends.",
     dtstart: "20260315T090000",
     dtend: "20260315T110000",
     url: "https://luma.com/4b9x0ct2",
@@ -2466,7 +2357,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0207-0180544b@entre.events",
     summary: "RedThreadX House | The LINE Austin",
-    description: "Join a hackathon, learn about LLMs and prompt engineering, or connect with other AI practitioners.",
     dtstart: "20260315T090000",
     dtend: "20260315T170000",
     url: "https://luma.com/u4q9akh7",
@@ -2478,7 +2368,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0208-64c642fe@entre.events",
     summary: "RedThreadXperience",
-    description: "Join a hackathon, jam on product design, and meet fellow tinkerers in the industry of tomorrow.",
     dtstart: "20260315T090000",
     dtend: "20260315T210000",
     url: "https://luma.com/ysv7xsh1",
@@ -2501,7 +2390,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0210-a398bbf2@entre.events",
     summary: "Superhuman for Startups Breakfast & Panel @ SXSW",
-    description: "Join a hackathon, learn about LLMs and prompt engineering, or connect with other AI practitioners.",
     dtstart: "20260315T100000",
     dtend: "20260315T121500",
     url: "https://luma.com/4y0z5r6j",
@@ -2559,7 +2447,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0215-409230fb@entre.events",
     summary: "Tennessee House: Power Up with Knoxville & Oak Ridge, then Meet Memphis",
-    description: "Join a hackathon, jam on product design, and meet fellow tinkerers in the industry of tomorrow.",
     dtstart: "20260315T100000",
     dtend: "20260315T220000",
     url: "https://luma.com/tn.house.sunday",
@@ -2571,7 +2458,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0216-dfd94c1c@entre.events",
     summary: "SXSW Superhuman Suite @ Antone's",
-    description: "Join a hackathon, learn about LLMs and prompt engineering, or connect with other AI practitioners.",
     dtstart: "20260315T100000",
     dtend: "20260315T220000",
     url: "https://luma.com/vxff43hf",
@@ -2583,7 +2469,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0217-ea5ccc8d@entre.events",
     summary: "AI Market Foresight: Live Simulation @SXSW",
-    description: "Join a hackathon, learn about LLMs and prompt engineering, or connect with other AI practitioners.",
     dtstart: "20260315T103000",
     dtend: "20260315T140000",
     url: "https://luma.com/aisimulation",
@@ -2595,7 +2480,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0218-91e032ce@entre.events",
     summary: "Investor Lounge",
-    description: "Join a hackathon, jam on product design, and meet fellow tinkerers in the industry of tomorrow.",
     dtstart: "20260315T110000",
     dtend: "20260315T190000",
     url: "https://luma.com/gqhs0akm",
@@ -2618,7 +2502,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0220-2a1ab1d5@entre.events",
     summary: "Creator Gold Live at SXSW: The Creator Economy Community Experience",
-    description: "Join a hackathon, jam on product design, and meet fellow tinkerers in the industry of tomorrow.",
     dtstart: "20260315T120000",
     dtend: "20260315T173000",
     url: "https://luma.com/euktoi6u",
@@ -2689,7 +2572,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0226-2b8b936c@entre.events",
     summary: "Superhuman Hang @ SXSW",
-    description: "Join a hackathon, jam on product design, and meet fellow tinkerers in the industry of tomorrow.",
     dtstart: "20260315T160000",
     dtend: "20260315T173000",
     url: "https://luma.com/2e1g9wr9",
@@ -2701,7 +2583,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0227-43f1d162@entre.events",
     summary: "From Raise to Reality: Lessons from Recent Series A Founders",
-    description: "Join a hackathon, learn about LLMs and prompt engineering, or connect with other AI practitioners.",
     dtstart: "20260315T160000",
     dtend: "20260315T183000",
     url: "https://luma.com/glbmqm6u",
@@ -2713,7 +2594,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0228-fb9822c8@entre.events",
     summary: "Drinks on James",
-    description: "Join a hackathon, learn about LLMs and prompt engineering, or connect with other AI practitioners.",
     dtstart: "20260315T160000",
     dtend: "20260315T190000",
     url: "https://luma.com/ksngov2z",
@@ -2725,7 +2605,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0229-adfbeb3a@entre.events",
     summary: "Crowdstake @ SX 2026",
-    description: "Join a hackathon, learn about LLMs and prompt engineering, or connect with other AI practitioners.",
     dtstart: "20260315T160000",
     dtend: "20260315T190000",
     url: "https://luma.com/56acre42",
@@ -2737,7 +2616,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0230-043d1dc0@entre.events",
     summary: "London Calling: Where pioneering ideas meet business opportunities",
-    description: "Join a hackathon, jam on product design, and meet fellow tinkerers in the industry of tomorrow.",
     dtstart: "20260315T160000",
     dtend: "20260315T190000",
     url: "https://luma.com/rd044u94",
@@ -2749,7 +2627,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0231-2e59772d@entre.events",
     summary: "NachoTuesday: Austin SaaS & AI Founder + Investor Happy Hour",
-    description: "Join a hackathon, learn about LLMs and prompt engineering, or connect with other AI practitioners.",
     dtstart: "20260315T170000",
     dtend: "20260315T200000",
     url: "https://luma.com/wddaow8l",
@@ -2761,7 +2638,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0232-153c41f1@entre.events",
     summary: "South Asian Meetup @ SXSW",
-    description: "From morning coffee to late night pizza, enjoy great food and drinks with old and new friends.",
     dtstart: "20260315T173000",
     dtend: "20260315T193000",
     url: "https://luma.com/asan-sxsw-0326",
@@ -2773,7 +2649,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0233-58543289@entre.events",
     summary: "Creator Exec Event for SXSW | by RockWater",
-    description: "Join a hackathon, jam on product design, and meet fellow tinkerers in the industry of tomorrow.",
     dtstart: "20260315T173000",
     dtend: "20260315T200000",
     url: "https://luma.com/pf4dxzg8",
@@ -2785,7 +2660,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0234-34698098@entre.events",
     summary: "Emerging Managers + Founding GPs Omakase - SXSW",
-    description: "From morning coffee to late night pizza, enjoy great food and drinks with old and new friends.",
     dtstart: "20260315T180000",
     dtend: "20260315T210000",
     url: "https://luma.com/njj07v0h",
@@ -2797,7 +2671,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0235-f4dd3a15@entre.events",
     summary: "GenJam: Use AI tools to create a Short Film! @ RTX House @SXSW 2026",
-    description: "Join a hackathon, learn about LLMs and prompt engineering, or connect with other AI practitioners.",
     dtstart: "20260315T183000",
     dtend: "20260315T210000",
     url: "https://luma.com/5r8qycf5",
@@ -2809,7 +2682,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0236-cf7cbb5a@entre.events",
     summary: "Off menu: Series A+ CEO dinner @ private mansion",
-    description: "From morning coffee to late night pizza, enjoy great food and drinks with old and new friends.",
     dtstart: "20260315T183000",
     dtend: "20260315T213000",
     url: "https://luma.com/ceodinneraustin3",
@@ -2821,7 +2693,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0237-dd06a6fa@entre.events",
     summary: "Teachable Sunset Sail @ SXSW",
-    description: "Join a hackathon, jam on product design, and meet fellow tinkerers in the industry of tomorrow.",
     dtstart: "20260315T183000",
     dtend: "20260315T213000",
     url: "https://luma.com/znuxkvmw",
@@ -2833,7 +2704,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0238-b0981df4@entre.events",
     summary: "Capital of Creators, hosted by TL\\;DR",
-    description: "Join a hackathon, learn about LLMs and prompt engineering, or connect with other AI practitioners.",
     dtstart: "20260315T183000",
     dtend: "20260315T223000",
     url: "https://luma.com/5rco2shh",
@@ -2845,7 +2715,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0239-45a7bfc4@entre.events",
     summary: "Tech Carnival",
-    description: "From morning coffee to late night pizza, enjoy great food and drinks with old and new friends.",
     dtstart: "20260315T190000",
     dtend: "20260315T230000",
     url: "https://luma.com/ohk51ec9",
@@ -2857,7 +2726,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0240-9297e815@entre.events",
     summary: "Mics Off, Vibes On: Podcaster Mixer at SXSW",
-    description: "Join a hackathon, jam on product design, and meet fellow tinkerers in the industry of tomorrow.",
     dtstart: "20260315T210000",
     dtend: "20260316T000000",
     url: "https://luma.com/h8su20os",
@@ -2916,7 +2784,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0245-9ff0fd7f@entre.events",
     summary: "RedThreadX House | The LINE Austin",
-    description: "Join a hackathon, learn about LLMs and prompt engineering, or connect with other AI practitioners.",
     dtstart: "20260316T090000",
     dtend: "20260316T170000",
     url: "https://luma.com/u4q9akh7",
@@ -2928,7 +2795,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0246-272cd76b@entre.events",
     summary: "AI x Journalism Day 2026",
-    description: "Join a hackathon, learn about LLMs and prompt engineering, or connect with other AI practitioners.",
     dtstart: "20260316T090000",
     dtend: "20260316T180000",
     url: "https://luma.com/hh-ai-journalism-day-2026-austin",
@@ -2940,7 +2806,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0247-13861c2d@entre.events",
     summary: "B2B HAUS at SXSW",
-    description: "Join a hackathon, jam on product design, and meet fellow tinkerers in the industry of tomorrow.",
     dtstart: "20260316T090000",
     dtend: "20260316T190000",
     url: "https://luma.com/zcugak8f",
@@ -2952,7 +2817,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0248-213e6a82@entre.events",
     summary: "RedThreadXperience",
-    description: "Join a hackathon, jam on product design, and meet fellow tinkerers in the industry of tomorrow.",
     dtstart: "20260316T090000",
     dtend: "20260316T210000",
     url: "https://luma.com/ysv7xsh1",
@@ -2964,7 +2828,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0249-cb417344@entre.events",
     summary: "Apify AI + GTM roadshow: Austin",
-    description: "Join a hackathon, learn about LLMs and prompt engineering, or connect with other AI practitioners.",
     dtstart: "20260316T094500",
     dtend: "20260316T120000",
     url: "https://luma.com/wtrz4mle",
@@ -2976,7 +2839,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0250-99157dca@entre.events",
     summary: "SXSW Superhuman Suite @ Antone's",
-    description: "Join a hackathon, learn about LLMs and prompt engineering, or connect with other AI practitioners.",
     dtstart: "20260316T100000",
     dtend: "20260316T220000",
     url: "https://luma.com/vxff43hf",
@@ -2988,7 +2850,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0251-11a9f520@entre.events",
     summary: "Nashville ♥️ Austin",
-    description: "From morning coffee to late night pizza, enjoy great food and drinks with old and new friends.",
     dtstart: "20260316T110000",
     dtend: "20260316T210000",
     url: "https://luma.com/nashville-loves-austin",
@@ -3012,7 +2873,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0253-44bc3b85@entre.events",
     summary: "humble ventures: The Future of Health",
-    description: "Join a hackathon, learn about LLMs and prompt engineering, or connect with other AI practitioners.",
     dtstart: "20260316T110000",
     dtend: "20260316T210000",
     url: "https://luma.com/79uagf6k",
@@ -3024,7 +2884,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0254-12337ded@entre.events",
     summary: "Investor Lounge",
-    description: "Join a hackathon, jam on product design, and meet fellow tinkerers in the industry of tomorrow.",
     dtstart: "20260316T110000",
     dtend: "20260316T190000",
     url: "https://luma.com/gqhs0akm",
@@ -3048,7 +2907,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0256-a11bd325@entre.events",
     summary: "Common Ground",
-    description: "Discover wellness events around you. Come for a walk, yoga or meditation, learn about nutrition and longevity, and connect with other health-conscious people.",
     dtstart: "20260316T120000",
     dtend: "20260316T160000",
     url: "https://luma.com/4smqergu",
@@ -3060,7 +2918,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0257-ccbbc3d0@entre.events",
     summary: "VC Arena: SXSW (Legendary Ventures x MEDC x JustWorks)",
-    description: "Join a hackathon, jam on product design, and meet fellow tinkerers in the industry of tomorrow.",
     dtstart: "20260316T130000",
     dtend: "20260316T150000",
     url: "https://luma.com/hbu8k62y",
@@ -3096,7 +2953,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0260-6b7cecd0@entre.events",
     summary: "Our Path Forward: Insights from Austin’s Black Tech Leaders",
-    description: "Join a hackathon, learn about LLMs and prompt engineering, or connect with other AI practitioners.",
     dtstart: "20260316T143000",
     dtend: "20260316T170000",
     url: "https://luma.com/f3ch1cru",
@@ -3132,7 +2988,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0263-d708aa9d@entre.events",
     summary: "The LegalTech AI Boom: Where Are We Now, and Where Are We Going?",
-    description: "Join a hackathon, learn about LLMs and prompt engineering, or connect with other AI practitioners.",
     dtstart: "20260316T150000",
     dtend: "20260316T180000",
     url: "https://luma.com/kmtg9hwd",
@@ -3144,7 +2999,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0264-964e159f@entre.events",
     summary: "Deep Tech and Hardware Expo",
-    description: "Join a hackathon, jam on product design, and meet fellow tinkerers in the industry of tomorrow.",
     dtstart: "20260316T150000",
     dtend: "20260316T200000",
     url: "https://luma.com/4b1xy177",
@@ -3156,7 +3010,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0265-776906e7@entre.events",
     summary: "Supabase x Dreambase at SXSW",
-    description: "Join a hackathon, jam on product design, and meet fellow tinkerers in the industry of tomorrow.",
     dtstart: "20260316T160000",
     dtend: "20260316T180000",
     url: "https://luma.com/supasxsw",
@@ -3168,7 +3021,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0266-a65c6f57@entre.events",
     summary: "FloSports SXSW Happy Hour",
-    description: "From morning coffee to late night pizza, enjoy great food and drinks with old and new friends.",
     dtstart: "20260316T160000",
     dtend: "20260316T190000",
     url: "https://luma.com/9rrc7f1z",
@@ -3180,7 +3032,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0267-da4f627a@entre.events",
     summary: "Microsoft for Startups: Founder x Funder Dinner @ SXSW",
-    description: "Join a hackathon, jam on product design, and meet fellow tinkerers in the industry of tomorrow.",
     dtstart: "20260316T170000",
     dtend: "20260316T193000",
     url: "https://luma.com/ig3nyeww",
@@ -3192,7 +3043,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0268-c8c150f5@entre.events",
     summary: "VC Village & Augment Present: Let's Get Liquid Investor Happy Hour @SXSW",
-    description: "Join a hackathon, jam on product design, and meet fellow tinkerers in the industry of tomorrow.",
     dtstart: "20260316T170000",
     dtend: "20260316T200000",
     url: "https://luma.com/xxdiqmj6",
@@ -3204,7 +3054,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0269-b883a943@entre.events",
     summary: "SXSW: AI Localization Happy Hour",
-    description: "Join a hackathon, learn about LLMs and prompt engineering, or connect with other AI practitioners.",
     dtstart: "20260316T173000",
     dtend: "20260316T210000",
     url: "https://luma.com/pj70xjkb",
@@ -3216,7 +3065,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0270-885309e1@entre.events",
     summary: "Velric & UEV: The Founder x Investor War Room",
-    description: "Join a hackathon, jam on product design, and meet fellow tinkerers in the industry of tomorrow.",
     dtstart: "20260316T180000",
     dtend: "20260316T200000",
     url: "https://luma.com/mcu47zkz",
@@ -3240,7 +3088,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0272-34ce1a77@entre.events",
     summary: "Startup Founder Dinner",
-    description: "From morning coffee to late night pizza, enjoy great food and drinks with old and new friends.",
     dtstart: "20260316T190000",
     dtend: "20260316T203000",
     url: "https://luma.com/StartupFounderDinner2026",
@@ -3276,7 +3123,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0275-fdce72ee@entre.events",
     summary: "AI x Journalism Day 2026",
-    description: "Join a hackathon, learn about LLMs and prompt engineering, or connect with other AI practitioners.",
     dtstart: "20260317T090000",
     dtend: "20260317T180000",
     url: "https://luma.com/hh-ai-journalism-day-2026-austin",
@@ -3288,7 +3134,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0276-208fd10a@entre.events",
     summary: "Investor Lounge",
-    description: "Join a hackathon, jam on product design, and meet fellow tinkerers in the industry of tomorrow.",
     dtstart: "20260317T110000",
     dtend: "20260317T190000",
     url: "https://luma.com/gqhs0akm",
@@ -3312,7 +3157,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0278-04d2c09b@entre.events",
     summary: "VCs with Voltaic Marine on Lake Austin",
-    description: "Join a hackathon, jam on product design, and meet fellow tinkerers in the industry of tomorrow.",
     dtstart: "20260317T130000",
     dtend: "20260317T150000",
     url: "https://luma.com/l2u8lvm3",
@@ -3324,7 +3168,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0279-5ad02d66@entre.events",
     summary: "AuremIP x SXSW",
-    description: "Join a hackathon, learn about LLMs and prompt engineering, or connect with other AI practitioners.",
     dtstart: "20260317T150000",
     dtend: "20260317T180000",
     url: "https://luma.com/coy5x7os",
@@ -3336,7 +3179,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0280-b672d1dc@entre.events",
     summary: "Recover + Recharge Closing Party @ SXSW",
-    description: "From running clubs to pickleball tournaments, take part in a fitness event to challenge yourself and connect with old and new friends.",
     dtstart: "20260317T160000",
     dtend: "20260317T200000",
     url: "https://luma.com/hq3xz20z",
@@ -3360,7 +3202,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0282-3abbf2df@entre.events",
     summary: "Duckpin Bowling & Drinks with Scalafai",
-    description: "Join a hackathon, jam on product design, and meet fellow tinkerers in the industry of tomorrow.",
     dtstart: "20260317T180000",
     dtend: "20260317T200000",
     url: "https://luma.com/iypnnttn",
@@ -3384,7 +3225,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0284-523668d7@entre.events",
     summary: "BCV x Banner VC: What's Next?",
-    description: "Join a hackathon, jam on product design, and meet fellow tinkerers in the industry of tomorrow.",
     dtstart: "20260317T190000",
     dtend: "20260317T220000",
     url: "https://luma.com/igmlu8sl",
@@ -3420,7 +3260,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0287-16cea4af@entre.events",
     summary: "Investor Lounge",
-    description: "Join a hackathon, jam on product design, and meet fellow tinkerers in the industry of tomorrow.",
     dtstart: "20260318T110000",
     dtend: "20260318T190000",
     url: "https://luma.com/gqhs0akm",
@@ -3456,7 +3295,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0290-55858a6d@entre.events",
     summary: "Vinyls and Viddles at the Equipment Room",
-    description: "From morning coffee to late night pizza, enjoy great food and drinks with old and new friends.",
     dtstart: "20260318T173000",
     dtend: "20260318T203000",
     url: "https://luma.com/7dfeprc1",
@@ -3468,7 +3306,6 @@ const EVENTS_DATA: RawEvent[] = [
   {
     uid: "sxsw-2026-0291-63871b09@entre.events",
     summary: "SideHustle® LIVE in Austin, TX - March Events - Closing Party",
-    description: "Join a hackathon, jam on product design, and meet fellow tinkerers in the industry of tomorrow.",
     dtstart: "20260318T190000",
     dtend: "20260318T230000",
     url: "https://luma.com/iunnsx9l",
