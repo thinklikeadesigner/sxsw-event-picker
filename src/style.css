@@ -47,6 +47,8 @@ header .subtitle { font-size: 12px; color: #888; margin-top: 2px; }
   border-top: 1px solid #2a2a2a;
 }
 .bmc-link { color: #FFDD00 !important; }
+.visitor-badge { margin-bottom: 10px; }
+.visitor-badge img { height: 24px; }
 .site-footer a {
   color: #4ade80;
   text-decoration: none;
