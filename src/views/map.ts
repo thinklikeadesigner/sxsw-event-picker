@@ -125,7 +125,7 @@ export function renderMap(container: HTMLElement) {
         <span style="color:#666;font-size:12px">${fmt(event.start)} \u2013 ${fmt(event.end)}</span><br>
         ${event.cost ? `<span style="color:#7c3aed;font-size:12px">${event.cost}</span><br>` : ''}
         ${event.type ? `<span style="color:#059669;font-size:12px">${event.type}</span><br>` : ''}
-        <span style="color:#888;font-size:11px">${event.location}</span><br>
+        <a href="https://maps.google.com/?q=${encodeURIComponent(event.location)}" target="_blank" style="color:#888;font-size:11px;text-decoration:none">\uD83D\uDCCD ${event.location}</a><br>
         ${event.url ? `<a href="${event.url}" target="_blank" style="color:#3b82f6;font-size:12px;text-decoration:none">Event page \u2197</a><br>` : ''}
         <button onclick="window.__toggleStar(${event.index})" style="margin-top:6px;padding:4px 12px;border-radius:6px;border:1px solid ${isStarred ? '#ef4444' : '#4ade80'};background:${isStarred ? '#1a0000' : '#052e16'};color:${isStarred ? '#ef4444' : '#4ade80'};cursor:pointer;font-size:12px;font-weight:600">
           ${isStarred ? '\u2605 Unstar' : '\u2606 Star'}
