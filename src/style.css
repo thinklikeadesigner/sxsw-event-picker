@@ -489,6 +489,23 @@ main { padding: 16px 24px; }
 .leaflet-popup-tip {
   background: #1a1a1a !important;
 }
+.map-toggle { background: none; border: none; }
+.map-soon-btn {
+  padding: 8px 14px;
+  border-radius: 8px;
+  border: 1px solid #333;
+  background: #1a1a1a;
+  color: #aaa;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.map-soon-btn.active {
+  background: #4ade80;
+  border-color: #4ade80;
+  color: #000;
+}
 
 /* ===== RESPONSIVE ===== */
 @media (max-width: 768px) {
