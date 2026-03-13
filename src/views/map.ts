@@ -45,6 +45,16 @@ function createMap(container: HTMLElement): L.Map {
   };
   toggle.addTo(map);
 
+  // Add "My Location" button
+  const locBtn = new L.Control({ position: 'bottomright' });
+  locBtn.onAdd = () => {
+    const div = L.DomUtil.create('div', 'map-toggle');
+    div.innerHTML = `<button class="map-loc-btn" id="map-loc-btn" title="Center on my location">\u25CE</button>`;
+    L.DomEvent.disableClickPropagation(div);
+    return div;
+  };
+  locBtn.addTo(map);
+
   return map;
 }
 
@@ -133,21 +143,30 @@ export function renderMap(container: HTMLElement) {
   };
 
   // Show user's current location
-  if (map && navigator.geolocation) {
+  function updateUserLocation(center?: boolean) {
+    if (!map || !navigator.geolocation) return;
     navigator.geolocation.getCurrentPosition((pos) => {
       if (!map) return;
       const { latitude, longitude } = pos.coords;
       if (userMarker) map.removeLayer(userMarker);
       userMarker = L.circleMarker([latitude, longitude], {
         radius: 10,
-        fillColor: '#f43f5e',
+        fillColor: '#e839f6',
         color: '#fff',
         weight: 3,
         opacity: 1,
         fillOpacity: 0.9,
       }).addTo(map);
       userMarker.bindPopup('<strong style="font-family:-apple-system,sans-serif">You are here</strong>');
+      if (center) map.setView([latitude, longitude], 16);
     }, () => {});
+  }
+  updateUserLocation();
+
+  // Bind location button
+  const locBtnEl = document.getElementById('map-loc-btn');
+  if (locBtnEl) {
+    locBtnEl.onclick = () => updateUserLocation(true);
   }
 
   // Invalidate size after render (Leaflet needs this when container changes)
