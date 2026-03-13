@@ -223,6 +223,13 @@ main { padding: 16px 24px; }
   overflow: hidden;
   text-overflow: ellipsis;
 }
+.map-link {
+  color: #3b82f6;
+  text-decoration: none;
+  font-weight: 600;
+  margin-left: 4px;
+}
+.map-link:hover { text-decoration: underline; }
 .event-url {
   font-size: 11px;
   color: #3b82f6;
