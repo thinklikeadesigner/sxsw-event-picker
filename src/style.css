@@ -218,14 +218,14 @@ main { padding: 16px 24px; }
 .event-location {
   display: block;
   font-size: 11px;
-  color: #555;
+  color: #3b82f6;
   margin-top: 5px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   text-decoration: none;
 }
-.event-location:hover { color: #3b82f6; }
+.event-location:hover { text-decoration: underline; }
 .event-url {
   font-size: 11px;
   color: #3b82f6;
