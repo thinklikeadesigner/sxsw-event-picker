@@ -216,22 +216,16 @@ main { padding: 16px 24px; }
 .pill-type { background: #1a2e1a; color: #86efac; }
 .pill-conflict { background: #431407; color: #fb923c; }
 .event-location {
+  display: block;
   font-size: 11px;
   color: #555;
   margin-top: 5px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-}
-.map-link {
-  display: block;
-  font-size: 11px;
-  color: #3b82f6;
   text-decoration: none;
-  font-weight: 600;
-  margin-top: 4px;
 }
-.map-link:hover { text-decoration: underline; }
+.event-location:hover { color: #3b82f6; }
 .event-url {
   font-size: 11px;
   color: #3b82f6;

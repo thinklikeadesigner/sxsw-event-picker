@@ -33,7 +33,7 @@ export function renderEventCard(event: SXSWEvent, starred: boolean, conflictCoun
         ${event.type ? `<span class="pill pill-type">${event.type}</span>` : ''}
         ${conflictCount > 0 ? `<span class="pill pill-conflict">\u26A1 ${conflictCount} overlap${conflictCount > 1 ? 's' : ''}</span>` : ''}
       </div>
-      ${event.location ? `<div class="event-location">\uD83D\uDCCD ${event.location}</div><a class="map-link" href="https://maps.google.com/?q=${encodeURIComponent(event.location)}" target="_blank">Open in Maps</a>` : ''}
+      ${event.location ? `<a class="event-location" href="https://maps.google.com/?q=${encodeURIComponent(event.location)}" target="_blank">\uD83D\uDCCD ${event.location}</a>` : ''}
       ${event.url ? `<a class="event-url" href="${event.url}" target="_blank">${formatUrlLabel(event.url)}</a>` : ''}
       ${event.description ? `<div class="card-description">${event.description}</div>` : ''}
     </div>`;
