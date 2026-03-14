@@ -89,6 +89,7 @@ export function renderMap(container: HTMLElement) {
 
   const dayEvents = events.filter(e => {
     if (dayKey(e.start) !== currentDay) return false;
+    if (e.end <= now) return false;
     const cost = (e.cost || '').toLowerCase();
     if (filters.cost === 'free' && cost !== 'free') return false;
     if (filters.cost === 'register' && cost !== 'register') return false;

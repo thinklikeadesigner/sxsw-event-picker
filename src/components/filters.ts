@@ -26,9 +26,11 @@ export function renderFilters() {
   const { currentDay, filters, events } = getState();
 
   const dayFilters = document.getElementById('day-filters')!;
-  // Count events per day
+  // Count events per day (only events that haven't ended)
+  const now = new Date();
   const dayCounts: Record<string, number> = {};
   for (const e of events) {
+    if (e.end <= now) continue;
     const k = dayKey(e.start);
     dayCounts[k] = (dayCounts[k] || 0) + 1;
   }
