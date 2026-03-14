@@ -33,9 +33,12 @@ export function renderFilters() {
     dayCounts[k] = (dayCounts[k] || 0) + 1;
   }
 
+  const today = dayKey(new Date());
+  const visibleDays = DAYS.filter(d => d.key >= today);
+
   dayFilters.innerHTML = `
     <span class="filter-label">DAY:</span>
-    ${DAYS.map(d => `
+    ${visibleDays.map(d => `
       <button class="filter-btn ${currentDay === d.key ? 'active' : ''}" data-day="${d.key}">
         ${d.label}
         <span class="filter-count">${dayCounts[d.key] || 0}</span>
