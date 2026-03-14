@@ -19,7 +19,7 @@ const state: AppState = {
   starred: new Set(),
   conflicts: [],
   currentView: 'discover',
-  currentDay: '2026-03-12',
+  currentDay: (() => { const d = new Date(); return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`; })(),
   filters: { cost: 'all', type: 'all', search: '' },
   resolveIndex: 0,
 };

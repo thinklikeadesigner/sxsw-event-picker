@@ -16,9 +16,10 @@ function matchesCostFilter(cost: string, filter: string): boolean {
 export function renderDiscover(container: HTMLElement) {
   const { events, starred, currentDay, filters, conflicts } = getState();
 
-  // Filter events for current day and cost
+  // Filter events for current day, cost, and not ended
+  const now = new Date();
   const dayEvents = events.filter(e =>
-    dayKey(e.start) === currentDay && matchesCostFilter(e.cost, filters.cost)
+    dayKey(e.start) === currentDay && matchesCostFilter(e.cost, filters.cost) && e.end > now
   );
 
   if (dayEvents.length === 0) {
