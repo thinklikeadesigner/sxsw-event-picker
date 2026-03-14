@@ -125,6 +125,7 @@ function loadFromStorage() {
     const data = JSON.parse(raw);
     if (data.starred) state.starred = new Set(data.starred);
     if (data.conflicts) state.conflicts = data.conflicts;
-    if (data.currentDay) state.currentDay = data.currentDay;
+    const today = state.currentDay;
+    if (data.currentDay && data.currentDay >= today) state.currentDay = data.currentDay;
   } catch {}
 }
