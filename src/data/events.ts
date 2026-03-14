@@ -3313,6 +3313,42 @@ const EVENTS_DATA: RawEvent[] = [
     cost: "$25 - $30",
     type: "SideHustle",
     rawBlock: "BEGIN:VEVENT\r\nUID:sxsw-2026-0291-63871b09@entre.events\r\nDTSTAMP:20260311T190329Z\r\nDTSTART;TZID=America/Chicago:20260318T190000\r\nDTEND;TZID=America/Chicago:20260318T230000\r\nSUMMARY:SideHustle® LIVE in Austin\\, TX - March Events - Closing Party\r\nURL:https://luma.com/iunnsx9l\r\nLOCATION:2415B E 5th St. Unit B\\, Austin\\, TX\r\nDESCRIPTION:Cost: $25 - $30 | Type: SideHustle | Register: https://luma.com\r\n /iunnsx9l\r\nEND:VEVENT"
+  },
+  {
+    uid: "sxsw-2026-0292-tjo-soundwave@manual",
+    summary: "TJO/Soundwave ft. Peter Gunz",
+    description: "Live showcase during SXSW weekend featuring Peter Gunz (Music, M&G), Dre Thompson, Brookie B, Woes, Damon Fletcher, Naoma, Victor EMG, DJ Dom, St. Black, Noella Grey and the Imaginary Band, and more.",
+    dtstart: "20260314T160000",
+    dtend: "20260315T000000",
+    url: "",
+    location: "The Cabana Club 5012 E 7th St, Austin, TX",
+    cost: "",
+    type: "Music + Live Show",
+    rawBlock: ""
+  },
+  {
+    uid: "sxsw-2026-0293-tjo-carousel-sat@manual",
+    summary: "TJO // Carousel - Unofficial SXSW Showcase",
+    description: "Unofficial SXSW showcase featuring Stepmom, Strong Work Band, Too Far Gone, and Cinema Hearts. Free show.",
+    dtstart: "20260314T200000",
+    dtend: "20260315T000000",
+    url: "",
+    location: "Carousel Lounge, 1110 E 52nd St, Austin, TX",
+    cost: "Free",
+    type: "Music + Live Show",
+    rawBlock: ""
+  },
+  {
+    uid: "sxsw-2026-0294-tjo-carousel-fri@manual",
+    summary: "TJO/Carousel - SXSW 40th Anniversary Showcase",
+    description: "SXSW 40th anniversary performances by Simm, Aaron Newsome, Charlie Gunn, and Hannah Sandoz.",
+    dtstart: "20260313T190000",
+    dtend: "20260313T210000",
+    url: "",
+    location: "Carousel Lounge, 1110 E 52nd St, Austin, TX",
+    cost: "Free",
+    type: "Music + Live Show",
+    rawBlock: ""
   }
 ];
 

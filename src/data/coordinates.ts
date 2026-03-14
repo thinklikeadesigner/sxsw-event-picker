@@ -126,4 +126,5 @@ export const VENUE_COORDS: Record<string, [number, number]> = {
   "Vulcan Gas Company, 418 E 6th St, Austin, TX": [30.2668, -97.7378],
   "W Austin, 200 Lavaca St, Austin, TX": [30.2648, -97.7480],
   "Waller Creek Boathouse 74 Trinity St, Austin, TX": [30.2620, -97.7388],
+  "Carousel Lounge, 1110 E 52nd St, Austin, TX": [30.3140, -97.7190],
 };
